@@ -12,9 +12,8 @@ class Tkutil(CMakePackage):
     """Bibliotheque d'utilitaires C++"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/tkutil'
-    url = 'https://github.com/LIHPC-Computational-Geometry/tkutil/-/archive/5.7.7/tkutil-5.7.7.tar.gz'
-    git = 'https://github.com/LIHPC-Computational-Geometry/tkutil.git'
-
+    url = 'https://github.com/LIHPC-Computational-Geometry/tkutil/archive/refs/tags/v5.14.0.tar.gz'
+    git = 'https://github.com/LIHPC-Computational-Geometry/tkutil.git' 
     maintainers = ['meshing_team']
 
 # 5.7.6 is the last python2 only version
@@ -25,7 +24,7 @@ class Tkutil(CMakePackage):
     depends_on('libiconv', type=('build', 'link'))
 
     version('main', branch='main')
-    version('5.13.1')
+    version('5.14.0')
     version('5.7.7', sha256='a9ed789f4088ba2bb3f1807d6317f74904fd10911b92cdb50f5c0e7f7ae61dea')
     version('5.7.5', sha256='335300ae3b441b45327d9b0fa4591c096509381b4c355d61fb407cb2eeea62fd')
     version('5.7.2', sha256='36406ad50fb73b07216f19ef34958abcf17171cc32a1d0fb44a7176aa97c03f3')
