@@ -22,8 +22,12 @@ from spack import *
 
 class Lima(CMakePackage):
     """Logiciel Interface MAillage"""
-    url = "file://REPLACE_PATH_MIRROR_SERVICE/MIRRORS/local_mirror/lima/lima-7.7.4.tar.gz"
-    homepage = ''
+
+    homepage = 'https://github.com/LIHPC-Computational-Geometry/lima'
+    url = 'https://github.com/LIHPC-Computational-Geometry/lima/archive/refs/tags/v7.7.5.tar.gz'
+    git = 'https://github.com/LIHPC-Computational-Geometry/lima.git' 
+    maintainers = ['meshing_team']
+
 
 #    depends_on('sumesh +shared', type=('build', 'link'))
     depends_on('swig', type=('build'), when='+scripting')
