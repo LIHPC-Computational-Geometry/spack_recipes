@@ -37,7 +37,7 @@ class Triton2(CMakePackage):
     variant('shared', default=True, description='Build as a shared library.')
 
     # FIXME: Add dependencies if required.
-    depends_on('gmds')
+    depends_on('mgx_gmds')
     depends_on('gmdscea')
 
     def cmake_args(self):
