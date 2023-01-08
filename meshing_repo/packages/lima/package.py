@@ -25,15 +25,12 @@ class Lima(CMakePackage):
     url = "file://REPLACE_PATH_MIRROR_SERVICE/MIRRORS/local_mirror/lima/lima-7.7.4.tar.gz"
     homepage = ''
 
-    depends_on('cmake', type='build')
-    # remove the dependency to machine types
-#    depends_on('machine-types', type='build')
-
 #    depends_on('sumesh +shared', type=('build', 'link'))
     depends_on('swig', type=('build'), when='+scripting')
     depends_on('python@2.7:3.0 +shared', type=('build', 'link'), when='+scripting')
 #    depends_on('hdf145', type=('build', 'link'))
-    depends_on('hdf5 +shared +cxx', type=('build', 'link'))
+#    depends_on('hdf5 +shared +cxx', type=('build', 'link'))
+    depends_on('hdf5 ~mpi', type=('build', 'link'))
 
     variant('scripting', default=False, description='Build python binding')
     variant('shared', default=True, description='Build shared library')
