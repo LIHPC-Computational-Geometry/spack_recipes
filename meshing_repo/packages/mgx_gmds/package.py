@@ -23,7 +23,7 @@
 from spack import *
 
 
-class Gmds(CMakePackage):
+class Mgxgmds(CMakePackage):
 
     homepage = 'https://gitlab.com/meshing'
     url = 'https://gitlab.com/meshing/gmds/-/archive/0.7.2/gmds-0.7.2.tgz'
@@ -32,8 +32,6 @@ class Gmds(CMakePackage):
     maintainers = ['meshing_team']
 
     version('0.7.2')#, sha256='ab3bc88f832b12f937308c90aa0dc6b12b9ec7cff9929477beee1f3dcdbf8963')
-
-    # depends_on('foo')
 
     def cmake_args(self):
         args = []
