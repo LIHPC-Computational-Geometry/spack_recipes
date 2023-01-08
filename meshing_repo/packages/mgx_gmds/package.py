@@ -25,10 +25,6 @@ from spack import *
 
 class MgxGmds(CMakePackage):
 
-    homepage = 'https://gitlab.com/meshing'
-    url = 'https://gitlab.com/meshing/gmds/-/archive/0.7.2/gmds-0.7.2.tgz'
-    git = 'https://gitlab.com/meshing/gmds.git'
-
     homepage = 'https://github.com/LIHPC-Computational-Geometry/MGX_GMDS'
     url = 'https://github.com/LIHPC-Computational-Geometry/MGX_GMDS/archive/refs/tags/v0.7.2.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/MGX_GMDS.git' 
