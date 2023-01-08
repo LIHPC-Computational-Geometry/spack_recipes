@@ -23,7 +23,7 @@
 from spack import *
 
 
-class Mgxgmds(CMakePackage):
+class MgxGmds(CMakePackage):
 
     homepage = 'https://gitlab.com/meshing'
     url = 'https://gitlab.com/meshing/gmds/-/archive/0.7.2/gmds-0.7.2.tgz'
