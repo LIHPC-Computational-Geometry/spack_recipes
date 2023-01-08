@@ -29,8 +29,12 @@ class MgxGmds(CMakePackage):
     url = 'https://gitlab.com/meshing/gmds/-/archive/0.7.2/gmds-0.7.2.tgz'
     git = 'https://gitlab.com/meshing/gmds.git'
 
+    homepage = 'https://github.com/LIHPC-Computational-Geometry/MGX_GMDS'
+    url = 'https://github.com/LIHPC-Computational-Geometry/MGX_GMDS/archive/refs/tags/v0.7.2.tar.gz'
+    git = 'https://github.com/LIHPC-Computational-Geometry/MGX_GMDS.git' 
     maintainers = ['meshing_team']
-
+    
+    version('main', branch='main')
     version('0.7.2')#, sha256='ab3bc88f832b12f937308c90aa0dc6b12b9ec7cff9929477beee1f3dcdbf8963')
 
     def cmake_args(self):
