@@ -34,7 +34,7 @@ class Lima(CMakePackage):
     depends_on('python@2.7:3.0 +shared', type=('build', 'link'), when='+scripting')
 #    depends_on('hdf145', type=('build', 'link'))
 #    depends_on('hdf5 +shared +cxx', type=('build', 'link'))
-    depends_on('hdf5 ~mpi', type=('build', 'link'))
+    depends_on('hdf5 +shared +cxx ~mpi', type=('build', 'link'))
 
     variant('scripting', default=False, description='Build python binding')
     variant('shared', default=True, description='Build shared library')
