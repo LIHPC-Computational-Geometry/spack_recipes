@@ -12,7 +12,7 @@ class Qtutil(CMakePackage):
     """Bibliotheque d'utilitaires Qt"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qtutil'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qtutil/releases/tag/v5.7.8.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qtutil/archive/refs/tags/v5.7.8.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qtutil.git'
     maintainers = ['meshing_team']
 

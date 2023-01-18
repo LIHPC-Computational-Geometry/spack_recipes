@@ -12,7 +12,7 @@ class Preferences(CMakePackage):
     """Bibliotheque d'utilitaires de gestion de preferences utilisateur reposant sur XercesC et Qt"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/preferences'
-    url = 'https://github.com/LIHPC-Computational-Geometry/preferences/releases/tag/v5.6.2.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/preferences/archive/refs/tags/v5.6.2.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/preferences.git'
 
     maintainers = ['meshing_team']
