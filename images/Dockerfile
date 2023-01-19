@@ -4,16 +4,12 @@ FROM ubuntu:20.04
 # METADATA OF THE IMAGE
 LABEL description "Build env" version="1.0" maintainer="Meshing teamp <lihpccg@gmail.com>"
 #==========================================
-
 ARG SPACK_VERSION=0.19.0
-ENV HOME /dev
 #==========================================
-
 SHELL ["/bin/bash", "-c"]
 #==========================================
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 #==========================================
 RUN apt update &&\
     apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libgl-dev gfortran-9 &&\
