@@ -37,7 +37,6 @@ RUN source /spack/share/spack/setup-env.sh && \
     spack add cgns~mpi &&\
     spack add swig &&\
     spack concretize &&\
-    spack install
-#==========================================
-RUN rm -rf /spack/var/spack/cache/*
+    spack install &&\
+    rm -rf /spack/var/spack/cache/*
 #==========================================
