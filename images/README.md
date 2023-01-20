@@ -92,4 +92,4 @@ If you want to work with the container used in lihpccg GitHub CI, change the con
 
 - Modify GitHub CI with the new image.
 - Try to instantiate a Qt class in the CI to execute preferences project test.
-- podman command memo
+- podman command memo + push + registry
