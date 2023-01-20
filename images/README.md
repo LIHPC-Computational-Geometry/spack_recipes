@@ -1,6 +1,6 @@
 # Directory content
 
-- ̀`Dockerfile`: file to build the docker image used in lihpc products CI on github.
+- `Dockerfile`: file to build the docker image used in lihpc products CI on github.
   Building the image is quite a long process depending on your computer.
   The image is available on [Dockerhub](https://hub.docker.com/repository/docker/lihpccg/mgx-ubuntu.20.04-spack.0.19.0/general) and it can be pulled (see below for details).
 
