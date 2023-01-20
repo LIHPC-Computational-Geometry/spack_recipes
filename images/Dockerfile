@@ -1,5 +1,5 @@
 #============== OS LAYER ==================
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 #==========================================
 # METADATA OF THE IMAGE
 LABEL description "Build env" version="1.0" maintainer="Meshing teamp <lihpccg@gmail.com>"
