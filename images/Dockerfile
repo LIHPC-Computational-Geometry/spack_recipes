@@ -12,7 +12,7 @@ ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
 RUN apt update &&\
-    apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libgl-dev gfortran-9 &&\
+    apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libgl-dev gfortran &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
