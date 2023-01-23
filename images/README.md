@@ -85,11 +85,9 @@ To execute our x11ogl container in VSCode:
 
 If you want to work with the container used in lihpccg GitHub CI, change the container on the line 2-3 of the `devcontainer.json` file and rebuild and restart the container.
 
-**Note:** VSCode will install a server into the remote container into the `/vscode-server` directory. It will also save the user preferences (extensions...) into the `${HOME}/.vscode-server` directory. Do not set the home folder to `/dev` directory in your Dockerfile (`ENV HOME /dev`). It is a shared memory folder with (in general) not enough disk space to store user preferences.
+**Note:** VSCode will install a server into the remote container into the `/vscode-server` directory. It will also save the user preferences (extensions...) into the `${HOME}/.vscode-server` directory. Do not set the home folder to `/dev` directory in your Dockerfile (`ENV HOME /dev`). It is a shared memory folder with (in general) not enough space to store user preferences.
 
 
 # TODO
 
-- Modify GitHub CI with the new image.
-- Try to instantiate a Qt class in the CI to execute preferences project test.
 - podman command memo + push + registry
