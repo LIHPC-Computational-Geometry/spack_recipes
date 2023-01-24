@@ -23,8 +23,14 @@ class Opencascade(CMakePackage):
 
 #    version('7.4.0', extension='tar.gz',
 #            sha256='1eace85115ea178f268e9d803ced994b66b72455b5484074b6ad7f643261f0a0')
-    version('7.1.0', extension='tar.gz')#,
- #           sha256='f28ca30bf939158c192df571d78b9dae0e34ab8d8ec9a8b2e8274acd81e138c8')
+    version('7.1.0', extension='tar.gz',
+            sha256='f28ca30bf939158c192df571d78b9dae0e34ab8d8ec9a8b2e8274acd81e138c8')
+
+    def url_for_version(self, version):
+        url = (
+            "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V{0};sf=tgz"
+        )
+        return url.format(version.underscored)
 
     # Opencascade depends on xlocale.h from glibc-headers but it was removed in 2.26.
     # This patch is a tentative backport from v7.4.0
