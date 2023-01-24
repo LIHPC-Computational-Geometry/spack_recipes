@@ -9,7 +9,7 @@ import sys
 from spack import *
 
 
-class Vtk(CMakePackage):
+class VtkMaillage(CMakePackage):
     """Recette "pole maillage" de VTK, en vue d'eviter d'entrer en collision avec toute autre recette de VTK.
     The Visualization Toolkit (VTK) is an open-source, freely
     available software system for 3D computer graphics, image
