@@ -71,7 +71,7 @@ class VtkMaillage(CMakePackage):
  #       url = "http://www.vtk.org/files/release/{0}/VTK-{1}.tar.gz"
  #       return url.format(version.up_to(2), version)
 
-    version('7.1.1')#, sha256='44366172caeeb2d213ba580d4d8d436f3b831f48770a786f31f97ca7ccc13095')
+    version('7.1.1', sha256='2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a')
 
 
     def setup_environment(self, spack_env, run_env):
