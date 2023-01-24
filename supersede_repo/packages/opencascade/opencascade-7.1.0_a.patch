@@ -1,0 +1,91 @@
+diff -Naur opencascade.orig/samples/ocafsamples/TDataStd_Sample.cxx opencascade/samples/ocafsamples/TDataStd_Sample.cxx
+--- opencascade.orig/samples/ocafsamples/TDataStd_Sample.cxx	2016-11-25 10:52:05.000000000 +0100
++++ opencascade/samples/ocafsamples/TDataStd_Sample.cxx	2018-04-20 13:41:22.841025000 +0200
+@@ -54,7 +54,6 @@
+ // This sample contains templates for typical actions with standard OCAF attributes
+ // ====================================================================================
+ 
+-#ifdef DEB
+ 
+ static void Sample()
+ {
+@@ -428,4 +427,3 @@
+   SecondChild->Prepend(FirstChild);
+ }
+ 
+-#endif
+diff -Naur opencascade-7.1.0.orig/samples/ocafsamples/TDocStd_Sample.cxx opencascade/samples/ocafsamples/TDocStd_Sample.cxx
+--- opencascade.orig/samples/ocafsamples/TDocStd_Sample.cxx	2016-11-25 10:52:05.000000000 +0100
++++ opencascade/samples/ocafsamples/TDocStd_Sample.cxx	2018-04-19 16:05:53.453894000 +0200
+@@ -26,7 +26,6 @@
+ // level (store / retrieve)
+ // ====================================================================================
+ 
+-#ifdef DEB
+ static void Sample()
+ {
+ 
+@@ -120,4 +119,3 @@
+   
+   
+ }
+-#endif
+diff -Naur opencascade.orig/samples/ocafsamples/TNaming_Sample.cxx opencascade/samples/ocafsamples/TNaming_Sample.cxx
+--- opencascade.orig/samples/ocafsamples/TNaming_Sample.cxx	2016-11-25 10:52:05.000000000 +0100
++++ opencascade/samples/ocafsamples/TNaming_Sample.cxx	2018-04-20 13:41:47.884619000 +0200
+@@ -50,7 +50,6 @@
+ // This sample contains template for typical actions with OCAF Topologigal Naming services
+ // =======================================================================================
+ 
+-#ifdef DEB
+ 
+ #define Box1POS          1
+ #define Box2POS          2
+@@ -410,4 +409,3 @@
+   //Result_1 and Result_2 are the same shapes
+   //=========================================
+ }
+-#endif
+diff -Naur opencascade.orig/samples/ocafsamples/TPrsStd_Sample.cxx opencascade/samples/ocafsamples/TPrsStd_Sample.cxx
+--- opencascade.orig/samples/ocafsamples/TPrsStd_Sample.cxx	2016-11-25 10:52:05.000000000 +0100
++++ opencascade/samples/ocafsamples/TPrsStd_Sample.cxx	2018-04-20 13:41:15.286150000 +0200
+@@ -32,7 +32,7 @@
+ // This sample contains template for typical actions with OCAF visualization attributes
+ // ====================================================================================
+ 
+-#ifdef DEB
++
+ static void Sample()
+ {
+   // Starting with data framework 
+@@ -214,4 +214,3 @@
+   return; 
+ }
+ 
+-#endif
+diff -Naur opencascade.orig/src/AppCont/AppCont_LeastSquare.cxx opencascade/src/AppCont/AppCont_LeastSquare.cxx
+--- opencascade.orig/src/AppCont/AppCont_LeastSquare.cxx	2016-11-25 10:52:07.000000000 +0100
++++ opencascade/src/AppCont/AppCont_LeastSquare.cxx	2018-02-05 14:05:09.925141000 +0100
+@@ -73,7 +73,7 @@
+       }
+ 
+       // from the third iteration
+-      if (anIter > 2 && aCurrDist / aPrevDist > 10.0)
++      if (anIter > 2 && (aPrevDist == 0) || (aCurrDist / aPrevDist > 10.0)) // [EB]
+         break;
+     }
+     aPrevP = aTabP;
+diff -Naur opencascade.orig/src/ProjLib/ProjLib_CompProjectedCurve.cxx opencascade/src/ProjLib/ProjLib_CompProjectedCurve.cxx
+--- opencascade.orig/src/ProjLib/ProjLib_CompProjectedCurve.cxx	2016-11-25 10:52:23.000000000 +0100
++++ opencascade/src/ProjLib/ProjLib_CompProjectedCurve.cxx	2018-02-05 14:05:27.216770000 +0100
+@@ -1888,6 +1888,10 @@
+         }
+       }
+ 
++      // [EB]
++      if (aMinIdx == -1)
++	throw Standard_Failure("OCC est en échec");
++
+       // Check that is point will be projected to the periodic border.
+       const Extrema_POnSurf &aPOnS = theSplitDS.myExtPS->Point(aMinIdx);
+       Standard_Real U, V, aProjParam;
