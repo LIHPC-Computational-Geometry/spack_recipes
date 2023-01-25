@@ -48,6 +48,9 @@ class VtkMaillage(CMakePackage):
     # when compiling vtk7 with gcc >= 10
     patch('vtk-maillage_gcc10_hiddenvisibility.patch', when='%gcc@10:')
 
+    # when compiling vtk7 with gcc >= 11
+    patch('vtk-maillage_gcc11_const.patch', when='%gcc@11:')
+
 
     depends_on('mpi', when='+mpi')
 
