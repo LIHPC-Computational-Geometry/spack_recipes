@@ -13,9 +13,7 @@ class Pythonutil(CMakePackage):
     maintainers = ['meshing_team']
 
     depends_on('tkutil')
-# 5.0.2 is the last python2 only version
-    depends_on('python@:2.999', type=('build', 'link'), when='@:5.0.2')
-    depends_on('python', type=('build', 'link'), when='@5.0.3:')
+    depends_on('python', type=('build', 'link'))
 # On a besoin de swig >= 3.0.0 :
     depends_on('swig@3:', type='build')
 
