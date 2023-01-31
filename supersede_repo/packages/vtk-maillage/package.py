@@ -158,18 +158,13 @@ class VtkMaillage(CMakePackage):
                 "-DBUILD_SHARED_LIBS:BOOL=ON",
                 "-DCMAKE_SKIP_INSTALL_RPATH:BOOL=ON",
                 "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON",
-                "-DModule_vtkFiltersParallelMPI:BOOL=ON",
                 "-DModule_vtkIOExportOpenGL:BOOL=ON",
                 "-DModule_vtkImagingOpenGL:BOOL=ON",
                 "-DModule_vtkIOExportOpenGL2:BOOL=OFF",
                 "-DModule_vtkImagingOpenGL2:BOOL=OFF",
-                "-DModule_vtkParallelMPI:BOOL=ON",
-                "-DModule_vtkFiltersParallelMPI:BOOL=ON",
-                "-DModule_vtkRenderingParallel:BOOL=ON",
                 "-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF",
                 "-DVTK_RENDERING_BACKEND=OpenGL",
                 "-DVTK_Group_Imaging:BOOL=ON",
-                "-DVTK_Group_MPI:BOOL=ON",
                 "-DVTK_Group_Qt:BOOL=ON",
                 "-DVTK_Group_Rendering:BOOL=ON",
                 "-DVTK_ALL_NEW_OBJECT_FACTORY=OFF",
@@ -177,6 +172,18 @@ class VtkMaillage(CMakePackage):
                 "-DVTK_USE_SYSTEM_NETCDF=OFF",
 #                "-DNETCDF_ENABLE_CXX=OFF",
             ])
+            if '+mpi' in spec:
+                cmake_args.extend([
+                    "-DModule_vtkParallelMPI:BOOL=ON",
+                    "-DModule_vtkFiltersParallelMPI:BOOL=ON",
+                    "-DModule_vtkRenderingParallel:BOOL=ON"
+                ])
+            else:
+                cmake_args.extend([
+                    "-DModule_vtkParallelMPI:BOOL=OFF",
+                    "-DModule_vtkFiltersParallelMPI:BOOL=OFF",
+                    "-DModule_vtkRenderingParallel:BOOL=OFF"
+                ])
 # !CP ADDON FLAGS
 
         if '+xdmf' in spec:
