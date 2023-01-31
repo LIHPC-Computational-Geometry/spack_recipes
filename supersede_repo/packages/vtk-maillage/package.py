@@ -153,8 +153,6 @@ class VtkMaillage(CMakePackage):
 
 # CP ADDON FLAGS :
             cmake_args.extend([
-                "-DModule_vtkRenderingParallel:BOOL=ON",
-                "-DModule_vtkIOExportOpenGL:BOOL=ON",
                 "-DBUILD_SHARED_LIBS:BOOL=ON",
                 "-DCMAKE_SKIP_INSTALL_RPATH:BOOL=ON",
                 "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON",
@@ -165,7 +163,6 @@ class VtkMaillage(CMakePackage):
                 "-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF",
                 "-DVTK_RENDERING_BACKEND=OpenGL",
                 "-DVTK_Group_Imaging:BOOL=ON",
-                "-DVTK_Group_Qt:BOOL=ON",
                 "-DVTK_Group_Rendering:BOOL=ON",
                 "-DVTK_ALL_NEW_OBJECT_FACTORY=OFF",
 #                "-DVTK_QT_VERSION=5",
