@@ -119,6 +119,9 @@ class VtkMaillage(CMakePackage):
                 '-DVTK_Group_MPI:BOOL=ON',
                 '-DVTK_USE_SYSTEM_DIY2:BOOL=OFF',
             ])
+        else:
+            cmake_args.append('-DVTK_Group_MPI:BOOL=OFF')
+            cmake_args.append("-DVTK_USE_MPI=OFF")
 
         if '+ffmpeg' in spec:
             cmake_args.extend(['-DModule_vtkIOFFMPEG:BOOL=ON'])
