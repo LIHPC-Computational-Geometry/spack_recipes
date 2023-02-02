@@ -11,8 +11,10 @@ from spack import *
 class Qwtcharts(CMakePackage):
     """Bibliotheque d'utilitaires Qwt"""
 
-    homepage = "https://gitlab.com/meshing/qwtcharts/"
-    url = "https://gitlab.com/meshing/qwtcharts/-/archive/4.4.6/qwtcharts-4.4.6.tar.gz"
+    homepage = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts/archive/refs/tags/v4.4.13.tar.gz'
+    git = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts.git'
+    maintainers = ['meshing_team']
  
 # On a besoin de 5.0 <= tkutil :
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')

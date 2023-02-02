@@ -11,10 +11,9 @@ from spack import *
 class Qqualif(CMakePackage):
     """Bibliotheque d'utilitaires de qualite de maillage."""
 
-    homepage = 'https://gitlab.com/meshing'
-    url = 'https://gitlab.com/meshing/qqualif/-/archive/3.9.0/qqualif-3.9.0.tar.gz'
-    git = 'https://gitlab.com/meshing/qqualif.git'
-
+    homepage = 'https://github.com/LIHPC-Computational-Geometry/qqualif'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qqualif/archive/refs/tags/v3.9.1.tar.gz'
+    git = 'https://github.com/LIHPC-Computational-Geometry/qqualif.git'
     maintainers = ['meshing_team']
 
 # On a besoin de 5.0 <= tkutil :
