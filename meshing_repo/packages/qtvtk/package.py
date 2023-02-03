@@ -16,8 +16,6 @@ class Qtvtk(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/qtvtk.git'
     maintainers = ['meshing_team']
 
-    maintainers = ['meshing_team']
-
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('vtkcontrib@4: +shared', type=('build', 'link'), when='+shared')
