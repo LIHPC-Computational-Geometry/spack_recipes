@@ -18,7 +18,7 @@ class Gmdscea(CMakePackage):
 
     variant('shared', default=True, description='Build as a shared library.')
 
-    depends_on('mgx_gmds')
+    depends_on('gmds')
     depends_on('lima')
 
     def cmake_args(self):
