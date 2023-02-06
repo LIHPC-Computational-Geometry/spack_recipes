@@ -20,7 +20,8 @@ class Mgx(CMakePackage):
     variant('mdlparser', default=False, description='Utilisation du lecteur du format mdl')
     variant('meshgems', default=False, description='Utilisation de la bibliotheque de maillage volumique MeshGems')
     variant('sepa3d', default=False, description='Utilisation du celebre outil de separatrices 3D')
-    variant('smooth3d', default=True, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
+    # 2023/06/02 - BL: Waiting for a GitHub smooth3d version, True ==> False
+    variant('smooth3d', default=False, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
     variant('triton2', default=True, description='Utilisation du mailleur tetraedrique Tetgen')
 
     version('1.0.0')
