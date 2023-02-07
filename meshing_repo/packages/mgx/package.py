@@ -53,8 +53,8 @@ class Mgx(CMakePackage):
     depends_on('doxygen')
     depends_on('lima')
   #  depends_on('experimentalroom')
+    depends_on('pkg-config', type=('build'))
  
-
     def cmake_args(self):
         args=  [      
             self.define_from_variant('USE_DKOC', 'dkoc'),
