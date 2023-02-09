@@ -22,7 +22,7 @@ class Preferences(CMakePackage):
     depends_on('tkutil')
     depends_on('xerces-c', type=('build', 'link'))
     depends_on('qt')
-    depends_on('pkg-config', type=('build'))
+    depends_on('pkgconfig', type=('build'))
 
     version('5.6.2')
     version('5.5.7')# sha256='09600a039e8458993eecaa8d7a6a8396f910caeddb3aecb4a7873d1cbaea31ae')

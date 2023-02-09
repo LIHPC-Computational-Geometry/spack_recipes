@@ -53,7 +53,7 @@ class Mgx(CMakePackage):
     depends_on('doxygen')
     depends_on('lima')
   #  depends_on('experimentalroom')
-    depends_on('pkg-config', type=('build'))
+    depends_on('pkgconfig', type=('build'))
  
     def cmake_args(self):
         args=  [      
