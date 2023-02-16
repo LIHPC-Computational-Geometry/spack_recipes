@@ -29,11 +29,14 @@ class Gmds(CMakePackage):
     homepage = "https://github.com/LIHPC-Computational-Geometry/gmds"
     url      = "https://github.com/LIHPC-Computational-Geometry/gmds/archive/refs/tags/v1.0.0.tar.gz"
 
+    version('1.1.0')
     version('1.0.0')
 
+    
     variant('kmds', default=False, description='Build with Kokkos')
     variant('elg3d', default=False, description='Build Elg3D')
     variant('blocking', default=False, description='Build the blocking component')
+    variant('lima',default=False, description='Provide Lima IO')
 
     depends_on('glpk')
     # necessary to build the internal glpk
@@ -51,9 +54,11 @@ class Gmds(CMakePackage):
 
     depends_on('cgal', when='+blocking')
 
+    depends_on('lima', when='+lima')
     def cmake_args(self):
         args = []
         args.append(self.define_from_variant('ENABLE_KMDS', 'kmds'))
         args.append(self.define_from_variant('ENABLE_ELG3D', 'elg3d'))
         args.append(self.define_from_variant('ENABLE_BLOCKING', 'blocking'))
+        args.append(self.define_from_variant('WITH_LIMA', 'lima'))
         return args
