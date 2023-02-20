@@ -49,6 +49,8 @@ class Gmds(CMakePackage):
     depends_on('pkg-config', type='build', when='+elg3d')
     depends_on('exodusii', when='+elg3d')
 
+    depends_on('cgns', when='+blocking')
+
     conflicts('+elg3d', when='~kmds',
              msg='elg3d cannot be built without kmds.')
 
