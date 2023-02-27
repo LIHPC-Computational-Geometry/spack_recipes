@@ -63,7 +63,7 @@ class Cgns(CMakePackage):
 
     # patch for error undefined reference to `matherr, see
     # https://bugs.gentoo.org/662210
-    patch("no-matter.patch", when="@:3.3.1 +tools")
+    patch("no-matherr.patch", when="@:3.3.1 +tools")
 
     def cmake_args(self):
         spec = self.spec
