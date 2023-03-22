@@ -66,7 +66,12 @@ class Mgx(CMakePackage):
             self.define('BUILD_SHARED_LIBS', True),
             self.define('PRODUCTION', True),
             self.define('BUILD_MAGIX3D', True),
-            self.define('BUILD_MAGIX3DBATCH', True)
+            self.define('BUILD_MAGIX3DBATCH', True),
+            self.define('T_INTERNAL_EXTENSION', 'not_defined'),
+            self.define('ERD_INTERNAL_EXTENSION', 'not_defined'),
+            self.define('USER_TEAM', 'undef_user_team'),
+            self.define('DOXYGEN_PATH', 'not_defined'),
+            self.define('DKOC_LICENCE', 'unavailable')
         ]
 
 
