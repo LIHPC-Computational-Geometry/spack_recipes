@@ -40,9 +40,8 @@ class VtkMaillage(CMakePackage):
     # mesa default is software rendering, llvm makes it faster
     depends_on('mesa+osmesa', when='+osmesa')
 
-    # VTK will need Qt5OpenGL, and qt needs '-opengl' for that
-#    depends_on('qt+opengl', when='+qt')	# CP comment
-    depends_on('qt', when='+qt')
+    # VTK will need Qt5OpenGL
+    depends_on('qt+opengl', when='+qt')
     patch('vtk-maillage_qt515.patch', when='^qt@5.15:')
 
     # when compiling vtk7 with gcc >= 10

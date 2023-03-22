@@ -4,9 +4,16 @@
 packages:
   all:
     providers:
-      gl: [opengl, mesa+opengl]
-      glx: [opengl, mesa+glx]
-      glu: [openglu, mesa-glu]
+      # Spack 0.19:
+      # - linux x11: gl(virt) is glx(bundle, shim) depends_on libglx(virt) is opengl(bundle, placeholder for external)
+      # - mesa:      gl(virt) is osmesa(bundle, shim) depends_on libosmesa(virt) is mesa
+      #              libglx(virt) is mesa
+
+      # (allow fallback on mesa when explicit depends_on)
+      gl:: [glx, osmesa]
+      libglx:: [opengl, mesa+glx]
+      glu:: [openglu, mesa-glu]
+      libosmesa:: [mesa+osmesa]
 
   opengl:
     buildable: false
