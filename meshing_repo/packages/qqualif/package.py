@@ -25,7 +25,7 @@ class Qqualif(CMakePackage):
     depends_on('qualif@2: +shared', type=('build', 'link'), when='+shared')
     depends_on('gmds', type=('build', 'link'), when='+gmds')
     depends_on('lima', type=('build', 'link'), when='+lima')
-    depends_on('vtk-maillage', type=('build', 'link'))
+    depends_on('vtk-maillage', type=('build', 'link'), when='+vtk')
 
 # necessary because it is probably missing in the lima cmake files
 #    depends_on('machine-types', type=('build', 'link'), when='+lima')
@@ -54,6 +54,13 @@ class Qqualif(CMakePackage):
         args.append(self.define_from_variant('BUILD_GQLima', 'lima'))
         args.append(self.define_from_variant('BUILD_GQGMDS', 'gmds'))
         args.append(self.define_from_variant('BUILD_GQVtk', 'vtk'))
-        args.append ('-DVTK_7:BOOL=ON')	# ATTENTION : si vtk, et la version dépend de la version majeure de vtk-maillage
+       
+        if '+vtk' in self.spec:
+            if self.spec['vtk-maillage'].version < Version('8'):
+                args.append('-DVTK_7:BOOL=ON')
+            elif self.spec['vtk-maillage'].version < Version('9'):
+                args.append('-DVTK_8:BOOL=ON')
+            else:
+                args.append('-DVTK_9:BOOL=ON')
 
         return args

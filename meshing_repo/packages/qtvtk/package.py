@@ -42,7 +42,9 @@ class Qtvtk(CMakePackage):
 
         if self.spec['vtk-maillage'].version < Version('8'):
             args.append('-DVTK_7:BOOL=ON')
-        else:
+        elif self.spec['vtk-maillage'].version < Version('9'):
             args.append('-DVTK_8:BOOL=ON')
+        else:
+            args.append('-DVTK_9:BOOL=ON')
 
         return args

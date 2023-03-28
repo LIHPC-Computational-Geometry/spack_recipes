@@ -42,8 +42,10 @@ class Vtkcontrib(CMakePackage):
 
         if self.spec['vtk-maillage'].version < Version('8'):
             args.append('-DVTK_7:BOOL=ON')
-        else:
+        elif self.spec['vtk-maillage'].version < Version('9'):
             args.append('-DVTK_8:BOOL=ON')
+        else:
+            args.append('-DVTK_9:BOOL=ON')
 
         # if OFF does vtkcontrib uses OPENGL2 ?
         # see VTK_OPENGL_BACKEND in src/VtkContrib/CMakeLists.txt
