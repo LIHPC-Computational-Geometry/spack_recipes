@@ -84,4 +84,11 @@ class Mgx(CMakePackage):
         else: 
             args.append('-DUSE_PYTHON_3:BOOL=ON')
 
+        if self.spec['vtk-maillage'].version < Version('8'):
+            args.append('-DVTK_7:BOOL=ON')
+        elif self.spec['vtk-maillage'].version < Version('9'):
+            args.append('-DVTK_8:BOOL=ON')
+        else:
+            args.append('-DVTK_9:BOOL=ON')
+
         return args
