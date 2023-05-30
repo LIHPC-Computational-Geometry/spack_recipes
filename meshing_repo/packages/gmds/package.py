@@ -39,6 +39,8 @@ class Gmds(CMakePackage):
     variant('lima',default=False, description='Provide Lima IO')
 
     depends_on('glpk')
+    depends_on('googletest')
+    depends_on('py-pybind11')
     # necessary to build the internal glpk
     depends_on('libtool', type='build')
     depends_on('eigen')
