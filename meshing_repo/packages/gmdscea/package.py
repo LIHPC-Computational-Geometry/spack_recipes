@@ -8,7 +8,7 @@ from spack import *
 
 class Gmdscea(CMakePackage):
 
-    homepage = 'https://github.com/LIHPC-Computational-Geometry/gmdsceal'
+    homepage = 'https://github.com/LIHPC-Computational-Geometry/gmdscea'
     url = 'https://github.com/LIHPC-Computational-Geometry/gmdscea/archive/refs/tags/v2.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/gmdscea.git' 
     maintainers = ['meshing_team']
