@@ -39,37 +39,38 @@ class Guitoolkits2(CMakePackage):
 
     version("1.0.0")
 
-    variant('tkutil', default=False, description='Classes C++ utilitaires') 
-    variant('pythonutil', default=False, description='Classes pour exécuter des scripts python dans un code C++.') 
-    variant('qtutil', default=False, description='Classes C++ utilitaires')
-    variant('qtpython', default=False, description='Classes C++ utilitaires') 
-    variant('qtvtk', default=False, description='Classes C++ utilitaires') 
-    variant('qtnetwork', default=False, description='Classes C++ utilitaires') 
-    variant('vtkcontrib', default=False, description='Classes C++ utilitaires') 
-    variant('preferences', default=False, description='Classes C++ utilitaires') 
-    variant('plugin', default=False, description='Classes C++ utilitaires') 
-    variant('annotations', default=False, description='Classes C++ utilitaires') 
-    variant('qtvtk', default=False, description='Classes C++ utilitaires') 
-    variant('qwtcharts', default=False, description='Classes C++ utilitaires') 
-    variant('qqualif', default=False, description='Classes C++ utilitaires')
-    variant('gmds', default=False, description='Support de GMDS (par QQualif)')
-    variant('lima', default=False, description='Support de Lima++ (par QQualif)')
-    variant('vtk', default=False, description='Support de VTK (par QQualif)')
+    variant('tkutil', default=True, description='Classes C++ utilitaires')
+    variant('pythonutil', default=True, description='Classes pour exécuter des scripts python dans un code C++.')
+    variant('qtutil', default=True, description='Classes C++ utilitaires')
+    variant('qtpython', default=True, description='Classes C++ utilitaires')
+    variant('qtvtk', default=True, description='Classes C++ utilitaires')
+    variant('qtnetwork', default=True, description='Classes C++ utilitaires')
+    variant('vtkcontrib', default=True, description='Classes C++ utilitaires')
+    variant('preferences', default=True, description='Classes C++ utilitaires')
+    variant('plugin', default=True, description='Classes C++ utilitaires')
+    variant('annotations', default=True, description='Classes C++ utilitaires')
+    variant('qtvtk', default=True, description='Classes C++ utilitaires')
+    variant('qwtcharts', default=True, description='Classes C++ utilitaires')
+    variant('qqualif', default=True, description='Classes C++ utilitaires')
+    variant('gmds', default=True, description='Support de GMDS (par QQualif)')
+    variant('lima', default=True, description='Support de Lima++ (par QQualif)')
+    variant('vtk', default=True, description='Support de VTK (par QQualif)')
     variant('corbautil', default=False, description='Classes C++ utilitaires')
 
 # Les composantes à installer :
-    tkutil		= True
-    pythonutil	= True
-    qtutil		= True
-    qtpython	= True
-    vtkcontrib	= True
-    qtvtk		= True
-    qtnetwork	= True
-    preferences	= True
-    plugin		= True
-    annotations	= True
-    qwtcharts	= True
-    qqualif		= True
+# ne pas changer manuellement. Elles sont positionées en fonction des variants
+    tkutil		= False
+    pythonutil	= False
+    qtutil		= False
+    qtpython	= False
+    vtkcontrib	= False
+    qtvtk		= False
+    qtnetwork	= False
+    preferences	= False
+    plugin		= False
+    annotations	= False
+    qwtcharts	= False
+    qqualif		= False
     corbautil	= False
 
                                             
@@ -174,43 +175,43 @@ class Guitoolkits2(CMakePackage):
         args = [
             self.define('BUILD_SHARED_LIBS', True),
             self.define_from_variant('USE_QT_TEXT_BROWSER', 'qtbrowser')
-                ]
+        ]
 
         if self.spec.satisfies('%intel'):
             args.append('-DCMAKE_CXX_FLAGS="-std=c++11"')
 
         if self.tkutil:
-            args.append('-tkutil')
+            args.append('-DTK_UTIL:BOOL=ON')
 
         if self.vtkcontrib:
-            args.append('-vtkcontrib')
+            args.append('-DVTKCONTRIB:BOOL=ON')
             
         if self.pythonutil:
-            args.append('-pythonutil')
+            args.append('-DPYTHON_UTIL:BOOL=ON')
             
         if self.qtutil:
-            args.append('-qtutil')
+            args.append('-DQT_UTIL:BOOL=ON')
             
         if self.qtpython:
-            args.append('-qtpython')
+            args.append('-DQT_PYTHON:BOOL=ON')
             
         if self.qtnetwork:
-            args.append('-qtnetwork')
+            args.append('-DQT_NETWORK:BOOL=ON')
             
         if self.qtvtk:
-            args.append('-qtvtk')
+            args.append('-DQT_VTK:BOOL=ON')
             
         if self.preferences:
-            args.append('-preferences')
+            args.append('-DPREFERENCES:BOOL=ON')
             
         if self.plugin:
-            args.append('-plugin')
+            args.append('-DPLUGIN:BOOL=ON')
             
         if self.qwtcharts:
-            args.append('-qwtcharts')
+            args.append('-DQWT_CHARTS:BOOL=ON')
             
         if self.qqualif:
-            args.append('-qqualif')
+            args.append('-DQQUALIF:BOOL=ON')
             if self.spec.satisfies('+lima'):
                 args.append('-DBUILD_GQLima:BOOL=ON')
             if self.spec.satisfies('+gmds'):
@@ -219,29 +220,15 @@ class Guitoolkits2(CMakePackage):
                 args.append('-DBUILD_GQVtk:BOOL=ON')
                                             
         if self.annotations:
-            args.append('-annotations')
+            args.append('-DANNOTATIONS:BOOL=ON')
 
         if self.corbautil:
-            args.append('-corbautil')
-            
+            args.append('-DCORBA_UTIL:BOOL=ON')
+
         if self.spec['python'].version < Version('3'):
             args.append('-DUSE_PYTHON_2:BOOL=ON')
         else:
             args.append('-DUSE_PYTHON_3:BOOL=ON')
 
-
-        # cmake appelé en mode script => -P CMakeLists.txt à la fin
-        args.append ("-P")
-        rootCmakefile	= self.root_cmakelists_dir + "/CMakeLists.txt"
-        args.append (rootCmakefile)
-
         return args
-
-
-    def build(self, spec, prefix):
-        print ("Déjà compilé !")
-
-
-    def install(self, spec, prefix):
-        print ("Déjà installé !")
 
