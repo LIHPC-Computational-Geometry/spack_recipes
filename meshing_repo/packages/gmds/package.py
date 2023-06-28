@@ -28,7 +28,9 @@ class Gmds(CMakePackage):
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/gmds"
     url      = "https://github.com/LIHPC-Computational-Geometry/gmds/archive/refs/tags/v1.2.1.tar.gz"
+    git = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
 
+    version('main', branch='main')
     version('1.2.1')
     version('1.1.0')
     version('1.0.0')
