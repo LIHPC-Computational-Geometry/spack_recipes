@@ -33,13 +33,13 @@ class Gmds(CMakePackage):
     version('1.1.0')
     version('1.0.0')
 
-    
     variant('kmds', default=False, description='Build with Kokkos')
     variant('elg3d', default=False, description='Build Elg3D')
     variant('blocking', default=False, description='Build the blocking component')
     variant('lima',default=False, description='Provide Lima IO')
     variant('python',default=True, description='Provide GMDS Python API')
-
+    variant('cgns', default=False, description='Provide CGNS blocking export')
+    
     depends_on('glpk')
     # necessary to build the internal glpk
     depends_on('libtool', type='build')
@@ -51,7 +51,7 @@ class Gmds(CMakePackage):
     depends_on('pkg-config', type='build', when='+elg3d')
     depends_on('exodusii', when='+elg3d')
 
-    depends_on('cgns', when='+blocking')
+    depends_on('cgns', when='+cgns')
 
     conflicts('+elg3d', when='~kmds',
              msg='elg3d cannot be built without kmds.')
@@ -67,4 +67,5 @@ class Gmds(CMakePackage):
         args.append(self.define_from_variant('ENABLE_BLOCKING', 'blocking'))
         args.append(self.define_from_variant('WITH_PYTHON_API', 'python'))
         args.append(self.define_from_variant('WITH_LIMA', 'lima'))
+        args.append(self.define_from_variant('WITH_CGNS', 'cgns'))
         return args
