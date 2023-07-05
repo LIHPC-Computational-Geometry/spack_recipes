@@ -12,7 +12,7 @@ class Qqualif(CMakePackage):
     """Bibliotheque d'utilitaires de qualite de maillage."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qqualif'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qqualif/archive/refs/tags/v3.9.1.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qqualif/archive/refs/tags/3.9.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qqualif.git'
     maintainers = ['meshing_team']
 
@@ -38,7 +38,7 @@ class Qqualif(CMakePackage):
     variant('gmds', default=True, description='Utilisation de la structure de maillages GMDS')
     variant('vtk', default=True, description='Utilisation de la structure de maillages VTK')
 
-    version('3.9.1')
+    version('3.9.1', sha256='bcc2a63ff842e59483bcafe68b09da17834f18b0bc6fecbad68638f85ba8f3e1')
     version('3.9.0')
     version('3.7.3', sha256='26c7abf2bf4af3608a3777cfa33b67a017965d20681d2e38532aa67e4327442a')
     version('3.7.1', sha256='88f767746ec679990b6ca957825d58f374ab322caae53b60f1e48887bcb0c59d')
