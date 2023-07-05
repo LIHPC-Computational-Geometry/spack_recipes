@@ -31,8 +31,7 @@ class Gmds(CMakePackage):
 
     maintainers = ['meshing_team']
 
-    #version('0.7.2'),# sha256='ab3bc88f832b12f937308c90aa0dc6b12b9ec7cff9929477beee1f3dcdbf8963')
-    version('0.7.2')#, sha256='83cdc17a94ac0efb871d312e2534f3d6e0567747e339b42909d6d0c8dc1fb6e8')
+    version('0.7.2', sha256='8300e51da2e81669b71ab5b22d15ed2c404d8e7981f604ba4f50c0159ad56cde')
 
     # depends_on('foo')
 
