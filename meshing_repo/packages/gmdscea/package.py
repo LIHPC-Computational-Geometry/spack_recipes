@@ -14,7 +14,7 @@ class Gmdscea(CMakePackage):
     maintainers = ['meshing_team']
 
     version('main', branch='main')
-    version('2.0.0')#, sha256='98c018d9c4e44364332a69fe0de70023c7fc09f39c259cf59ec87d8244a8626e')
+    version('2.0.0', sha256='81846ce42c2f8dea041a02823fc28cf1f435b793ec2e788097851787abfdcb4b')
 
     variant('shared', default=True, description='Build as a shared library.')
 
