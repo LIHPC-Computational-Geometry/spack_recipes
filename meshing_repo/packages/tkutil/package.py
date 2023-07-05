@@ -12,7 +12,7 @@ class Tkutil(CMakePackage):
     """Bibliotheque d'utilitaires C++"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/tkutil'
-    url = 'https://github.com/LIHPC-Computational-Geometry/tkutil/archive/refs/tags/v5.14.0.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/tkutil/archive/refs/tags/5.14.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/tkutil.git' 
     maintainers = ['meshing_team']
 
