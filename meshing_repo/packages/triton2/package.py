@@ -27,12 +27,12 @@ class Triton2(CMakePackage):
     """FIXME: Put a proper description of your package here."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/triton2'
-    url = 'https://github.com/LIHPC-Computational-Geometry/triton2/archive/refs/tags/v1.0.0.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/triton2/archive/refs/tags/1.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/triton2.git' 
     maintainers = ['meshing_team']
 
     version('main', branch='main')
-    version('1.0.0')#, sha256='28f7aadfd57b8db011fb28d2a2adfc2031b1981c3afaf5753454bf28b937bbea')
+    version('1.0.0', sha256='2298e8c9e39cceee741831be10f72ca9c3fecb62b4e3ce2482c9ec85b747f806')
 
     variant('shared', default=True, description='Build as a shared library.')
 
