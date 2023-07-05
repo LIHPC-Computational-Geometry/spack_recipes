@@ -12,7 +12,7 @@ class Qualif(CMakePackage):
     """Bibliotheque/utilitaire de mesure de qualite de maillage"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qualif'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qualif/archive/refs/tags/v2.3.5.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qualif/archive/refs/tags/2.3.5.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qualif.git'
 
     depends_on('cmake', type='build')
