@@ -12,7 +12,7 @@ class Qtpython(CMakePackage):
     """Bibliotheque d'utilitaires Qt/Python permettant d'executer des scripts dans une console avec mode pas a pas."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qtpython'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qtpython/archive/refs/tags/v5.1.10.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qtpython/archive/refs/tags/5.1.10.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qtpython.git'
     maintainers = ['meshing_team']
 
@@ -31,8 +31,8 @@ class Qtpython(CMakePackage):
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
-    version('5.1.10')
-    version('5.1.1')# sha256='c6fe52a87cf38d28ed711dc47cd31ca3411cf5db962fe09531758340e7045844')
+    version('5.1.10', sha256='ef9258f94a10c4124ad08ddac1824dfd616fc13e81bf3dabe8e8022578ed84fb')
+    version('5.1.1', sha256='c6fe52a87cf38d28ed711dc47cd31ca3411cf5db962fe09531758340e7045844')
     version('5.0.3', sha256='2602f10437cdd1293caffbefefcdf104c146456d81f61b13ea0356533c63a2e0')
     version('5.0.2', sha256='587a91778f6797f056da3f54272e362b155ab427f63a7efd36db9fb739591881')
     version('4.1.0', sha256='870101ed2ef4e3424e3e9e03e83676186785dcd4e88e1ab6618f2bcbc9766112')
