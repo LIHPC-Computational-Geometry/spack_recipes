@@ -8,7 +8,7 @@ class Pythonutil(CMakePackage):
     """Utilitaires python-cpp."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/pythonutil'
-    url = 'https://github.com/LIHPC-Computational-Geometry/pythonutil/archive/refs/tags/v5.6.6.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/pythonutil/archive/refs/tags/5.6.6.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/pythonutil.git' 
     maintainers = ['meshing_team']
 
