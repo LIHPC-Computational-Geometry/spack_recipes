@@ -12,7 +12,7 @@ class Qwtcharts(CMakePackage):
     """Bibliotheque d'utilitaires Qwt"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts/archive/refs/tags/v4.4.13.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts/archive/refs/tags/4.4.13.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts.git'
     maintainers = ['meshing_team']
  
