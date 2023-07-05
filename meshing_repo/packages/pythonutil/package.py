@@ -19,7 +19,7 @@ class Pythonutil(CMakePackage):
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
-    version('5.6.6')
+    version('5.6.6', sha256='6edd64ff6ac22ea3483a551c49e490f77071aebe50d5586ece6f8ff929d6e84f')
     version('5.0.2')
 
     def cmake_args(self):
