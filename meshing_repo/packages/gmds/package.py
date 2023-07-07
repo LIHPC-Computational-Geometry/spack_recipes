@@ -61,6 +61,11 @@ class Gmds(CMakePackage):
     depends_on('cgal', when='+blocking')
     depends_on('py-pybind11', when='+python')
     depends_on('lima', when='+lima')
+
+    # testing dependencies
+    depends_on('lcov')
+    depends_on('googletest')
+    depends_on('py-pytest', when='+python')
     
     def cmake_args(self):
         args = []
