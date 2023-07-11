@@ -27,8 +27,8 @@ jobs:
       run: |
         git clone --depth=1 -b releases/latest https://github.com/spack/spack.git ${{github.workspace}}/spack
         source ${{github.workspace}}/spack/share/spack/setup-env.sh
-        spack repo add ${{github.workspace}}/meshing_repo
-        spack repo add ${{github.workspace}}/supersede_repo
+        spack repo add ${{github.workspace}}/meshing
+        spack repo add ${{github.workspace}}/meshing_supersede
     
     - name: Check spack spec 
       # We create a subdirectory that will stand as our working directory for all 
