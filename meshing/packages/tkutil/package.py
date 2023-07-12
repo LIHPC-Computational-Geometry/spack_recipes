@@ -16,10 +16,11 @@ class Tkutil(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/tkutil.git' 
     maintainers = ['meshing_team']
 
-# 5.7.6 is the last python2 only version
+    depends_on('guitoolkitsvariables', type=('build', 'link'))
+    # 5.7.6 is the last python2 only version
     depends_on('python@:2.999', type=('build', 'link'), when='@:5.7.6')
     depends_on('python', type=('build', 'link'), when='@5.7.7:')
-# On a besoin de swig >= 3.0.0 :
+    # On a besoin de swig >= 3.0.0 :
     depends_on('swig@3:', type=('build'))
     depends_on('libiconv', type=('build', 'link'))
 
