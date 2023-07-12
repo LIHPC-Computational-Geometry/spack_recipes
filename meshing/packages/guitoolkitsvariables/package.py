@@ -13,7 +13,7 @@ class Guitoolkitsvariables(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables.git' 
     maintainers = ['meshing_team']
 
-    version('main', branch='main')
+    version('develop', branch='main')
     version('1.3.0', sha256='bc8844a6b13b35eea8cb99676e23824d6e437f7cfe3bc7aedea62a7b3e93bb64')
 
     def cmake_args(self):
