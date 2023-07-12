@@ -18,6 +18,4 @@ class Guitoolkitsvariables(CMakePackage):
 
     def cmake_args(self):
         args = []
-        args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
-
         return args
