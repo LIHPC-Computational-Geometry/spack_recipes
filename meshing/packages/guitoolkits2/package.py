@@ -37,7 +37,7 @@ class Guitoolkits2(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/guitoolkits2.git' 
     maintainers = ["meshing_team"]
 
-    version("1.0.0")
+    version('1.0.0')
 
     variant('tkutil', default=True, description='Classes C++ utilitaires')
     variant('pythonutil', default=True, description='Classes pour exécuter des scripts python dans un code C++.')
