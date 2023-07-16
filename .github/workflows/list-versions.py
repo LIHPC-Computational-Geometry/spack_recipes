@@ -8,7 +8,8 @@ import os
 # Used in CI when a new is release is creted to comment it.
 def listVersions(source_path):
     recipes = glob.glob(source_path + '/**/package.py', recursive=True)
-    with open(source_path + '/recipes.md', 'w') as md:
+    file_name = source_path + '/recipes.md'
+    with open(file_name, 'w') as md:
         md.write('**Below the last version of products contained in Spack recipes for this release.**\n')
         md.write('| Product | Version |\n')
         md.write('| ------- | ------- |\n')
@@ -19,6 +20,7 @@ def listVersions(source_path):
                 version = re.search("version\([\'\"]([0-9]+(\.[0-9]+)*)[\'\"]", line)
                 version_name = 'undefined' if version is None else version.group(1)
                 md.write('| ' + product_name + ' | ' + version_name + ' |\n')
+    print("File created:", file_name)
             
 if __name__ == "__main__":
     project_path = sys.argv[1]

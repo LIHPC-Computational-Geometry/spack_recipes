@@ -26,7 +26,7 @@ jobs:
       - name: Create a release
         uses: softprops/action-gh-release@v1
         with:
-            body_path: $GITHUB_WORKSPACE/recipes.md
+            body_path: ${{ github.workspace }}/recipes.md
         env:
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ github.token }}
