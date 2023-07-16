@@ -1,4 +1,4 @@
-name: checkspec
+name: Check spec
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
 jobs:
   Continuous:
     name: ${{ matrix.config }}
@@ -30,7 +31,7 @@ jobs:
         spack repo add ${{github.workspace}}/meshing
         spack repo add ${{github.workspace}}/meshing_supersede
     
-    - name: Check spack spec 
+    - name: Check Spack spec 
       # We create a subdirectory that will stand as our working directory for all 
       # subsequent commands
       run: |
