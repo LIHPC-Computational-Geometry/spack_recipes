@@ -20,6 +20,7 @@ class Vtkcontrib(CMakePackage):
 # On veut dans cette version un VTK 7.*
 #    depends_on('vtk@7.1:7.99~opengl2~python~xdmf+qt', type=('build', 'link'))
 #    depends_on('qt@5.9.1', type=('build', 'link'))
+    depends_on('guitoolkitsvariables', type=('build', 'link'))
     depends_on('vtk-maillage', type=('build', 'link'))
  #   depends_on('mpi', type=('build', 'link'))
 
