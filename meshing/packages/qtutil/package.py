@@ -20,6 +20,7 @@ class Qtutil(CMakePackage):
     depends_on('tkutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('tkutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qt@5.9:', type=('build', 'link'))
+    version('6.2.0', sha256='74a85acee94a676060197ac49179d82a9544f2baba871d4b2c1b1633317886bb')
     version('5.7.8', sha256='7073195a2cbfdae00840412d54ef7d8b8d60a6b28d9520a34e9b34fd3779bc5d')
     version('5.7.0', sha256='a62fd6e85a8e45f42c3382edeb9a094e873cc479abf6f70efd3df0fb8188cc02')
     version('5.1.0', sha256='b3f1825ed7a4fb2039d47fad235ac819d61adc8faf4f1a70d8a3ed226bceb625')
