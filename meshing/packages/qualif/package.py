@@ -18,7 +18,7 @@ class Qualif(CMakePackage):
     depends_on('cmake', type='build')
 # On a besoin de 7.2 <= Lima :
     depends_on('lima', type=('build', 'link'))
-    version('2.3.5', sha256='84529d811c74454b695f4432e1c8a1af6af4ab422c3dd8f4e2d8e6e5aa7f8c31')
+    version('2.3.5', sha256='29a0135fc9d9348922d8513225b8e693b48c0dcb423c9d18cbff2278153c3794')
     version('2.3.4')
     version('2.3.2', sha256='c5049581fb01c240b6ea0662129d8a2ee9002901090e5be8805ed738ea1e34a7')
     version('2.3.1', sha256='b2a4f936539db69de061e5552bea780b098eca8221b40204a0888b9f9a3f7718')
