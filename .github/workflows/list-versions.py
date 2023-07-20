@@ -16,7 +16,7 @@ def listVersions(source_path):
             line = ' '.join(f.readlines())
             version = re.search("version\([\'\"]([0-9]+(\.[0-9]+)*)[\'\"]", line)
             version_name = 'undefined' if version is None else version.group(1)
-            recipes[product_name] = version_name
+            products[product_name] = version_name
     print(products)
 
     file_name = source_path + '/recipes.md'
@@ -25,7 +25,7 @@ def listVersions(source_path):
         md.write('**Below the last version of products contained in Spack recipes for this release.**\n')
         md.write('| Product | Version |\n')
         md.write('| ------- | ------- |\n')
-        for product in products:
+        for product in products.items():
             product_name = product[0]
             version = product[1]
             md.write('| ' + product_name + ' | ' + version + ' |\n')
@@ -36,7 +36,7 @@ def listVersions(source_path):
     with open(file_name, 'w') as md:
         md.write('#!/bin/bash\n\n')
         md.write('declare -A products\n')
-        for product in products:
+        for product in products.items():
             product_name = product[0]
             version = product[1]
             md.write('products[' + product_name + ']=' + version + '\n')
