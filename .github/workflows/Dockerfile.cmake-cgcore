@@ -5,6 +5,7 @@ FROM ubuntu:22.04
 #==========================================
 # METADATA OF THE IMAGE
 LABEL description="LIHPC-CG cmake core image" \
+    version.ubuntu="22.04" \
     version.qwt="6.1.5" \
     version.mesquite="2.3.0" \
     version.cgns="4.3.0" \
