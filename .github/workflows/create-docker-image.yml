@@ -3,7 +3,7 @@ name: 'Create cmake-cgcore docker image'
 on:
   push:
     branches:
-      - 'cmake_cgcore'
+      - 'cmake-cgcore'
     tags:
       - '*'
 
