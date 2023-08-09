@@ -16,7 +16,7 @@ class VtkMaillage(CMakePackage):
     processing and visualization. """
 
     homepage = "http://www.vtk.org"
-    url = 'https://www.vtk.org/files/release/7.1/VTK-7.1.1.tar.gz'	# VTK-7.1.1.tar.gz
+    url = 'https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz'	# VTK-7.1.1.tar.gz
 
     # VTK7 defaults to OpenGL2 rendering backend
     variant('opengl2', default=True, description='Enable OpenGL2 backend')
