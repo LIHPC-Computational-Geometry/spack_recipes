@@ -58,7 +58,7 @@ RUN PRJ=CGNS-4.3.0 &&\
     cmake --build build/${PRJ} --parallel 4 --target install
 #==========================================
 RUN PRJ=VTK-7.1.1 &&\
-    curl -L https://www.vtk.org/files/release/7.1/${PRJ}.tar.gz | tar xz --directory src &&\
+    curl -L https://vtk.org/files/release/7.1/${PRJ}.tar.gz | tar xz --directory src &&\
     cd src/${PRJ} &&\
     curl -L -O ${PATCH_BASE}/vtk-maillage/vtk-maillage_qt515.patch &&\
     patch -p1 < vtk-maillage_qt515.patch &&\
