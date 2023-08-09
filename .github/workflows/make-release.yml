@@ -2,12 +2,14 @@ name: Make release
 
 on:
   push:
+    branches:
+      - 'main'
     tags:
       - '*'
 
 jobs:
   main:
-    name: Main job
+    name: Make release
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +25,7 @@ jobs:
           cd $GITHUB_WORKSPACE/.github/workflows && python list-versions.py $GITHUB_WORKSPACE
 
       # Create a Github Release
-      - name: Create a release
+      - name: Create github release
         uses: softprops/action-gh-release@v1
         with:
             body_path: ${{ github.workspace }}/recipes.md
