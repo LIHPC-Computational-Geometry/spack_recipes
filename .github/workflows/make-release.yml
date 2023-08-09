@@ -2,8 +2,6 @@ name: Make release
 
 on:
   push:
-    branches:
-      - 'main'
     tags:
       - '*'
 
