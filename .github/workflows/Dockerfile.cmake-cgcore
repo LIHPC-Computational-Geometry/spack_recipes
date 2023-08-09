@@ -1,0 +1,90 @@
+#============== OS LAYER ==================
+# In ubuntu:20.4 the Open GL version is too old to execute in container
+# Ubuntu 22.04 allows to execute glxgears in a docker container
+FROM ubuntu:22.04
+#==========================================
+# METADATA OF THE IMAGE
+LABEL description="LIHPC-CG cmake core image" \
+    version.qwt="6.1.5" \
+    version.mesquite="2.3.0" \
+    version.cgns="4.3.0" \
+    version.vtk="7.1.1" \
+    version.occt="7.1.0"
+#==========================================
+# Do not use /dev as the HOME if you use containers in vscode
+# /dev is too small to store .vscode-server directory containing user preferences
+# ENV HOME /dev
+#==========================================
+SHELL ["/bin/bash", "-c"]
+#==========================================
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#==========================================
+# graphviz, sphinx and pip are needed by mgx documentation
+RUN apt update &&\
+    apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release &&\
+    apt install -y openmpi-bin libopenmpi-dev python3-dev swig doxygen libhdf5-dev libhdf5-mpi-dev libxerces-c-dev qtbase5-dev libqwt-qt5-dev libqt5x11extras5-dev qttools5-dev &&\
+    apt install -y tcllib tklib tcl-dev tk-dev libfreetype-dev libfreeimage-dev rapidjson-dev libdraco-dev libxmu-dev libxi-dev libgts-dev libqt5svg5-dev &&\
+    apt install -y graphviz sphinx pip &&\
+    apt clean &&\
+    pip install -U pytest &&\
+    rm -rf /var/lib/apt/lists/*
+#==========================================
+WORKDIR /containerws
+RUN mkdir src && mkdir build && mkdir install
+ARG PATCH_BASE=https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes_meshing/main/supersede_repo/packages
+ENV INSTALL_DIR=/containerws/install
+#==========================================
+RUN PRJ=qwt-6.1.5 &&\
+    curl -L https://sourceforge.net/projects/qwt/files/qwt/6.1.5/${PRJ}.tar.bz2 | tar jxv --directory src &&\
+    cd src/${PRJ} &&\
+    qmake qwt.pro &&\
+    make -j4 &&\
+    cd ../..
+#==========================================
+RUN PRJ=mesquite-2.3.0 &&\
+    curl -L https://github.com/sandialabs/mesquite/blob/main/mesquite/${PRJ}.tar.gz?raw=true | tar xz --directory src &&\
+    cd src/${PRJ} &&\
+    ./configure --prefix=${INSTALL_DIR}/${PRJ} --without-cppunit --with-pic &&\
+    make -j4 &&\
+    make install &&\
+    cd ../..
+#==========================================
+# -DHDF5_NEED_MPI=true works only if libhdf5-dev is not installed
+# but, in this case, lima does not compile
+RUN PRJ=CGNS-4.3.0 &&\
+    curl -L https://github.com/CGNS/CGNS/archive/v4.3.0.tar.gz | tar xz --directory src &&\
+    cmake -S src/${PRJ} -B build/${PRJ} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${PRJ} &&\
+    cmake --build build/${PRJ} --parallel 4 --target install
+#==========================================
+RUN PRJ=VTK-7.1.1 &&\
+    curl -L https://www.vtk.org/files/release/7.1/${PRJ}.tar.gz | tar xz --directory src &&\
+    cd src/${PRJ} &&\
+    curl -L -O ${PATCH_BASE}/vtk-maillage/vtk-maillage_qt515.patch &&\
+    patch -p1 < vtk-maillage_qt515.patch &&\
+    curl -L -O ${PATCH_BASE}/vtk-maillage/vtk-maillage_gcc10_hiddenvisibility.patch  &&\
+    patch -p1 < vtk-maillage_gcc10_hiddenvisibility.patch &&\
+    curl -L -O ${PATCH_BASE}/vtk-maillage/vtk-maillage_gcc11_const.patch &&\
+    patch -p1 < vtk-maillage_gcc11_const.patch  &&\
+    cd ../.. &&\
+    cmake -S src/${PRJ} -B build/${PRJ} -DMPI_HOME=/usr/lib/x86_64-linux-gnu/openmpi -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${PRJ} \
+    -DCMAKE_BUILD_TYPE=Release -DModule_vtkFiltersParallelMPI:BOOL=ON -DModule_vtkIOExportOpenGL:BOOL=ON -DModule_vtkImagingOpenGL:BOOL=ON \
+    -DModule_vtkRenderingOpenGL:BOOL=ON -DModule_vtkIOExportOpenGL2:BOOL=OFF -DModule_vtkImagingOpenGL2:BOOL=OFF -DModule_vtkRenderingOpenGL2:BOOL=OFF \
+    -DModule_vtkGUISupportQtOpenGL:BOOL=OFF -DModule_vtkParallelMPI:BOOL=ON -DModule_vtkFiltersParallelMPI:BOOL=ON -DModule_vtkRenderingParallel:BOOL=ON \
+    -DVTK_USE_SYSTEM_GL2PS:BOOL=OFF -DVTK_RENDERING_BACKEND=OpenGL -DVTK_Group_Imaging:BOOL=ON -DVTK_Group_MPI:BOOL=ON -DVTK_Group_Qt:BOOL=ON \
+    -DVTK_Group_Rendering:BOOL=ON -DVTK_QT_VERSION=5 -DVTK_ALL_NEW_OBJECT_FACTORY=OFF -DVTK_DEBUG_LEAKS=OFF -DBUILD_DOCUMENTATION=OFF -DVTK_USE_X=ON \
+    -DVTK_PYTHON_VERSION=3 -DVTK_USE_OFFSCREEN=OFF -DVTK_OPENGL_HAS_OSMESA=OFF &&\
+    cmake --build build/${PRJ} --parallel 4 --target install
+#==========================================
+RUN PRJ=occt-V7_1_0 &&\
+    curl -L "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_1_0;sf=tgz" | tar xz --directory src &&\
+    cd src/${PRJ} &&\
+    curl -L -O ${PATCH_BASE}/opencascade/xlocale-7_1.patch &&\
+    patch -p1 < xlocale-7_1.patch &&\
+    curl -L -O ${PATCH_BASE}/opencascade/opencascade-7.1.0_a.patch &&\
+    patch -p1 < opencascade-7.1.0_a.patch &&\
+    cd ../.. &&\
+    cmake -S src/${PRJ} -B build/${PRJ} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${PRJ} &&\
+    cmake --build build/${PRJ} --parallel 4 --target install
+#==========================================
+
