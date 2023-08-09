@@ -2,8 +2,6 @@ name: 'Create cmake-cgcore docker image'
 
 on:
   push:
-    branches:
-      - 'cmake-cgcore'
     tags:
       - '*.*.*'
 
@@ -14,7 +12,7 @@ env:
 
 jobs:
   main:
-    name: Create ${{ env.DOCKERFILE_NAME }} docker image
+    name: Create cmake-cgcore docker image
     runs-on: ubuntu-latest
     permissions:
       contents: read
