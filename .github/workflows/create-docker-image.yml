@@ -5,7 +5,7 @@ on:
     branches:
       - 'cmake-cgcore'
     tags:
-      - '*'
+      - '*.*.*'
 
 env:
   REGISTRY: 'ghcr.io'
