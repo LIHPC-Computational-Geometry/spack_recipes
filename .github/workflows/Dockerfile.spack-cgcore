@@ -1,0 +1,66 @@
+#============== OS LAYER ==================
+# In ubuntu:20.4 the Open GL version is too old to execute in container
+# Ubuntu 22.04 allows to execute glxgears in a docker container
+FROM ubuntu:22.04
+#==========================================
+# METADATA OF THE IMAGE
+LABEL description="LIHPC-CG Spack core image" \
+    version.ubuntu="22.04" \
+    version.spack="0.20.1"
+#==========================================
+ARG SPACK_VERSION=0.20.1
+# Do not use /dev as the HOME if you use containers in vscode
+# /dev is too small to store .vscode-server directory containing user preferences
+# ENV HOME /dev
+#==========================================
+SHELL ["/bin/bash", "-c"]
+#==========================================
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#==========================================
+# 01/23: libxt-dev has been added to compile VTK.
+#        Error msg without libxt-dev: "X11_Xt_LIB could not be found. Required for VTK X lib."
+# 02/23: autoconf added. Used by gmds during build.
+# 02/23: pkg-config added. Used by gts
+# 02/23: lsb-release added. Used by mgx start script.
+# 04/23: graphviz, sphinx and pip added. Used by mgx documentation
+RUN apt update &&\
+    apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file &&\
+    apt install -y graphviz sphinx pip &&\
+    apt clean &&\
+    rm -rf /var/lib/apt/lists/*
+#==========================================
+RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
+    git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git &&\
+    cp spack_recipes_meshing/config/packages.yaml /spack/etc/spack/
+
+# spack config without mpi should be possible
+RUN source /spack/share/spack/setup-env.sh &&\
+    spack repo add ./spack_recipes_meshing/meshing &&\
+    spack repo add ./spack_recipes_meshing/meshing_supersede &&\
+    spack config --scope site add 'packages:all:target:[x86_64]' &&\
+    spack compiler find &&\
+    spack external find cmake
+
+RUN sed -i 's#"${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}"#"${PACKAGE}-${VERSION}"#g' spack/etc/spack/defaults/config.yaml
+#==========================================
+# 2023/02/01-BL: qwt must be installed early due to its qt@5.14 dependency (5.15 otherwise)
+# 2023/02/03-BL: @7.1.0+foundationclasses+dataexchange added on opencascade for mgx
+RUN source /spack/share/spack/setup-env.sh &&\
+    spack env create meshing-env &&\
+    spack env activate meshing-env &&\
+    spack add python@3 &&\
+    spack add py-pytest &&\
+    spack add qt+opengl~examples &&\
+    spack add hdf5+cxx~mpi &&\
+    spack add opencascade@7.1.0+foundationclasses+dataexchange &&\
+    spack add vtk-maillage+mpi~opengl2+qt &&\
+    spack add cgns &&\
+    spack add swig &&\
+    spack add qwt &&\
+    spack add doxygen &&\
+    spack add openmpi &&\
+    spack concretize &&\
+    spack install &&\
+    rm -rf /spack/var/spack/cache/*
+#==========================================

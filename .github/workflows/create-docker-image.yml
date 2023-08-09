@@ -1,4 +1,4 @@
-name: 'Create cmake-cgcore docker image'
+name: 'Create spack-cgcore docker image'
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
 env:
   REGISTRY: 'ghcr.io'
   USER_NAME: 'LIHPC-Computational-Geometry'
-  DOCKERFILE_NAME: 'cmake-cgcore'
+  DOCKERFILE_NAME: 'spack-cgcore'
 
 jobs:
   main:
-    name: Create cmake-cgcore docker image
+    name: Create spack-cgcore docker image
     runs-on: ubuntu-latest
     permissions:
       contents: read
