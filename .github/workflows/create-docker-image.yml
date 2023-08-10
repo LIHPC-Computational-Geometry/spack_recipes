@@ -35,7 +35,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.USER_NAME }}/${{ env.DOCKERFILE_NAME }}
           labels: |
-            org.opencontainers.image.title=lihpccg
+            org.opencontainers.image.title=lihpccg-cmake-cgcore
             org.opencontainers.image.vendor=CEA
           tags: |
             type=raw, latest
