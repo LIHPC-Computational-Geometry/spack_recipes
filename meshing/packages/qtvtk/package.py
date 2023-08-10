@@ -12,7 +12,7 @@ class Qtvtk(CMakePackage):
     """Bibliotheque d'utilitaires Qt/VTK et permettant le parametrage d'experiences lasers ou conteneurs"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qtvtk'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qtvtk/archive/refs/tags/7.14.8.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qtvtk/archive/refs/tags/8.4.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qtvtk.git'
     maintainers = ['meshing_team']
 
