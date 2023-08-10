@@ -31,7 +31,7 @@ RUN apt update &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
 RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
-    git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git &&\
+    git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git &&\
     cp spack_recipes_meshing/config/packages.yaml /spack/etc/spack/
 
 # spack config without mpi should be possible
