@@ -5,12 +5,12 @@ on:
     branches: 
       - main
     paths:
-      - 'package.py'
+      - '**/package.py'
   pull_request:
     branches:
       - main
     paths:
-      - 'package.py'
+      - '**/package.py'
 
 jobs:
   Continuous:
