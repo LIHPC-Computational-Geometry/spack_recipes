@@ -9,7 +9,8 @@ RUN echo CGCORE_VERSION=${CGCORE_VERSION} &&\
     echo SPACK_RECIPES_RELEASE_NUMBER=${SPACK_RECIPES_RELEASE_NUMBER}
 # METADATA OF THE IMAGE
 LABEL description="Mgx image based on spack-cgcore image" \
-      version.spack-cgcore=${CGCORE_VERSION}
+      version.spack-cgcore=${CGCORE_VERSION} \
+      version.spack-recipes=${SPACK_RECIPES_RELEASE_NUMBER}
 #==========================================
 SHELL ["/bin/bash", "-c"]
 #==========================================
