@@ -8,9 +8,8 @@ PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtc
 
 print_usage() {
 	echo "Usage:"
-	echo "  Download released versions:              mirror.sh mirror-releases SPACK_RECIPES_RELEASE_NUMBER"
-	echo "  Download and build released versions:    mirror.sh build-releases  SPACK_RECIPES_RELEASE_NUMBER"
-	echo "  Clone main branch of products and build: mirror.sh build-mainlines"
+	echo "  Download released versions and clone projects:  mirror.sh mirror-releases SPACK_RECIPES_RELEASE_NUMBER"
+	echo "  Download and build released versions:           mirror.sh build-releases  SPACK_RECIPES_RELEASE_NUMBER"
 	exit 1
 }
 
@@ -120,17 +119,6 @@ elif [[ $1 = "build-releases" ]] && [ $# -eq 2 ]; then
 		if [[ $prj == gmds072 ]]; then prj_version=${products[gmds]}; else prj_version=${products[$prj]}; fi
 		download_release_and_untar $prj $prj_version src
 		build src/$prj-$prj_version build/$prj $INSTALL_DIR/$prj
-	done
-
-elif [[ $1 = "build-mainlines" ]] && [ $# -eq 1 ]; then
-
-	mkdir -p src build
-
-	for prj in ${PRJS[@]}
-	do
-		echo -e "\n\e[1;33m=== Project $prj\e[0m"
-		clone $prj src/$prj
-		build src/$prj build/$prj $INSTALL_DIR/$prj
 	done
 
 else
