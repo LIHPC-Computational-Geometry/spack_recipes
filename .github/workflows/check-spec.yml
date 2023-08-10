@@ -1,11 +1,16 @@
 name: Check spec
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: 
+      - main
+    paths:
+      - 'package.py'
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - 'package.py'
 
 jobs:
   Continuous:
