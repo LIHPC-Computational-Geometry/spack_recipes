@@ -1,0 +1,23 @@
+#============== OS LAYER cgcore=======
+ARG CGCORE_VERSION
+FROM ghcr.io/lihpc-computational-geometry/spack-cgcore:${CGCORE_VERSION}
+#==========================================
+# CORE_VERSION ARG MUST BE REWRITE IN BUILD ZONE
+ARG CGCORE_VERSION
+# METADATA OF THE IMAGE
+LABEL description="Mgx image based on spack-cgcore image" \
+      version.spack-cgcore=${CGCORE_VERSION}
+#==========================================
+SHELL ["/bin/bash", "-c"]
+#==========================================
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#==========================================
+ARG SPACK_RECIPES_RELEASE_NUMBER
+RUN source /spack/share/spack/setup-env.sh &&\
+    cd /spack_recipes_meshing && git pull && git checkout ${SPACK_RECIPES_RELEASE_NUMBER} &&\
+    spack env activate meshing-env &&\
+    spack add mgx~smooth3d^vtk-maillage~opengl2+qt &&\
+    spack install --no-checksum &&\
+    rm -rf /spack/var/spack/cache/*
+#==========================================

@@ -1,0 +1,33 @@
+#============== OS LAYER cgcore=======
+ARG CGCORE_VERSION
+FROM ghcr.io/lihpc-computational-geometry/cmake-cgcore:${CGCORE_VERSION}
+#==========================================
+# CORE_VERSION ARG MUST BE REWRITE IN BUILD ZONE
+ARG CGCORE_VERSION
+# METADATA OF THE IMAGE
+LABEL description="Mgx image built from project releases and based on cmake-cgcore image" \
+      version.cmake-cgcore=${CGCORE_VERSION}
+#==========================================
+SHELL ["/bin/bash", "-c"]
+#==========================================
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#==========================================
+WORKDIR /containerws
+#==========================================
+ARG SPACK_RECIPES_RELEASE_NUMBER
+ENV MIRROR_SCRIPT=mirror.sh
+RUN curl -LO https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes_meshing/main/dockerfiles/${MIRROR_SCRIPT} &&\
+    chmod +x ${MIRROR_SCRIPT} &&\
+    ./${MIRROR_SCRIPT} build-releases ${SPACK_RECIPES_RELEASE_NUMBER}
+#==========================================
+# mgx documentation
+RUN cd /containerws/src/mgx-1.0.0 &&\
+    python3 -m venv .venv &&\
+    source .venv/bin/activate &&\
+    pip install sphinx_rtd_theme &&\
+    pip install breathe &&\
+    pip install -U pytest &&\
+    pip install sphinx-copybutton
+#==========================================
+ENV LD_LIBRARY_PATH=$INSTALL_DIR/mgx/lib:$INSTALL_DIR/occt-V7_1_0/lib:$INSTALL_DIR/VTK-7.1.1/lib

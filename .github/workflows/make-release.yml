@@ -6,12 +6,12 @@ on:
       - '*'
 
 jobs:
-  main:
+  make-release:
     name: Make release
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout source files used by the Python checker
+      # Checkout source files to get list-versions.py
       - name: Checkout sources
         uses: actions/checkout@v3
 
@@ -32,3 +32,46 @@ jobs:
           USERNAME: ${{ github.actor }}
           PASSWORD: ${{ github.token }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  make-containers:
+    name: Make cmake and spack containers
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image: [cmake-cgcore-mgx, spack-cgcore-mgx]
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log into the container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.USER_NAME }}/${{ matrix.image }}
+          labels: |
+            org.opencontainers.image.title=lihpccg
+            org.opencontainers.image.vendor=CEA
+          tags: |
+            type=raw, latest
+            type=raw, {{date 'YYYYMMDD'}}
+            type=pep440, pattern={{version}}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v3
+        with:
+            file: ./dockerfiles/Dockerfile.${{ matrix.image }}
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+            build-args: CGCORE_VERSION=1.0.0, SPACK_RECIPES_RELEASE_NUMBER=1.1.1
