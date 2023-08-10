@@ -3,7 +3,7 @@ name: 'Create cmake-cgcore docker image'
 on:
   push:
     tags:
-      - '*.*.*'
+      - 'cmake-cgcore-*.*.*'
 
 env:
   REGISTRY: 'ghcr.io'
@@ -45,7 +45,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
-            file: ./.github/workflows/Dockerfile.${{ env.DOCKERFILE_NAME }}
+            file: ./dockerfiles/Dockerfile.${{ env.DOCKERFILE_NAME }}
             push: true
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
