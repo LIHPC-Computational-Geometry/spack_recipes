@@ -1,0 +1,46 @@
+#============== OS LAYER ==================
+# In ubuntu:20.4 the Open GL version is too old to execute in container
+# Ubuntu 22.04 allows to execute glxgears in a docker container
+FROM ubuntu:22.04
+#==========================================
+# METADATA OF THE IMAGE
+LABEL description "Mgx image built with spack" version="1.0" maintainer="Meshing team <lihpccg@gmail.com>"
+LABEL org.opencontainers.image.source https://github.com/lihpc-computational-geometry/lihpccg-ci
+#==========================================
+ARG SPACK_VERSION=0.19.2
+# Do not use /dev as the HOME if you use containers in vscode
+# /dev is too small to store .vscode-server directory containing user preferences
+# ENV HOME /dev
+#==========================================
+SHELL ["/bin/bash", "-c"]
+#==========================================
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#==========================================
+# 04/23: graphviz, sphinx and pip added. Used by mgx documentation
+RUN apt update &&\
+    apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file &&\
+    apt install -y graphviz sphinx pip &&\
+    apt clean &&\
+    pip install -U pytest &&\
+    rm -rf /var/lib/apt/lists/*
+#==========================================
+RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
+    git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git &&\
+    cp spack_recipes_meshing/config/packages.yaml /spack/etc/spack/
+
+RUN source /spack/share/spack/setup-env.sh &&\
+    spack repo add ./spack_recipes_meshing/meshing &&\
+    spack repo add ./spack_recipes_meshing/meshing_supersede &&\
+    spack config --scope site add 'packages:all:target:[x86_64]' &&\
+    spack compiler find &&\
+    spack external find cmake
+
+#==========================================
+RUN source /spack/share/spack/setup-env.sh &&\
+    spack env create meshing-env &&\
+    spack env activate meshing-env &&\
+    spack add mgx~smooth3d^vtk-maillage~opengl2+qt &&\
+    spack install --no-checksum &&\
+    rm -rf /spack/var/spack/cache/*
+#==========================================

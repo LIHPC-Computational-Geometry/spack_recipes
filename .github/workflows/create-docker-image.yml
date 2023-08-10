@@ -1,0 +1,57 @@
+name: 'Create docker image'
+
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: 'Product'
+        required: true
+        default: 'base'
+        type: choice
+        options:
+        - spack-gmds
+        - spack-gmds-macos
+        - x11ogl
+
+env:
+  REGISTRY: 'ghcr.io'
+  USER_NAME: 'LIHPC-Computational-Geometry'
+
+jobs:
+  main:
+    name: Create ${{ inputs.product }} image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.USER_NAME }}/${{ inputs.product }}
+          labels: |
+            org.opencontainers.image.title=lihpccg-${{ inputs.product }}
+            org.opencontainers.image.vendor=CEA
+          tags: |
+            type=raw, latest
+            type=raw, {{date 'YYYYMMDD'}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+            file: ./dockerfiles/Dockerfile.${{ inputs.product }}
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}

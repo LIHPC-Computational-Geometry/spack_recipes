@@ -1,0 +1,43 @@
+#============== OS LAYER ==================
+FROM ubuntu:22.04
+#==========================================
+# METADATA OF THE IMAGE
+LABEL description="GMDS image built with spack"
+#==========================================
+ARG SPACK_VERSION=0.19.2
+# Do not use /dev as the HOME if you use containers in vscode
+# /dev is too small to store .vscode-server directory containing user preferences
+# ENV HOME /dev
+#==========================================
+SHELL ["/bin/bash", "-c"]
+#==========================================
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#==========================================
+
+#==========================================
+RUN apt update &&\
+    apt install -y build-essential cmake python3 python3-distutils python3-venv pip unzip zip curl git  autoconf &&\
+    apt clean &&\
+    rm -rf /var/lib/apt/lists/*
+#==========================================
+RUN pip install pytest
+#==========================================
+RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
+    sed -i 's#"${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}"#"${PACKAGE}"#g' spack/etc/spack/defaults/config.yaml
+#   spack macro will change at version 0.20, the previous line will be replaced with this one
+#   sed -i 's#"{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}"#"{name}"#g' spack/etc/spack/defaults/config.yaml
+#==========================================
+RUN . ./spack/share/spack/setup-env.sh && \
+    git clone --branch gmds_temp --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git &&\
+    spack repo add ./spack_recipes_meshing/meshing &&\
+    spack repo add ./spack_recipes_meshing/meshing_supersede &&\
+    spack config --scope site add 'packages:all:target:[x86_64]' &&\
+    spack compiler find &&\
+    spack external find cmake
+#==========================================
+RUN . ./spack/share/spack/setup-env.sh && \
+    spack install --only dependencies gmds+kmds+blocking ^kokkos+openmp ^cgns~mpi
+#==========================================
+RUN rm -rf /spack/var/spack/cache/*
+#==========================================

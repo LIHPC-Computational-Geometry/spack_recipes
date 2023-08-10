@@ -1,0 +1,21 @@
+#============== OS LAYER ==================
+# In ubuntu:20.4 the Open GL version is too old to execute in container
+# Ubuntu 22.04 allows to execute glxgears in a docker container
+FROM ubuntu:22.04
+#==========================================
+# METADATA OF THE IMAGE
+LABEL description "Test X11 and OGL" version="1.0" maintainer="Meshing team <lihpccg@gmail.com>"
+#==========================================
+# Do not use /dev as the HOME if you use containers in vscode
+# /dev is too small to store .vscode-server directory containing user preferences
+# ENV HOME /dev
+#==========================================
+SHELL ["/bin/bash", "-c"]
+#==========================================
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+#==========================================
+RUN apt update &&\
+    apt install -y x11-apps mesa-utils &&\
+    apt clean &&\
+    rm -rf /var/lib/apt/lists/*
