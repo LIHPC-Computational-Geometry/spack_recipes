@@ -3,11 +3,13 @@
 # Ubuntu 22.04 allows to execute glxgears in a docker container
 FROM ubuntu:22.04
 #==========================================
+ARG SPACK_VERSION=0.20.1
 # METADATA OF THE IMAGE
-LABEL description "Mgx image built with spack" version="1.0" maintainer="Meshing team <lihpccg@gmail.com>"
-LABEL org.opencontainers.image.source https://github.com/lihpc-computational-geometry/lihpccg-ci
+LABEL description="Mgx image built with spack" \
+      version.ubuntu="22.04" \
+      version.spack=${SPACK_VERSION}
+ARG SPACK_VERSION
 #==========================================
-ARG SPACK_VERSION=0.19.2
 # Do not use /dev as the HOME if you use containers in vscode
 # /dev is too small to store .vscode-server directory containing user preferences
 # ENV HOME /dev
@@ -35,7 +37,6 @@ RUN source /spack/share/spack/setup-env.sh &&\
     spack config --scope site add 'packages:all:target:[x86_64]' &&\
     spack compiler find &&\
     spack external find cmake
-
 #==========================================
 RUN source /spack/share/spack/setup-env.sh &&\
     spack env create meshing-env &&\

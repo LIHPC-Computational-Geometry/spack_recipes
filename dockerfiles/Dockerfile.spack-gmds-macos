@@ -1,10 +1,12 @@
 #============== OS LAYER ==================
 FROM sickcodes/docker-osx
 #==========================================
+ARG SPACK_VERSION=0.20.1
 # METADATA OF THE IMAGE
-LABEL description="GMDS image built with spack for macos"
+LABEL description="GMDS image built with spack for macos" \
+      version.spack=${SPACK_VERSION}
+ARG SPACK_VERSION
 #==========================================
-ARG SPACK_VERSION=0.19.2
 # Do not use /dev as the HOME if you use containers in vscode
 # /dev is too small to store .vscode-server directory containing user preferences
 # ENV HOME /dev
@@ -16,13 +18,13 @@ RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git 
 #   spack macro will change at version 0.20, the previous line will be replaced with this one
 #   sed -i 's#"{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}"#"{name}"#g' spack/etc/spack/defaults/config.yaml
 #==========================================
-RUN . ./spack/share/spack/setup-env.sh && \
+RUN source ./spack/share/spack/setup-env.sh && \
     git clone --branch gmds_temp --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git &&\
     spack repo add ./spack_recipes_meshing/meshing &&\
     spack repo add ./spack_recipes_meshing/meshing_supersede &&\
     spack compiler find
 #==========================================
-RUN . ./spack/share/spack/setup-env.sh && \
+RUN source ./spack/share/spack/setup-env.sh && \
     spack install cmake &&\
     spack install lcov && \
     spack install py-pybind11 && \
