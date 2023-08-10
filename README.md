@@ -1,5 +1,6 @@
 # A repository for the spack recipes of our meshing software
-![CI checkspec](https://github.com//LIHPC-Computational-Geometry/spack_recipes_meshing/actions/workflows/checkspec.yml/badge.svg)
+![CI check-spec](https://github.com//LIHPC-Computational-Geometry/spack_recipes_meshing/actions/workflows/check-spec.yml/badge.svg)
+![CI check-mgx](https://github.com//LIHPC-Computational-Geometry/spack_recipes_meshing/actions/workflows/check-mgx.yml/badge.svg)
 
 
 In order to develop and in our CI we can use the spack package manager (https://github.com/spack/spack), where packages are described in recipes. We will usually be based on the latest release from spack.
