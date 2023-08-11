@@ -78,4 +78,6 @@ jobs:
             push: true
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
-            build-args: CGCORE_VERSION=latest, SPACK_RECIPES_RELEASE_NUMBER=${{ github.ref_name }}
+            build-args: |
+              "CGCORE_VERSION=latest"
+              "SPACK_RECIPES_RELEASE_NUMBER=${{ github.ref_name }}"
