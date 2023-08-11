@@ -8,7 +8,7 @@ class Pythonutil(CMakePackage):
     """Utilitaires python-cpp."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/pythonutil'
-    url = 'https://github.com/LIHPC-Computational-Geometry/pythonutil/archive/refs/tags/5.6.6.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/pythonutil/archive/refs/tags/6.2.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/pythonutil.git' 
     maintainers = ['meshing_team']
 
@@ -19,6 +19,7 @@ class Pythonutil(CMakePackage):
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
+    version('6.2.1', sha256='14425325f2627bb410d9effb022aa0d1f7d7ee490766093668e3552630809acb')
     version('6.2.0', sha256='6c513802336821be8895bc7f46bc580d80a564e2d7ec6c4ee2b1c7d6383a383f')
     version('5.6.6', sha256='6edd64ff6ac22ea3483a551c49e490f77071aebe50d5586ece6f8ff929d6e84f')
     version('5.0.2')
