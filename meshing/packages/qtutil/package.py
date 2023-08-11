@@ -12,7 +12,7 @@ class Qtutil(CMakePackage):
     """Bibliotheque d'utilitaires Qt"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qtutil'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qtutil/archive/refs/tags/6.2.0.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qtutil/archive/refs/tags/6.2.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qtutil.git'
     maintainers = ['meshing_team']
 
@@ -20,6 +20,7 @@ class Qtutil(CMakePackage):
     depends_on('tkutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('tkutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qt@5.9:', type=('build', 'link'))
+    version('6.2.1', sha256='0e8f0a75dca6574d4f348c4c2db3b5689a21cea94e6345a146235053ad4bbc4c')
     version('6.2.0', sha256='74a85acee94a676060197ac49179d82a9544f2baba871d4b2c1b1633317886bb')
     version('5.7.8', sha256='7073195a2cbfdae00840412d54ef7d8b8d60a6b28d9520a34e9b34fd3779bc5d')
     version('5.7.0', sha256='a62fd6e85a8e45f42c3382edeb9a094e873cc479abf6f70efd3df0fb8188cc02')
