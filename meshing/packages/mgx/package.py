@@ -12,7 +12,7 @@ class Mgx(CMakePackage):
     """Mailleur 3D"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/mgx'
-    url = 'https://github.com/LIHPC-Computational-Geometry/mgx/archive/refs/tags/1.0.0.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/mgx/archive/refs/tags/2.2.4.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/mgx.git'
     maintainers = ['meshing_team']
     
@@ -24,6 +24,7 @@ class Mgx(CMakePackage):
     variant('smooth3d', default=False, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
     variant('triton2', default=True, description='Utilisation du mailleur tetraedrique Tetgen')
 
+    version('2.2.4', sha256='09753f649955dcbcfed4debf13c06fb143d369da71c9ce000f7ae0c9478282e4')
     version('2.2.3', sha256='10d3942a650af103bc22f00ccb915470bac4f50c8b43432fcf913db8855f8be1')
     version('1.0.0', sha256='1c52c5d0760adc69c392c70c7d88b5824aa9dfaf9d7b68f7bffbb80cd147f81e')
     
