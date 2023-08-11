@@ -12,7 +12,7 @@ class Qwtcharts(CMakePackage):
     """Bibliotheque d'utilitaires Qwt"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts/archive/refs/tags/4.4.13.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts/archive/refs/tags/5.2.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts.git'
     maintainers = ['meshing_team']
  
@@ -22,6 +22,7 @@ class Qwtcharts(CMakePackage):
 #    depends_on('qt@5.9:', type=('build', 'link'))
     depends_on('qwt@6.1:', type=('build', 'link'))
 
+    version('5.2.1', sha256='fda34002a9631f7afcdb7cc4baaca81d09cacb0cd05b10fe08af86f091eddad5')
     version('5.2.0', sha256='5566d9bdd718f6c12b83f9bc03569ba61b3b67a54ef0ba39e72221ced985f706')
     version('4.4.13', sha256='e73544b6f94e2a3f989b74827bac5afbbf9c9a8899d991528d6f101f4fbc34d4')
     version('4.4.7', sha256='e22528b70830e6ffa819ef032ab72307f218a65fa925a4c5f78a8510deedbae4')
