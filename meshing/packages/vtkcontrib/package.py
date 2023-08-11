@@ -12,7 +12,7 @@ class Vtkcontrib(CMakePackage):
     """Bibliotheque d'utilitaires VTK"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib'
-    url = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib/archive/refs/tags/4.6.4.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib/archive/refs/tags/5.4.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib.git' 
     maintainers = ['meshing_team']
 
@@ -29,6 +29,7 @@ class Vtkcontrib(CMakePackage):
 
     patch('vtkcontrib-4.6.0_calc_mpi.patch', when='@4.6.0')
 
+    version('5.4.1', sha256='de31db5778628eb8b01a67517379b2abe524944a038a348c00d65b1935ad0081')
     version('5.4.0', sha256='c3c7d6b9491cbb273084ef1f5795e88599d23a041b568b61d1da426277cefcea')
     version('4.6.4', sha256='1fce68d5c9342f90ff54aae75248679d52e303cf1954cdcf2ed0bf9bc6157a4c')
     version('4.6.1', sha256='8d32ff953f61addd0a40fa6a92c2ba8fe11f7431cc01608f45b8f7f681a7de76')
