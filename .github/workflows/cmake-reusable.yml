@@ -1,0 +1,65 @@
+name: Deprecated reusable Cmake CI (must be unused)
+
+on:
+  workflow_call:
+    inputs:
+      run-tests:
+        required: true
+        type: boolean
+
+env:
+  QT_QPA_PLATFORM: offscreen
+
+jobs:
+  main:
+    name: Main job
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Linux, Windows or Mac.
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/lihpc-computational-geometry/cmake-cgcore-mgx:latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2 # seems to be needed by codecov
+          submodules: recursive
+
+      - name: Build and install
+        shell: bash
+        run: |
+          cmake -S . -B build --preset=ci --install-prefix=$INSTALL_DIR/${{ github.event.repository.name }}
+          cmake --build build --target install --parallel 4
+
+      - name: Run unit tests
+        if: ${{ inputs.run-tests }}
+        shell: bash
+        run: |
+          cmake --build build --target test
+
+      - name: Archive unit tests logs
+        if: ${{ inputs.run-tests && failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: unit-test-logs
+          path: $GITHUB_WORKSPACE/build/Testing/Temporary/LastTest.log
+
+      - name: Build and run test_link
+        shell: bash
+        run: |
+          cd test_link/
+          cp ../CMakePresets.json .
+          # Do not use ${{ github.event.repository.name }}_ROOT variable: package names != project names (sometimes)
+          cmake -S . -B build --preset=ci -DCMAKE_PREFIX_PATH=$INSTALL_DIR/${{ github.event.repository.name }}
+          cmake --build build
+          cmake --build build --target test
+
+      - name: Archive test_link logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-of-link-logs
+          path: $GITHUB_WORKSPACE/test_link/build/Testing/Temporary/LastTest.log

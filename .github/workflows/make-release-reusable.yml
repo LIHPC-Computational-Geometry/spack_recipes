@@ -1,0 +1,50 @@
+name: Reusable make release CI
+
+on:
+  workflow_call:
+
+jobs:
+  main:
+    name: Main job
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout source files used by the Python checker
+      - name: Checkout sources
+        uses: actions/checkout@v3
+
+      # Release tag name == cmake eversion ?
+      - name: Check cmake and release versions
+        shell: bash
+        run: |
+          echo Project path: $GITHUB_WORKSPACE
+          echo Release number: ${{ github.ref_name }}
+          git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git
+          cd $GITHUB_WORKSPACE/spack_recipes_meshing/.github/workflows && python check-version.py $GITHUB_WORKSPACE ${{ github.ref_name }}
+
+      # Create a Github Release
+      - name: Create a release
+        uses: softprops/action-gh-release@v1
+        env:
+          USERNAME: ${{ github.actor }}
+          PASSWORD: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Download release source (.tar.gz) + compute SHA256 + write file with SHA256
+      - name: Compute SHA256
+        shell: bash
+        run: |
+          echo Project name: ${{ github.event.repository.name }}
+          echo Release number: ${{ github.ref_name }}
+          echo Project path: $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/spack_recipes_meshing/.github/workflows && python compute-sha256.py ${{ github.event.repository.name }} ${{ github.ref_name }} $GITHUB_WORKSPACE
+
+      # Update release with sha
+      - name: Update release with SHA256
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: ${{ github.workspace }}/newbody.md
+        env:
+          USERNAME: ${{ github.actor }}
+          PASSWORD: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
