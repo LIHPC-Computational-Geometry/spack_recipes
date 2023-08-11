@@ -5,6 +5,10 @@ on:
     tags:
       - '*'
 
+env:
+  REGISTRY: 'ghcr.io'
+  USER_NAME: 'LIHPC-Computational-Geometry'
+
 jobs:
   make-release:
     name: Make release
