@@ -3,12 +3,13 @@
 # Ubuntu 22.04 allows to execute glxgears in a docker container
 FROM ubuntu:22.04
 #==========================================
+ARG SPACK_VERSION=0.20.1
 # METADATA OF THE IMAGE
 LABEL description="LIHPC-CG Spack core image" \
-    version.ubuntu="22.04" \
-    version.spack="0.20.1"
+      version.ubuntu="22.04" \
+      version.spack=${SPACK_VERSION}
+ARG SPACK_VERSION
 #==========================================
-ARG SPACK_VERSION=0.20.1
 # Do not use /dev as the HOME if you use containers in vscode
 # /dev is too small to store .vscode-server directory containing user preferences
 # ENV HOME /dev
