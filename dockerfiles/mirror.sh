@@ -18,7 +18,7 @@ build() {
 	builddir=$2
 	installdir=$3
 	echo -e "\e[1;32mCompiling $srcdir in $builddir\e[0m"
-	echo cmake -S $srcdir -B $builddir --preset=ci --install-prefix=$installdir \
+	cmake -S $srcdir -B $builddir --preset=ci --install-prefix=$installdir \
 	&& cmake --build $builddir --target install --parallel 4 \
 	|| exit 1
 }
