@@ -25,7 +25,7 @@ RUN curl -LO https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spac
     ./${MIRROR_SCRIPT} build-releases ${SPACK_RECIPES_RELEASE_NUMBER}
 #==========================================
 # mgx documentation
-RUN cd /containerws/src/mgx-1.0.0 &&\
+RUN cd /containerws/src/mgx-* &&\
     python3 -m venv .venv &&\
     source .venv/bin/activate &&\
     pip install sphinx_rtd_theme &&\
