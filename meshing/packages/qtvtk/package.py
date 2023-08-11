@@ -12,7 +12,7 @@ class Qtvtk(CMakePackage):
     """Bibliotheque d'utilitaires Qt/VTK et permettant le parametrage d'experiences lasers ou conteneurs"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qtvtk'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qtvtk/archive/refs/tags/8.4.0.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qtvtk/archive/refs/tags/8.4.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qtvtk.git'
     maintainers = ['meshing_team']
 
@@ -26,6 +26,7 @@ class Qtvtk(CMakePackage):
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
+    version('8.4.1', sha256='8b5b0f74a27fd0664b4c94229d8488fb62fa34b2fd7a7367085215a2f850f786')
     version('8.4.0', sha256='851bcf977d03f514dec6e1c220f3585e80ad043c4b11ef45805a5916b1c16d64')
     version('7.14.8', sha256='2d9cb54c14afc38e849a25fe8fe534481402f64352c690454671e0e61a9fe0c4')
     version('7.14.0', sha256='ff72228ae9762551e8c7be0def0a5e3289cb8c29427870beb34a375e02fec396')
