@@ -13,13 +13,13 @@ The **dockerfiles** directory contains various dockerfiles used by Github workfl
 
 This project also contains workflows used by the mgx project and its dependencies (tkutil, qtutil...).
 
-## CI and versioning policy of mgx ecosystem projects
+## Development in mgx ecosystem projects
 
-**Development**
+**Good practices**
 
 Try to follow the following rules:
 - develop on a branch and submit a pull-request on main branch at the end,
-- do not versionize project using Github interface.
+- do not versionize project using Github interface: use tags (see below).
 
 **CI**
 
@@ -28,7 +28,6 @@ All mgx ecosystem projects conform to the same spack CI. It:
 - builds the current project branch using Spack,
 - executes unit tests (registered in `CMakeLists.txt`),
 - builds and runs the content of `test_link` directory.
-
 
 **Versioning**
 
@@ -47,23 +46,6 @@ Adding a new tag on the `spack_recipes_meshing` project:
 
 *Consequently, check that CI passes before taging `spack_recipes_meshing`: a release of this project is considered as a reference.*
 
-## Use cases
-**Development in a library like tkutil**
-
-TODO
-
-**Development in two dependent libraries like tkutil and qtutil**
-
-TODO
-
-**Development in mgx**
-
-TODO
-
-## Project branches
-
-TODO
-
 ## Docker images
 
 This repository contains docker images available in the [Packages section](https://github.com/orgs/LIHPC-Computational-Geometry/packages?repo_name=spack_recipes_meshing) on the right of the main page.
@@ -72,7 +54,7 @@ The dockerfiles used to create those images are available in the [dockerfiles](.
 
 If you need some help to use available containers, you can read [this document](./docs/container-development.md).
 
-### Automatic images
+**Automatic images**
 
 At first, two core images:
 - `spack-cgcore`: LIHPC-CG core image based on Ubuntu and built with Spack. It contains Qwt, CGNS, VTK, Open Cascade...
@@ -86,7 +68,7 @@ Two images based on above core images:
 
 These images are built when the `main` branch is tagged. The tag defines the version number of the image. These images are used to provide both a development environment for all mgx ecosystem projects and an executable mgx product.
 
-### Handmade images
+**Handmade images**
 
 The `spack-mgx` image is "handmade": it takes more than 6 hours to create (exceeds the maximum possible free time on GitHub).
 
