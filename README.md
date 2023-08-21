@@ -3,7 +3,7 @@
 ![CI check-spec](https://github.com//LIHPC-Computational-Geometry/spack_recipes_meshing/actions/workflows/check-spec.yml/badge.svg)
 ![CI check-mgx](https://github.com//LIHPC-Computational-Geometry/spack_recipes_meshing/actions/workflows/check-mgx.yml/badge.svg)
 
-Spack package manager (https://github.com/spack/spack) is used bu LIHPC-CG projects. Spack packages are described in recipes. Two repositories of recipes are currently defined here:
+Spack package manager (https://github.com/spack/spack) is used by LIHPC-CG projects. Spack packages are described in recipes. Two repositories of recipes are currently defined here:
 - **meshing** contains the recipes of our meshing components;
 - **meshing_supersede** contains recipes present in upstream spack but with modifications to suit our needs. It should be kept minimal and these modifications should be integrated into upstream when possible, and removed when they make their way into a spack release.
 
@@ -18,7 +18,7 @@ This project also contains workflows used by the mgx project and its dependencie
 **Development**
 
 Try to follow the following rules:
-- develop on a branch and do a pull-request on main branch at the end,
+- develop on a branch and submit a pull-request on main branch at the end,
 - do not versionize project using Github interface.
 
 **CI**
@@ -26,15 +26,15 @@ Try to follow the following rules:
 All mgx ecosystem projects conform to the same spack CI. It:
 - pulls the `spack_recipes_meshing` main branch,
 - builds the current project branch using Spack,
-- executes unit tests (registered in `CMakeLists.txt),
+- executes unit tests (registered in `CMakeLists.txt`),
 - builds and runs the content of `test_link` directory.
 
 
 **Versioning**
 
-Version number are of the `X.Y.Z` form: please do not prefix release with `v` to share the same release name between Github and Spack.
+Version number are of the `X.Y.Z` form: please do not tag your project with a `v` prefix to share the same release name between Github and Spack.
 
-Do not versionize project using Github interface. Tag your project and push the tag. It will trigger a workflow that check rules before making the project release.
+Do not versionize project using Github interface. Tag your project and push the tag. It will trigger a workflow that checks rules and publishes the project release.
 ```bash
 git tag X.Y.Z && git push origin X.Y.Z
 ```
