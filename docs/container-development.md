@@ -36,7 +36,7 @@ To install Podman:
 
 ### Build the image
 
-You will build an image on your computer. Download the [`images/Dockerfile.x11ogl`](https://raw.githubusercontent.com/LIHPC-Computational-Geometry/lihpccg-ci/main/images/Dockerfile.x11ogl) file and enter the following command:
+You will build an image on your computer. Download the [`Dockerfile.x11ogl`](https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes_meshing/main/dockerfiles/Dockerfile.x11ogl) file and enter the following command:
 
     podman build -t lihpccg/x11ogl . -f Dockerfile_x11ogl --format docker
 
@@ -62,7 +62,7 @@ In the following use cases, we have a `lihpccg` directory on our computer, conta
 ### Build and open a container from an image
 
 To execute our x11ogl container in VSCode: 
-- Create a `lihpccg/.devcontainer` directory and copy the [`devcontainer.json`](https://raw.githubusercontent.com/LIHPC-Computational-Geometry/lihpccg-ci/main/devcontainer.json) in it.
+- Create a `lihpccg/.devcontainer` directory and copy the [`devcontainer.json`](https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes_meshing/main/docs/devcontainer.json) in it.
 - Launch VSCode and click on `File>Open Folder` menu and select `lihpccg` directory.
 - VSCode should automatically ask you if you want to install the `Dev Container` extension. In this case, just accept it otherwise install the extension (clik on the Extensions icon in the Activity Bar on the left and search extension in marketplace in the top left search bar).
 - Launch the container with CTRL-P and select `Dev Containers: Rebuild and Reopen in Container`. Wait for the container to start and open a terminal (Terminal menu in top menu bar). The terminal is open in the container.
