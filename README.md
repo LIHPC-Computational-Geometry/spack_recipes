@@ -92,7 +92,7 @@ The `spack-mgx` image is "handmade": it takes more than 6 hours to create (excee
 
 The others images can be created thanks to the `create-docker-image` workflow available [in the actions tab](https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing/actions/workflows/create-docker-image.yml): click on "Run workflow" button on the right and select the desired image.
 
-# Build a mirror for sites that do not have an internet connection
+## Build a mirror for sites that do not have an internet connection
 
 To build a mirror for sites that do not have an internet connection, download [this script](./dockerfiles/mirror.sh) and type the following command :
 
@@ -104,7 +104,7 @@ It will clone all repositories needed by mgx and will prepare Spack mirrors and 
 
 If you just need to compile mgx (no mirroring of github repositories), you can also use [Spack mirroring feature](./docs/spack-mirroring.md).
 
-# Under construction
+## Under construction
 
 - replace `meshing` term with `lihpccg`
 - upgrade `mirror.sh` to the new repository
