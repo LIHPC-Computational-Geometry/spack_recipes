@@ -1,0 +1,21 @@
+{
+	"name": "Ubuntu.22.04-Spack.0.19",
+	"image": "lihpccg/mgx-ubuntu.22.04-spack.0.19.0:latest",
+	//"image": "lihpccg/x11ogl",
+	"remoteUser": "root",
+	"extensions": [
+		"ms-vscode.cpptools",
+		"ms-vscode.cmake-tools",
+		"cheshirekow.cmake-format",
+		"xaver.clang-format"
+	],
+	"runArgs": [
+		"--rm",
+        "--net", "host", 
+        "-e", "DISPLAY=${env:DISPLAY}",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
+	],
+	"containerEnv": {
+		"ENV1": "MyPersonalEnvVar"
+	}
+}
