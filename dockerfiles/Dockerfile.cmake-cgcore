@@ -33,7 +33,7 @@ RUN apt update &&\
 #==========================================
 WORKDIR /containerws
 RUN mkdir src && mkdir build && mkdir install
-ARG PATCH_BASE=https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes_meshing/main/meshing_supersede/packages
+ARG PATCH_BASE=https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes/main/meshing_supersede/packages
 ENV INSTALL_DIR=/containerws/install
 #==========================================
 RUN PRJ=qwt-6.1.5 &&\
