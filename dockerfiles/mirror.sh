@@ -63,7 +63,7 @@ clone() {
 download_recipes_sh() {
 	recipes_release=$1
 
-	url=$GH_BASE/spack_recipes_meshing/releases/download/$recipes_release/recipes.sh
+	url=$GH_BASE/spack_recipes/releases/download/$recipes_release/recipes.sh
 	echo -e "\e[1;32mDownloading $url in /tmp to get versions of products\e[0m"
 	curl -L $url > /tmp/recipes.sh || exit 1
 }
@@ -91,9 +91,9 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	echo -e "\n\e[1;33m=== Project vtk-maillage\e[0m"
 	download_release vtk-maillage '7.1.1' https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz
 
-	# Mirroring spack_recipes_meshing from mirrors
+	# Mirroring spack_recipes from mirrors
 	echo -e "\n\e[1;33m=== Spack recipes\e[0m"
-	prj=spack_recipes_meshing
+	prj=spack_recipes
 	download_release_and_untar $prj $2 .
 	mv $prj-$2 meshing_recipes
 	tar cvfz meshing_recipes.tar.gz meshing_recipes

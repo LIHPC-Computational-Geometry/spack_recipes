@@ -19,8 +19,8 @@ jobs:
         run: |
           echo Project path: $GITHUB_WORKSPACE
           echo Release number: ${{ github.ref_name }}
-          git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git
-          cd $GITHUB_WORKSPACE/spack_recipes_meshing/.github/workflows && python check-version.py $GITHUB_WORKSPACE ${{ github.ref_name }}
+          git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
+          cd $GITHUB_WORKSPACE/spack_recipes/.github/workflows && python check-version.py $GITHUB_WORKSPACE ${{ github.ref_name }}
 
       # Create a Github Release
       - name: Create a release
@@ -37,7 +37,7 @@ jobs:
           echo Project name: ${{ github.event.repository.name }}
           echo Release number: ${{ github.ref_name }}
           echo Project path: $GITHUB_WORKSPACE
-          cd $GITHUB_WORKSPACE/spack_recipes_meshing/.github/workflows && python compute-sha256.py ${{ github.event.repository.name }} ${{ github.ref_name }} $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE/spack_recipes/.github/workflows && python compute-sha256.py ${{ github.event.repository.name }} ${{ github.ref_name }} $GITHUB_WORKSPACE
 
       # Update release with sha
       - name: Update release with SHA256

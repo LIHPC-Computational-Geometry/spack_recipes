@@ -24,7 +24,7 @@ Go to the `/spack/var/spack`, tar the cache directory of the previously created 
     tar cvfz /mgx-mirror/cache.tar.gz cache
 
 Then, you can exit from the container and go the previously mounted directory on your computer, `/tmp/mgx-mirror`in this example.
-Do not forget to download the last release of [spack LIHPC-CG recipes](https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing/releases) in the same directory.
+Do not forget to download the last release of [spack LIHPC-CG recipes](https://github.com/LIHPC-Computational-Geometry/spack_recipes/releases) in the same directory.
 
 # Use the mirror
 

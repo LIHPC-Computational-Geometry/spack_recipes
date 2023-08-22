@@ -12,7 +12,7 @@ def computeSha256(project_name, project_version, project_path):
 
         file_name = project_path + '/newbody.md'
         print("Creating markdown file:", file_name)
-        spack_recipe_url = base_url + 'spack_recipes_meshing/blob/main/meshing/packages/' + project_name + '/package.py'
+        spack_recipe_url = base_url + 'spack_recipes/blob/main/meshing/packages/' + project_name + '/package.py'
         with open(file_name, 'w') as md:
             md.write("Do not forget to update your [Spack recipe](" + spack_recipe_url + ") with the following line:\n")
             md.write("```python\n")

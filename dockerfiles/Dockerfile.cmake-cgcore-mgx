@@ -20,7 +20,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /containerws
 #==========================================
 ENV MIRROR_SCRIPT=mirror.sh
-RUN curl -LO https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes_meshing/main/dockerfiles/${MIRROR_SCRIPT} &&\
+RUN curl -LO https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes/main/dockerfiles/${MIRROR_SCRIPT} &&\
     chmod +x ${MIRROR_SCRIPT} &&\
     ./${MIRROR_SCRIPT} build-releases ${SPACK_RECIPES_RELEASE_NUMBER}
 #==========================================

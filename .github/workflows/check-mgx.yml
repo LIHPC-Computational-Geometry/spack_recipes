@@ -24,9 +24,9 @@ jobs:
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
-          cd /spack_recipes_meshing && git pull
-          spack repo add /spack_recipes_meshing/meshing
-          spack repo add /spack_recipes_meshing/meshing_supersede
+          cd /spack_recipes && git pull
+          spack repo add /spack_recipes/meshing
+          spack repo add /spack_recipes/meshing_supersede
           spack env activate meshing-env
           spack add mgx~smooth3d^vtk-maillage~opengl2+qt
           spack install -v --no-checksum -v
