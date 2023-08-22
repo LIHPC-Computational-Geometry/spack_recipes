@@ -32,13 +32,13 @@ RUN apt update &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
 RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
-    git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes_meshing.git &&\
-    cp spack_recipes_meshing/config/packages.yaml /spack/etc/spack/
+    git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git &&\
+    cp spack_recipes/config/packages.yaml /spack/etc/spack/
 
 # spack config without mpi should be possible
 RUN source /spack/share/spack/setup-env.sh &&\
-    spack repo add ./spack_recipes_meshing/meshing &&\
-    spack repo add ./spack_recipes_meshing/meshing_supersede &&\
+    spack repo add ./spack_recipes/meshing &&\
+    spack repo add ./spack_recipes/meshing_supersede &&\
     spack config --scope site add 'packages:all:target:[x86_64]' &&\
     spack compiler find &&\
     spack external find cmake
