@@ -26,7 +26,7 @@ jobs:
           spack repo add /spack_recipes/meshing_supersede
 
       # Checkout project source files
-      - name: Checkout sources for test_link
+      - name: Checkout sources
         uses: actions/checkout@v3
 
       # Build the current sources, run unit tests and install
