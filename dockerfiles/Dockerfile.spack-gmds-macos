@@ -20,16 +20,11 @@ RUN source ./spack/share/spack/setup-env.sh && \
     git clone --branch gmds_temp --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes.git &&\
     spack repo add ./spack_recipes/meshing_repo &&\
     spack repo add ./spack_recipes/supersede_repo &&\
-    spack compiler find
+    spack config --scope site add 'packages:all:target:[x86_64]' &&\
+    spack compiler find &&\
+    spack external find cmake
 #==========================================
 RUN source ./spack/share/spack/setup-env.sh && \
-    spack install cmake &&\
-    spack install lcov && \
-    spack install py-pybind11 && \
-    spack install py-pytest &&\
-    spack install glpk && \
-    spack install googletest && \
-    spack install cgal && \
     spack install --only dependencies gmds+kmds+blocking ^kokkos+openmp ^cgns~mpi
 #==========================================
 RUN rm -rf /spack/var/spack/cache/*
