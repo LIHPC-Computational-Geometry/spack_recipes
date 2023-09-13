@@ -23,6 +23,7 @@ class Mgx(CMakePackage):
     # 2023/06/02 - BL: Waiting for a GitHub smooth3d version, True ==> False
     variant('smooth3d', default=False, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
     variant('triton2', default=True, description='Utilisation du mailleur tetraedrique Tetgen')
+    variant('doc', default=False, description='Installation de la documentation utilisateur')
 
     version('2.2.4', sha256='09753f649955dcbcfed4debf13c06fb143d369da71c9ce000f7ae0c9478282e4')
     version('2.2.3', sha256='10d3942a650af103bc22f00ccb915470bac4f50c8b43432fcf913db8855f8be1')
@@ -57,7 +58,13 @@ class Mgx(CMakePackage):
     depends_on('lima')
   #  depends_on('experimentalroom')
     depends_on('pkgconfig', type=('build'))
- 
+
+    depends_on("texlive +full", when="+doc")
+    depends_on("py-breathe", when="+doc")
+    depends_on("py-sphinx", when="+doc")
+    depends_on("py-sphinx-rtd-theme", when="+doc")
+    depends_on("py-sphinx-copybutton", when="+doc")
+  
     def cmake_args(self):
         args=  [      
             self.define_from_variant('USE_DKOC', 'dkoc'),
