@@ -59,7 +59,7 @@ class Mgx(CMakePackage):
   #  depends_on('experimentalroom')
     depends_on('pkgconfig', type=('build'))
 
-    depends_on("texlive +full", when="+doc")
+    depends_on("texlive scheme='full'", when="+doc")
     depends_on("py-breathe", when="+doc")
     depends_on("py-sphinx", when="+doc")
     depends_on("py-sphinx-rtd-theme", when="+doc")
