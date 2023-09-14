@@ -62,6 +62,9 @@ class Lima(CMakePackage):
                 self.define_from_variant('BUILD_XLMLIMA', 'xlmlima'),
                ]
 
+        args.append(self.define('MACHINE_TYPES', 'OFF'))
+        args.append(self.define('FORMAT_MLI', 'OFF'))
+
         if '+i4' in self.spec:
             args.append(self.define('INT_8', False))
         else:
