@@ -19,7 +19,7 @@ SHELL ["/bin/bash", "-c"]
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
-# 04/23: graphviz, sphinx and pip added. Used by mgx documentation
+# 04/23: graphviz added for mgx documentation
 RUN apt update &&\
     apt install -y build-essential cmake python3 python3-distutils unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file graphviz &&\
     apt clean &&\
@@ -27,7 +27,7 @@ RUN apt update &&\
 #==========================================
 RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
     git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes.git &&\
-    cp spack_recipes/config/packages.yaml /spack/etc/spack/
+    cp /spack_recipes/config/packages.yaml /spack/etc/spack/
 
 RUN source /spack/share/spack/setup-env.sh &&\
     spack repo add ./spack_recipes/meshing &&\
@@ -39,11 +39,6 @@ RUN source /spack/share/spack/setup-env.sh &&\
 RUN source /spack/share/spack/setup-env.sh &&\
     spack env create meshing-env &&\
     spack env activate meshing-env &&\
-    spack add texlive scheme=full &&\
-    spack add py-breathe &&\
-    spack add py-sphinx@6.2.1 &&\
-    spack add py-sphinx-rtd-theme &&\
-    spack add py-sphinx-copybutton &&\
     spack add py-pytest &&\
     spack add mgx +doc ~smooth3d^vtk-maillage~opengl2+qt &&\
     spack install --no-checksum &&\
