@@ -23,6 +23,7 @@ class Mgx(CMakePackage):
     # 2023/06/02 - BL: Waiting for a GitHub smooth3d version, True ==> False
     variant('smooth3d', default=False, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
     variant('triton2', default=True, description='Utilisation du mailleur tetraedrique Tetgen')
+    variant('doc', default=False, description='Installation de la documentation utilisateur')
 
     version('2.2.4', sha256='09753f649955dcbcfed4debf13c06fb143d369da71c9ce000f7ae0c9478282e4')
     version('2.2.3', sha256='10d3942a650af103bc22f00ccb915470bac4f50c8b43432fcf913db8855f8be1')
@@ -57,7 +58,22 @@ class Mgx(CMakePackage):
     depends_on('lima')
   #  depends_on('experimentalroom')
     depends_on('pkgconfig', type=('build'))
- 
+
+    depends_on("texlive scheme='small'", when="+doc")
+    depends_on("py-breathe", when="+doc")
+    depends_on("py-sphinx@5.3.0", when="+doc")
+    depends_on("py-sphinx-rtd-theme@0.5.1", when="+doc")
+    depends_on("py-sphinx-copybutton", when="+doc")
+
+    def setup_build_environment(self, env):
+        if ('doc' in self.spec.variants):
+            python_version = str(self.spec['python'].version).split('.')
+            python_dir = "python" + python_version[0] + "." + python_version[1]
+
+            sphinx_path = self.spec['py-sphinx'].prefix
+            sphinx_pythonpath = join_path(sphinx_path, 'lib', python_dir, 'site-packages')
+            env.prepend_path('PYTHONPATH', sphinx_pythonpath)
+  
     def cmake_args(self):
         args=  [      
             self.define_from_variant('USE_DKOC', 'dkoc'),
@@ -77,10 +93,11 @@ class Mgx(CMakePackage):
             self.define('DKOC_LICENCE', 'unavailable')
         ]
 
+        if ('doc' in self.spec.variants):
+            args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
         if self.spec.satisfies('%intel'):
             args.append('-DCMAKE_CXX_FLAGS="-std=c++11"')
-
 
         if self.spec['python'].version < Version('3'):
             args.append('-DUSE_PYTHON_3:BOOL=OFF')
