@@ -82,7 +82,7 @@ class Magix3d(CMakePackage):
 
     # setup PYTHON_PATH for documentation
     def setup_build_environment(self, env):
-        if ('doc' in self.spec.variants):
+        if ('+doc' in self.spec.variants):
             python_version = str(self.spec['python'].version).split('.')
             python_dir = "python" + python_version[0] + "." + python_version[1]
 
@@ -119,7 +119,7 @@ class Magix3d(CMakePackage):
         args.append('-DBUILD_MAGIX3D:BOOL=ON')
         args.append('-DBUILD_MAGIX3DBATCH:BOOL=OFF')
 
-        if ('doc' in self.spec.variants):
+        if ('+doc' in self.spec.variants):
             args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
         if self.spec['python'].version < Version('3'):

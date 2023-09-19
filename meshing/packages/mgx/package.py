@@ -66,7 +66,7 @@ class Mgx(CMakePackage):
     depends_on("py-sphinx-copybutton", when="+doc")
 
     def setup_build_environment(self, env):
-        if ('doc' in self.spec.variants):
+        if ('+doc' in self.spec.variants):
             python_version = str(self.spec['python'].version).split('.')
             python_dir = "python" + python_version[0] + "." + python_version[1]
 
@@ -93,7 +93,7 @@ class Mgx(CMakePackage):
             self.define('DKOC_LICENCE', 'unavailable')
         ]
 
-        if ('doc' in self.spec.variants):
+        if ('+doc' in self.spec.variants):
             args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
         if self.spec.satisfies('%intel'):
