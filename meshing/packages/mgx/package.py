@@ -59,11 +59,20 @@ class Mgx(CMakePackage):
   #  depends_on('experimentalroom')
     depends_on('pkgconfig', type=('build'))
 
-    depends_on("texlive scheme='minimal'", when="+doc")
+    depends_on("texlive scheme='small'", when="+doc")
     depends_on("py-breathe", when="+doc")
-    depends_on("py-sphinx@6.2.1", when="+doc")
-    depends_on("py-sphinx-rtd-theme", when="+doc")
+    depends_on("py-sphinx@5.3.0", when="+doc")
+    depends_on("py-sphinx-rtd-theme@0.5.1", when="+doc")
     depends_on("py-sphinx-copybutton", when="+doc")
+
+    def setup_build_environment(self, env):
+        if ('doc' in self.spec.variants):
+            python_version = str(self.spec['python'].version).split('.')
+            python_dir = "python" + python_version[0] + "." + python_version[1]
+
+            sphinx_path = self.spec['py-sphinx'].prefix
+            sphinx_pythonpath = join_path(sphinx_path, 'lib', python_dir, 'site-packages')
+            env.prepend_path('PYTHONPATH', sphinx_pythonpath)
   
     def cmake_args(self):
         args=  [      
@@ -84,10 +93,11 @@ class Mgx(CMakePackage):
             self.define('DKOC_LICENCE', 'unavailable')
         ]
 
+        if ('doc' in self.spec.variants):
+            args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
         if self.spec.satisfies('%intel'):
             args.append('-DCMAKE_CXX_FLAGS="-std=c++11"')
-
 
         if self.spec['python'].version < Version('3'):
             args.append('-DUSE_PYTHON_3:BOOL=OFF')
