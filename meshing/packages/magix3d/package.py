@@ -19,6 +19,7 @@ class Magix3d(CMakePackage):
     variant('smooth3d', default=False, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
     variant('triton2', default=True, description='Utilisation du mailleur tetraedrique Tetgen')
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
+    variant('doc', default=False, description='Installation de la documentation utilisateur')
 
     version('2.2.5')
 
@@ -72,6 +73,23 @@ class Magix3d(CMakePackage):
     depends_on('py-setuptools-scm', when='+pythonaddon')
     depends_on('py-six', when='+pythonaddon')
 
+    # documentation
+    depends_on("texlive scheme='small'", when="+doc")
+    depends_on("py-breathe", when="+doc")
+    depends_on("py-sphinx@5.3.0", when="+doc")
+    depends_on("py-sphinx-rtd-theme@0.5.1", when="+doc")
+    depends_on("py-sphinx-copybutton", when="+doc")
+
+    # setup PYTHON_PATH for documentation
+    def setup_build_environment(self, env):
+        if ('doc' in self.spec.variants):
+            python_version = str(self.spec['python'].version).split('.')
+            python_dir = "python" + python_version[0] + "." + python_version[1]
+
+            sphinx_path = self.spec['py-sphinx'].prefix
+            sphinx_pythonpath = join_path(sphinx_path, 'lib', python_dir, 'site-packages')
+            env.prepend_path('PYTHONPATH', sphinx_pythonpath)
+
     def cmake_args(self):
         args = []
 
@@ -87,6 +105,7 @@ class Magix3d(CMakePackage):
         args.append(self.define_from_variant('SMOOTH3D', 'smooth3d'))
         args.append(self.define_from_variant('TRITON', 'triton2'))
         args.append(self.define_from_variant('PYTHONADDON', 'pythonaddon'))
+        args.append(self.define_from_variant('WITH_DOC', 'doc'))
 
         args.append(self.define('T_INTERNAL_EXTENSION', 'not_defined'))
         args.append(self.define('ERD_INTERNAL_EXTENSION', 'not_defined'))
@@ -99,6 +118,9 @@ class Magix3d(CMakePackage):
 
         args.append('-DBUILD_MAGIX3D:BOOL=ON')
         args.append('-DBUILD_MAGIX3DBATCH:BOOL=OFF')
+
+        if ('doc' in self.spec.variants):
+            args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
         if self.spec['python'].version < Version('3'):
             args.append('-DUSE_PYTHON_3:BOOL=OFF')
