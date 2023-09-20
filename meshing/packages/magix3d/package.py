@@ -77,7 +77,7 @@ class Magix3d(CMakePackage):
     depends_on("texlive scheme='small'", when="+doc")
     depends_on("py-breathe", when="+doc")
     depends_on("py-sphinx@5.3.0", when="+doc")
-    depends_on("py-sphinx-rtd-theme@0.5.1", when="+doc")
+    depends_on("py-sphinx-rtd-theme", when="+doc")
     depends_on("py-sphinx-copybutton", when="+doc")
 
     # setup PYTHON_PATH for documentation
