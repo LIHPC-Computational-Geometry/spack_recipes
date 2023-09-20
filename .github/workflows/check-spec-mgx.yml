@@ -1,4 +1,4 @@
-name: Check spec
+name: Check spec mgx
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Check spec
+name: Check spec magix3d
 
 on:
   push:

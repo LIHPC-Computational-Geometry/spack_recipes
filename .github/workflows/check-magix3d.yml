@@ -1,4 +1,4 @@
-name: Check mgx
+name: Check magix3d
 
 on:
   push:
