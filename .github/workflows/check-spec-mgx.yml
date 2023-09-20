@@ -42,4 +42,3 @@ jobs:
       run: |
         source ${{github.workspace}}/spack/share/spack/setup-env.sh
         spack spec mgx~smooth3d ^vtk-maillage~opengl2+qt ^qt+opengl
-        spack spec magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
