@@ -1,7 +1,9 @@
 # A repository for Spack recipes
 
-![CI check-spec](https://github.com//LIHPC-Computational-Geometry/spack_recipes/actions/workflows/check-spec.yml/badge.svg)
+![CI check-spec](https://github.com//LIHPC-Computational-Geometry/spack_recipes/actions/workflows/check-spec-mgx.yml/badge.svg)
 ![CI check-mgx](https://github.com//LIHPC-Computational-Geometry/spack_recipes/actions/workflows/check-mgx.yml/badge.svg)
+![CI check-spec](https://github.com//LIHPC-Computational-Geometry/spack_recipes/actions/workflows/check-spec-magix3d.yml/badge.svg)
+![CI check-mgx](https://github.com//LIHPC-Computational-Geometry/spack_recipes/actions/workflows/check-magix3d.yml/badge.svg)
 
 Spack package manager (https://github.com/spack/spack) is used by LIHPC-CG projects. Spack packages are described in recipes. Two repositories of recipes are currently defined here:
 - **meshing** contains the recipes of our meshing components;
