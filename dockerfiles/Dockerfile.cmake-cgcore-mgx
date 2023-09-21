@@ -21,7 +21,7 @@ WORKDIR /containerws
 #==========================================
 # documentation
 RUN apt update &&\
-    apt install -y graphviz sphinx pip &&\
+    apt install -y graphviz sphinx pip latexmk texlive-lang-greek texlive-latex-extra &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 RUN python3 -m venv .venv &&\
