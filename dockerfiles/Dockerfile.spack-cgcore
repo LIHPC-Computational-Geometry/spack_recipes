@@ -25,9 +25,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # 02/23: pkg-config added. Used by gts
 # 02/23: lsb-release added. Used by mgx start script.
 # 09/23: documentation - texlive installation failed with Spack => latexmk texlive-lang-greek texlive-latex-extra added
+# 09/23: documentation - graphviz added
 RUN apt update &&\
     apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file &&\
-    apt install -y latexmk texlive-lang-greek texlive-latex-extra &&\
+    apt install -y latexmk texlive-lang-greek texlive-latex-extra graphviz &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
