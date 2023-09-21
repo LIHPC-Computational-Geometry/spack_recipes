@@ -74,8 +74,7 @@ class Magix3d(CMakePackage):
     depends_on('py-six', when='+pythonaddon')
 
     # documentation
-    # texlive version forced to fix a CI bug... should not
-    depends_on("texlive", when="+doc")
+    # depends_on("texlive", when="+doc")
     depends_on("py-breathe", when="+doc")
     depends_on("py-sphinx@5.3.0", when="+doc")
     depends_on("py-sphinx-rtd-theme", when="+doc")
