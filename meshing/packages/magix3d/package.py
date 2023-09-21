@@ -7,7 +7,7 @@ class Magix3d(CMakePackage):
     """Mailleur 3D"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/magix3d'
-    url = 'https://github.com/LIHPC-Computational-Geometry/magix3d/archive/refs/tags/2.2.4.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/magix3d/archive/refs/tags/2.2.5.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/magix3d.git'
     maintainers = ['meshing_team']
     
@@ -21,7 +21,7 @@ class Magix3d(CMakePackage):
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
     variant('doc', default=False, description='Installation de la documentation utilisateur')
 
-    version('2.2.5')
+    version('2.2.5', sha256='9aec047d48a84263067a34340272503c9bba7db300ddeff56d502a5cbe024d38')
 
     depends_on('tkutil')
     depends_on('vtkcontrib@4: +shared', type=('build', 'link'))
