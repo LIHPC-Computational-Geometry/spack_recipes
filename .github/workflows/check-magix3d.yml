@@ -29,4 +29,4 @@ jobs:
           spack repo add /spack_recipes/meshing_supersede
           spack env activate meshing-env
           spack add magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
-          spack install -v --no-checksum -v
+          spack install -v --no-checksum
