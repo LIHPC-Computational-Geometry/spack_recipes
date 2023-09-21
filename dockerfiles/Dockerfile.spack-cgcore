@@ -27,8 +27,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # 09/23: documentation - texlive installation failed with Spack => latexmk texlive-lang-greek texlive-latex-extra added
 RUN apt update &&\
     apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file &&\
-    apt clean &&\
     apt install -y latexmk texlive-lang-greek texlive-latex-extra &&\
+    apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
 RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
