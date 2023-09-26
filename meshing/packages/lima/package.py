@@ -6,16 +6,6 @@
 # REPLACE_NAME_SERVICE_LABO, 2020
 ##############################################################################
 
-##############################################################################
-# Version 7.4.2
-# Tests de non régression (hors spack) OK dans les environnements suivants :
-# - CentOS 7 : HDF5 1.10.4, Python 2.7, Swig 3.0, GNU 8.3 ou Intel 19.0.5
-# - Atos 7 : HDF5 1.10.4, Python 2.7, Swig 3.0, GNU 4.8 ou Intel 17.0.6
-# - Rhel_8 : HDF5 1.10.4, Python 2.7, Swig 3.0, GNU 8.3 ou Intel 20.0.0
-# Il est recommandé d'installer également l'utilitaire xlmlima afin de
-# vérifier le bon fonctionnement de lima et notamment des lecteurs aux
-# différents formats de fichiers de maillage.
-##############################################################################
 
 from spack import *
 
@@ -24,14 +14,13 @@ class Lima(CMakePackage):
     """Logiciel Interface MAillage"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/lima'
-    url = 'https://github.com/LIHPC-Computational-Geometry/lima/archive/refs/tags/7.7.9.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/lima/archive/refs/tags/7.9.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/lima.git' 
     maintainers = ['meshing_team']
 
-
 #    depends_on('sumesh +shared', type=('build', 'link'))
     depends_on('swig', type=('build'), when='+scripting')
-    depends_on('python@2.7:3.0 +shared', type=('build', 'link'), when='+scripting')
+    depends_on('python +shared', type=('build', 'link'), when='+scripting')
 #    depends_on('hdf145', type=('build', 'link'))
 #    depends_on('hdf5 +shared +cxx', type=('build', 'link'))
     depends_on('hdf5 +shared +cxx', type=('build', 'link'))
@@ -47,6 +36,7 @@ class Lima(CMakePackage):
     patch('cmake-7.6.0.patch', when='@7.6.0')
 
     version('main', branch='main')
+    version('7.9.1', sha256='da517fa87a6df3b07e793d8a6a300865614803fa84cf1d3ec1994605e69b4571')
     version('7.9.0', sha256='7849219cf1de94c63fe019187a4a8dec61447d1b726fac90f43d871293f55315')
     version('7.8.1', sha256='a54de52e7414d820c5ba081cf6693e753e92993f0d250f56fd215cc2fbe28b65')
     version('7.7.9', sha256='e251a6732a2cdafb7f2851be3c5f5dba41d937fe253a9ebbf50fb81a7ddbd11f')
@@ -56,7 +46,6 @@ class Lima(CMakePackage):
     version('7.6.3', sha256='4039ebbf3f7e047b6cb75393c6a3d4a86be635c03798bb2eb69760c2b760a508')
 
     conflicts('~shared', '+scripting')
-    
 
     def cmake_args(self):
         args = [self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
@@ -77,5 +66,16 @@ class Lima(CMakePackage):
             args.append(self.define('REAL_8', False))
         else:
             args.append(self.define('REAL_8', True))
+
+        if '+scripting' in self.spec:
+            py = self.spec['python']
+            args.extend([
+                self.define('USE_PYTHON_3', int(py.version[0]) >= 3),
+                # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
+                self.define('Python_EXECUTABLE', py.command.path),
+                # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
+                self.define('Python{}_EXECUTABLE'.format(py.version[0]),
+                            py.command.path),
+            ])
 
         return args
