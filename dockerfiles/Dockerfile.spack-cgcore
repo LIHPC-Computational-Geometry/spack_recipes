@@ -58,6 +58,7 @@ RUN source /spack/share/spack/setup-env.sh &&\
     spack add swig &&\
     spack add qwt &&\
     spack add doxygen &&\
+    spack add graphviz &&\
     spack add openmpi &&\
     spack concretize &&\
     spack install &&\
