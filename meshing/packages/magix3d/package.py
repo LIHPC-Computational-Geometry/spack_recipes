@@ -75,6 +75,7 @@ class Magix3d(CMakePackage):
     depends_on('py-six', when='+pythonaddon')
 
     # documentation
+    depends_on("libpng", when="+doc")
     depends_on("graphviz", when="+doc")
     depends_on("py-breathe", when="+doc")
     depends_on("py-rst2pdf", when="+doc")
