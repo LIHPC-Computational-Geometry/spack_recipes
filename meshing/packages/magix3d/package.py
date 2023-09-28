@@ -21,6 +21,7 @@ class Magix3d(CMakePackage):
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
     variant('doc', default=False, description='Installation de la documentation utilisateur')
 
+    version('2.2.6', sha256='5917142b8467f3d47529908884260cdf263604fbecb4a513f364381f82111b3f')
     version('2.2.5')
 
     depends_on('tkutil')
@@ -74,6 +75,7 @@ class Magix3d(CMakePackage):
     depends_on('py-six', when='+pythonaddon')
 
     # documentation
+    depends_on("graphviz", when="+doc")
     depends_on("py-breathe", when="+doc")
     depends_on("py-rst2pdf", when="+doc")
     depends_on("py-sphinx@5.3.0", when="+doc")
