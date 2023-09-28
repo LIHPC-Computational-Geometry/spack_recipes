@@ -17,16 +17,10 @@ SHELL ["/bin/bash", "-c"]
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
-# documentation : texlive installation failed with Spack
-RUN apt update &&\
-    apt install -y latexmk texlive-lang-greek texlive-latex-extra &&\
-    apt clean &&\
-    rm -rf /var/lib/apt/lists/*
-#==========================================
 RUN source /spack/share/spack/setup-env.sh &&\
     cd /spack_recipes && git pull && git checkout ${SPACK_RECIPES_RELEASE_NUMBER} &&\
     spack env activate meshing-env &&\
-    spack add mgx~smooth3d^vtk-maillage~opengl2+qt &&\
+    spack add magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl &&\
     spack install --no-checksum &&\
     rm -rf /spack/var/spack/cache/*
 #==========================================

@@ -21,15 +21,16 @@ WORKDIR /containerws
 #==========================================
 # documentation
 RUN apt update &&\
-    apt install -y graphviz sphinx pip latexmk texlive-lang-greek texlive-latex-extra &&\
+    apt install -y graphviz sphinx &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 RUN python3 -m venv .venv &&\
     source .venv/bin/activate &&\
-    pip install sphinx_rtd_theme &&\
-    pip install breathe &&\
     pip install -U pytest &&\
-    pip install sphinx-copybutton
+    pip install sphinx_rtd_theme &&\
+    pip install sphinx-copybutton &&\
+    pip install breathe &&\
+    pip install rst2pdf
 #==========================================
 ENV MIRROR_SCRIPT=mirror.sh
 RUN curl -LO https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes/main/dockerfiles/${MIRROR_SCRIPT} &&\
