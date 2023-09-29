@@ -14,7 +14,7 @@ on:
 
 jobs:
   main:
-    name: Check mgx
+    name: Check magix3d
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/lihpc-computational-geometry/spack-cgcore:latest

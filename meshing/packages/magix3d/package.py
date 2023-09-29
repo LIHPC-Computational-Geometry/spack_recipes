@@ -81,6 +81,7 @@ class Magix3d(CMakePackage):
     depends_on("py-sphinx@5.3.0", when="+doc")
     depends_on("py-sphinx-rtd-theme", when="+doc")
     depends_on("py-sphinx-copybutton", when="+doc")
+    depends_on("py-sphinxcontrib-serializinghtml", when="+doc")
 
     # setup PYTHON_PATH for documentation
     def setup_build_environment(self, env):
