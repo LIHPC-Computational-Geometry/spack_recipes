@@ -21,6 +21,6 @@ RUN source /spack/share/spack/setup-env.sh &&\
     cd /spack_recipes && git pull && git checkout ${SPACK_RECIPES_RELEASE_NUMBER} &&\
     spack env activate meshing-env &&\
     spack add magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl &&\
-    spack install --no-checksum &&\
+    spack install &&\
     rm -rf /spack/var/spack/cache/*
 #==========================================
