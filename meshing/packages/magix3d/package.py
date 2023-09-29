@@ -21,7 +21,7 @@ class Magix3d(CMakePackage):
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
     variant('doc', default=False, description='Installation de la documentation utilisateur')
 
-    version('2.2.6', sha256='fec05a3ecfeff1f2580e2e063c349bcc5581d9f833415d09f34e68d1140023d5')
+    version('2.2.6', sha256='942489d64a852b624111ccb0ffe1da26087bcf81f816412dd6eec1678dced586')
     version('2.2.5')
 
     depends_on('tkutil')
