@@ -24,7 +24,8 @@ RUN apt update &&\
     apt install -y graphviz sphinx &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
-RUN python3 -m venv .venv &&\
+RUN cd /containerws &&\
+    python3 -m venv .venv &&\
     source .venv/bin/activate &&\
     pip install -U pytest &&\
     pip install sphinx_rtd_theme &&\
