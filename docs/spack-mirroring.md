@@ -21,7 +21,7 @@ Activate the Spack environment used to build the image and create the mirror.
 Go to the `/spack/var/spack`, tar the cache directory of the previously created mirror (with h option to follow symlinks) in your local file system through the mounting point, `/mgx-mirror`in this example.
 
     cd /spack/var/spack
-    tar hcvfz /mgx-mirror/cache.tar.gz cache
+    tar cvfz /mgx-mirror/cache.tar.gz cache
 
 Then, you can exit from the container and go the previously mounted directory on your computer, `/tmp/mgx-mirror`in this example.
 Do not forget to download the last release of [spack LIHPC-CG recipes](https://github.com/LIHPC-Computational-Geometry/spack_recipes/releases) in the same directory.
