@@ -24,8 +24,7 @@ RUN apt update &&\
     apt install -y graphviz sphinx &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
-RUN cd /containerws &&\
-    python3 -m venv .venv &&\
+RUN python3 -m venv .venv &&\
     source .venv/bin/activate &&\
     pip install -U pytest &&\
     pip install sphinx_rtd_theme &&\
@@ -34,7 +33,8 @@ RUN cd /containerws &&\
     pip install rst2pdf
 #==========================================
 ENV MIRROR_SCRIPT=mirror.sh
-RUN curl -LO https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes/main/dockerfiles/${MIRROR_SCRIPT} &&\
+RUN source .venv/bin/activate &&\
+    curl -LO https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes/main/dockerfiles/${MIRROR_SCRIPT} &&\
     chmod +x ${MIRROR_SCRIPT} &&\
     ./${MIRROR_SCRIPT} build-releases ${SPACK_RECIPES_RELEASE_NUMBER}
 #==========================================
