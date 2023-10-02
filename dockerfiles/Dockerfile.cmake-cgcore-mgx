@@ -38,4 +38,4 @@ RUN source .venv/bin/activate &&\
     chmod +x ${MIRROR_SCRIPT} &&\
     ./${MIRROR_SCRIPT} build-releases ${SPACK_RECIPES_RELEASE_NUMBER}
 #==========================================
-ENV LD_LIBRARY_PATH=$INSTALL_DIR/mgx/lib:$INSTALL_DIR/occt-V7_1_0/lib:$INSTALL_DIR/VTK-7.1.1/lib
+ENV LD_LIBRARY_PATH=$INSTALL_DIR/magix3d/lib:$INSTALL_DIR/occt-V7_1_0/lib:$INSTALL_DIR/VTK-7.1.1/lib
