@@ -125,10 +125,8 @@ class Magix3d(CMakePackage):
         if ('+doc' in self.spec.variants):
             args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
-        if self.spec['python'].version < Version('3'):
-            args.append('-DUSE_PYTHON_3:BOOL=OFF')
-        else:
-            args.append('-DUSE_PYTHON_3:BOOL=ON')
+        args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
+        args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
         # only py-numpy py-matplotlib py-scipy are necessary
         # the rest are here because we are not in an environment

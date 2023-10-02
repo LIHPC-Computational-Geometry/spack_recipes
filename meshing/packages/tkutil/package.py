@@ -44,10 +44,8 @@ class Tkutil(CMakePackage):
         if self.spec.satisfies('%intel'):
             args.append('-DCMAKE_CXX_FLAGS="-std=c++11"')
 
-        if self.spec['python'].version < Version('3'):
-            args.append('-DUSE_PYTHON_3:BOOL=OFF')
-        else:
-            args.append('-DUSE_PYTHON_3:BOOL=ON')
+        args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
+        args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
         return args
 #    def cmake_args(self):

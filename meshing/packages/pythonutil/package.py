@@ -27,10 +27,7 @@ class Pythonutil(CMakePackage):
     def cmake_args(self):
         args = []
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
-
-        if self.spec['python'].version < Version('3'):
-            args.append('-DUSE_PYTHON_3:BOOL=OFF')
-        else:
-            args.append('-DUSE_PYTHON_3:BOOL=ON')
+        args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
+        args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
         return args

@@ -72,6 +72,7 @@ class Lima(CMakePackage):
             py = self.spec['python']
             args.extend([
                 self.define('USE_PYTHON_3', int(py.version[0]) >= 3),
+                self.define('USE_PYTHON_2', int(py.version[0]) < 3),
                 # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
                 self.define('Python_EXECUTABLE', py.command.path),
                 # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
