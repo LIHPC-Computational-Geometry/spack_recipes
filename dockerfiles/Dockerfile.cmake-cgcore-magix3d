@@ -8,7 +8,7 @@ ARG SPACK_RECIPES_RELEASE_NUMBER
 RUN echo CGCORE_VERSION=${CGCORE_VERSION} &&\
     echo SPACK_RECIPES_RELEASE_NUMBER=${SPACK_RECIPES_RELEASE_NUMBER}
 # METADATA OF THE IMAGE
-LABEL description="Mgx image built from project releases and based on cmake-cgcore image" \
+LABEL description="Magix3d image built from project releases and based on cmake-cgcore image" \
       version.cmake-cgcore=${CGCORE_VERSION} \
       version.spack-recipes=${SPACK_RECIPES_RELEASE_NUMBER}
 #==========================================

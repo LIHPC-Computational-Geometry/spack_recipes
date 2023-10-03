@@ -1,12 +1,12 @@
-If you need to use mgx on sites that do not have an internet connection and youcan use [Spack mirrors](https://spack.readthedocs.io/en/latest/mirrors.html).
+If you need to use magix3d on sites that do not have an internet connection and youcan use [Spack mirrors](https://spack.readthedocs.io/en/latest/mirrors.html).
 
 # Build the mirror
 
 *Step 1*
 
-Open a bash terminal on the [spack-mgx](https://github.com/LIHPC-Computational-Geometry/lihpccg-ci/pkgs/container/spack-mgx) image and mount a volume of the container to your local file system, for example `/mgx-mirror` on the container points to `/tmp/mgx-mirror` on your local machine.
+Open a bash terminal on the [spack-magix3d](https://github.com/LIHPC-Computational-Geometry/lihpccg-ci/pkgs/container/spack-magix3d) image and mount a volume of the container to your local file system, for example `/magix3d-mirror` on the container points to `/tmp/magix3d-mirror` on your local machine.
 
-    podman run -v /tmp/mgx-mirror:/mgx-mirror --rm -it ghcr.io/lihpc-computational-geometry/spack-mgx bash
+    podman run -v /tmp/magix3d-mirror:/magix3d-mirror --rm -it ghcr.io/lihpc-computational-geometry/spack-magix3d bash
 
 *Step 2*
 
@@ -18,12 +18,12 @@ Activate the Spack environment used to build the image and create the mirror.
 
 *Step 3*
 
-Go to the `/spack/var/spack`, tar the cache directory of the previously created mirror (with h option to follow symlinks) in your local file system through the mounting point, `/mgx-mirror`in this example.
+Go to the `/spack/var/spack`, tar the cache directory of the previously created mirror (with h option to follow symlinks) in your local file system through the mounting point, `/magix3d-mirror`in this example.
 
     cd /spack/var/spack
-    tar cvfz /mgx-mirror/cache.tar.gz cache
+    tar cvfz /magix3d-mirror/cache.tar.gz cache
 
-Then, you can exit from the container and go the previously mounted directory on your computer, `/tmp/mgx-mirror`in this example.
+Then, you can exit from the container and go the previously mounted directory on your computer, `/tmp/magix3d-mirror`in this example.
 Do not forget to download the last release of [spack LIHPC-CG recipes](https://github.com/LIHPC-Computational-Geometry/spack_recipes/releases) in the same directory.
 
 # Use the mirror
