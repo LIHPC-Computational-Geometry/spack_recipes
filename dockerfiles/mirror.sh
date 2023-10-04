@@ -4,7 +4,7 @@
 # INSTALL_DIR is defined in the containers using this script
 
 GH_BASE=https://github.com/LIHPC-Computational-Geometry
-PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds072 gmdscea qtpython triton2 vtkcontrib qtvtk qqualif mgx magix3d)
+PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds072 gmdscea qtpython triton2 vtkcontrib qtvtk qqualif magix3d)
 
 print_usage() {
 	echo "Usage:"
