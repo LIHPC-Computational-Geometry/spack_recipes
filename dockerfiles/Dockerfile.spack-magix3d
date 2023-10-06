@@ -19,10 +19,19 @@ SHELL ["/bin/bash", "-c"]
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
+# wget libasound2 libdbus-glib-1-2 used by firefox for documentation
 RUN apt update &&\
     apt install -y build-essential cmake python3 python3-distutils unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file &&\
+    apt install -y wget libasound2 libdbus-glib-1-2 &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
+#==========================================
+# Installation of firefox for magix3d documentation (wget installed above)
+RUN wget -O FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64" &&\
+    tar xvf FirefoxSetup.tar.bz2 &&\
+    mv firefox /opt &&\
+    rm FirefoxSetup.tar.bz2 &&\
+    ln -s /opt/firefox/firefox /usr/bin/firefox
 #==========================================
 RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
     git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes.git &&\
@@ -38,7 +47,7 @@ RUN source /spack/share/spack/setup-env.sh &&\
 RUN source /spack/share/spack/setup-env.sh &&\
     spack env create meshing-env &&\
     spack env activate meshing-env &&\
-    spack add py-pytest &&\
+    spack add python@3 &&\
     spack add magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl &&\
     spack install &&\
     rm -rf /spack/var/spack/cache/*
