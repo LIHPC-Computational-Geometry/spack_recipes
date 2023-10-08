@@ -12,6 +12,7 @@ class Pythonutil(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/pythonutil.git' 
     maintainers = ['meshing_team']
 
+    depends_on('guitoolkitsvariables', type=('build'))
     depends_on('tkutil')
     depends_on('python', type=('build', 'link'))
 # On a besoin de swig >= 3.0.0 :

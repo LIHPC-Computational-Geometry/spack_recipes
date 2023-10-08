@@ -15,11 +15,10 @@ class Qwtcharts(CMakePackage):
     url = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts/archive/refs/tags/5.2.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qwtcharts.git'
     maintainers = ['meshing_team']
- 
-# On a besoin de 5.0 <= tkutil :
+
+    depends_on('guitoolkitsvariables', type=('build'))
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
-#    depends_on('qt@5.9:', type=('build', 'link'))
     depends_on('qwt@6.1:', type=('build', 'link'))
 
     version('5.2.1', sha256='fda34002a9631f7afcdb7cc4baaca81d09cacb0cd05b10fe08af86f091eddad5')
