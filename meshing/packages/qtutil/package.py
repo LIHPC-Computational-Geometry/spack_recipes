@@ -16,7 +16,7 @@ class Qtutil(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/qtutil.git'
     maintainers = ['meshing_team']
 
-# On a besoin de 5.0 <= tkutil :
+    depends_on('guitoolkitsvariables', type=('build'))
     depends_on('tkutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('tkutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qt@5.9:', type=('build', 'link'))

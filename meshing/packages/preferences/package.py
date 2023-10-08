@@ -17,6 +17,7 @@ class Preferences(CMakePackage):
 
     maintainers = ['meshing_team']
 
+    depends_on('guitoolkitsvariables', type=('build'))
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('tkutil')

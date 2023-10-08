@@ -16,6 +16,7 @@ class Qtpython(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/qtpython.git'
     maintainers = ['meshing_team']
 
+    depends_on('guitoolkitsvariables', type=('build'))
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('pythonutil@5: +shared', type=('build', 'link'), when='+shared')

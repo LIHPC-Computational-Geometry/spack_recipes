@@ -16,7 +16,7 @@ class Qqualif(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/qqualif.git'
     maintainers = ['meshing_team']
 
-# On a besoin de 5.0 <= tkutil :
+    depends_on('guitoolkitsvariables', type=('build'))
     depends_on('qwtcharts@4: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qwtcharts@4: +shared', type=('build', 'link'), when='+shared')
     depends_on('vtkcontrib@4: ~shared', type=('build', 'link'), when='~shared+vtk')
