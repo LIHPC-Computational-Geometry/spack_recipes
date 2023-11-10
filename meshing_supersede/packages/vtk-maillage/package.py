@@ -50,6 +50,8 @@ class VtkMaillage(CMakePackage):
     # when compiling vtk7 with gcc >= 11
     patch('vtk-maillage_gcc11_const.patch', when='%gcc@11:')
 
+    # patch against underallocations for meshes of more than 10 million nodes/meshs
+    patch('vtk-maillage_vtkAbstractArray_SetNumberOfValues.patch')
 
     depends_on('mpi', when='+mpi')
 
