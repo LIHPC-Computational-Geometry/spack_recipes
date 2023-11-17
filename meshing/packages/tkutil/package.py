@@ -47,9 +47,15 @@ class Tkutil(CMakePackage):
         args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
         args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
+	    # Fix cmake taking python3 even if `which python` is python2
+        py = self.spec['python']
+        args.extend([
+           # find_package(PythonInterp) # Deprecated, but used by pybind11
+           self.define('PYTHON_EXECUTABLE', py.command.path),
+           # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
+           self.define('Python_EXECUTABLE', py.command.path),
+           # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
+           self.define('Python{}_EXECUTABLE'.format(py.version[0]), py.command.path),
+        ])
+
         return args
-#    def cmake_args(self):
-#        spec = self.spec
-#        return [
-#        print(spec["libiconv"].libs)
-#        return []
