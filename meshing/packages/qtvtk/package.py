@@ -24,6 +24,7 @@ class Qtvtk(CMakePackage):
     depends_on('xerces-c@3.1.4', type=('build', 'link'))
     depends_on('preferences', type=('build', 'link'))
     depends_on('qt')
+    depends_on('vtk-maillage +qt', type=('build', 'link'))
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
