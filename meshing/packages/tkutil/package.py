@@ -9,12 +9,14 @@ from spack import *
 
 
 class Tkutil(CMakePackage):
-    """Bibliotheque d'utilitaires C++"""
+    """Bibliothèque d'utilitaires C++"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/tkutil'
     url = 'https://github.com/LIHPC-Computational-Geometry/tkutil/archive/refs/tags/6.5.1.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/tkutil.git' 
     maintainers = ['meshing_team']
+
+    extends("python")		# For the PYTHONPATH in the generated modules
 
     depends_on('guitoolkitsvariables', type=('build', 'link'))
     # 5.7.6 is the last python2 only version
@@ -25,6 +27,8 @@ class Tkutil(CMakePackage):
     depends_on('libiconv', type=('build', 'link'))
 
     version('develop', branch='main')
+    version('6.6.1', sha256='1f65b2628992d455cdd0fb9b1e3e791432a3051ac2b138d4a7ef73dabc9e5d76')
+    version('6.6.0', sha256='9ae89bf5da6ed5af88e11325862df528c16166df49419b518c1c51a80019d0b8')
     version('6.5.1', sha256='877ca71cc84cb4d948db8f5ecf65bae775cd33d83b2208c2d8260313238cc285')
     version('6.5.0', sha256='a1f1dc27fd0f5bcb8ddeee3f9d895c793f97e21d1cf395d1f607e29a47d0363e')
     version('5.14.0', sha256='e9fdc04f5a8efa4a95648a80422cfaccbb6733b79af2d49fe1af3ace4c748cb3')

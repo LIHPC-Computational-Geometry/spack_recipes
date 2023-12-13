@@ -18,6 +18,8 @@ class Lima(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/lima.git' 
     maintainers = ['meshing_team']
 
+    extends("python", when='+scripting')		# For the PYTHONPATH in the generated modules
+    
 #    depends_on('sumesh +shared', type=('build', 'link'))
     depends_on('swig', type=('build'), when='+scripting')
     depends_on('python +shared', type=('build', 'link'), when='+scripting')
@@ -36,6 +38,8 @@ class Lima(CMakePackage):
     patch('cmake-7.6.0.patch', when='@7.6.0')
 
     version('main', branch='main')
+    version('7.9.6', sha256='650f071afb420cab80cfb4f25913b59f2cff68f6ceb921ea91f58d6985460cba')
+    version('7.9.5', sha256='48d06f71cefb7253d24b4ae5f9803219ab861281806521d97f335d6a2a209ccd')
     version('7.9.4', sha256='ab2fae0938b08c86685b0b2809dff5f6f69bb139e50179c952b391447d5833ec')
     version('7.9.3', sha256='4ef65333269ad9ba3a522a4b82d621b4a9ae6d920042a67361fe0a404c4fd0c1')
     version('7.9.2', sha256='fee1d16d12b6b2beaa6680903f67feba0fe10a0b1159a61dd926816f89e635fa')
