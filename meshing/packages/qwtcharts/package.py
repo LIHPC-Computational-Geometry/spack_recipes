@@ -21,6 +21,7 @@ class Qwtcharts(CMakePackage):
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qwt@6.1:', type=('build', 'link'))
 
+    version('5.3.0', sha256='71d7653d2887f124fe060bbaeea988f306e660a2eceeec33bf0b3baa0328be21')
     version('5.2.1', sha256='fda34002a9631f7afcdb7cc4baaca81d09cacb0cd05b10fe08af86f091eddad5')
     version('5.2.0', sha256='5566d9bdd718f6c12b83f9bc03569ba61b3b67a54ef0ba39e72221ced985f706')
     version('4.4.13', sha256='e73544b6f94e2a3f989b74827bac5afbbf9c9a8899d991528d6f101f4fbc34d4')

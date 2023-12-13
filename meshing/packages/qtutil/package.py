@@ -20,6 +20,7 @@ class Qtutil(CMakePackage):
     depends_on('tkutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('tkutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qt@5.9:', type=('build', 'link'))
+    version('6.4.0', sha256='568f09a12c92810e27457ae1c589a0a9e89d3dd605194e5e1a429a0a3e18c96b')
     version('6.3.0', sha256='183642b97f60053b3643a097124a8e4cad04447f5934f21d66715d9f17cdfa86')
     version('6.2.1', sha256='0e8f0a75dca6574d4f348c4c2db3b5689a21cea94e6345a146235053ad4bbc4c')
     version('6.2.0', sha256='74a85acee94a676060197ac49179d82a9544f2baba871d4b2c1b1633317886bb')
@@ -37,7 +38,7 @@ class Qtutil(CMakePackage):
 
     def cmake_args(self):
         args = []
-        args = [self.define_from_variant('BUILD_SHARED_LIBS', 'shared')]
-        args = [self.define_from_variant('USE_QT_TEXT_BROWSER', 'qtbrowser')]
+        args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
+        args.append(self.define_from_variant('USE_QT_TEXT_BROWSER', 'qtbrowser'))
 
         return args
