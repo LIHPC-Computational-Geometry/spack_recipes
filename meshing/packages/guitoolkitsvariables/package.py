@@ -14,6 +14,7 @@ class Guitoolkitsvariables(CMakePackage):
     maintainers = ['meshing_team']
 
     version('develop', branch='main')
+    version('1.4.2', sha256='564d3d55a274faedf9d8c3b1f351f7268d2e40e58dc6a92745c53c67c45a764e')
     version('1.4.1', sha256='9670a0f383aa70b3005c85bf2e48b1b843084be172d150efc5268ab5c8dfdf1d')
     version('1.3.3', sha256='8b0cfa94d892af453bb2f6672a2f4ffcc8129ec20ae045a8f6f4e13c2b4a96de')
     version('1.3.2', sha256='3e8621469763e3216c4cea9197eba3361fb1cd4e060f0295a65e99e9262250f4')
