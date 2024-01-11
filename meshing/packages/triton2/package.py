@@ -32,6 +32,7 @@ class Triton2(CMakePackage):
     maintainers = ['meshing_team']
 
     version('main', branch='main')
+    version('1.0.1', sha256='5dc8b9fb702019bf1a46fa2a0605e2b99a2c2ea39c8d652070f5a5ade6e40ab9')
     version('1.0.0', sha256='40e17e5611bee25774507fe0f074a99d03b1755eeb22fa7fa59408d1701582ff')
 
     variant('shared', default=True, description='Build as a shared library.')
