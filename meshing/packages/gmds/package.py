@@ -26,7 +26,7 @@ from spack import *
 class Gmds(CMakePackage):
 
     homepage = 'https://gitlab.com/meshing'
-    url = 'https://github.com/LIHPC-Computational-Geometry/gmds072/archive/refs/tags/0.7.2.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/gmds072/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/gmds072'
 
     maintainers = ['meshing_team']

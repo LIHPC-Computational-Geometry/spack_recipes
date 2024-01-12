@@ -14,7 +14,7 @@ class Lima(CMakePackage):
     """Logiciel Interface MAillage"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/lima'
-    url = 'https://github.com/LIHPC-Computational-Geometry/lima/archive/refs/tags/7.9.1.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/lima/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/lima.git' 
     maintainers = ['meshing_team']
 

@@ -12,7 +12,7 @@ class Qqualif(CMakePackage):
     """Bibliotheque d'utilitaires de qualite de maillage."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qqualif'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qqualif/archive/refs/tags/4.2.1.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qqualif/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qqualif.git'
     maintainers = ['meshing_team']
 

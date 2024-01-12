@@ -15,7 +15,7 @@ class Smooth3d(CMakePackage):
     """Smooth3D is a mesh smoothing library"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/smooth3d'
-    url = 'https://github.com/LIHPC-Computational-Geometry/smooth3d/archive/refs/tags/3.2.0.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/smooth3d/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/smooth3d.git'
     maintainers = ['meshing_team']
     

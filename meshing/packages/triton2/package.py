@@ -27,7 +27,7 @@ class Triton2(CMakePackage):
     """FIXME: Put a proper description of your package here."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/triton2'
-    url = 'https://github.com/LIHPC-Computational-Geometry/triton2/archive/refs/tags/1.0.0.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/triton2/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/triton2.git' 
     maintainers = ['meshing_team']
 

@@ -7,7 +7,7 @@ class Magix3d(CMakePackage):
     """Mailleur 3D"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/magix3d'
-    url = 'https://github.com/LIHPC-Computational-Geometry/magix3d/archive/refs/tags/2.2.4.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/magix3d/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/magix3d.git'
     maintainers = ['meshing_team']
     

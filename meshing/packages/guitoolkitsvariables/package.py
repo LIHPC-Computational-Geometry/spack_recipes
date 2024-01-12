@@ -9,7 +9,7 @@ from spack import *
 class Guitoolkitsvariables(CMakePackage):
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables'
-    url = 'https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables/archive/refs/tags/1.3.3.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables.git' 
     maintainers = ['meshing_team']
 

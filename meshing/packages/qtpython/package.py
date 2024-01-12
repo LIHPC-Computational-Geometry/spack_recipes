@@ -12,7 +12,7 @@ class Qtpython(CMakePackage):
     """Bibliotheque d'utilitaires Qt/Python permettant d'executer des scripts dans une console avec mode pas a pas."""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/qtpython'
-    url = 'https://github.com/LIHPC-Computational-Geometry/qtpython/archive/refs/tags/6.3.1.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/qtpython/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/qtpython.git'
     maintainers = ['meshing_team']
 

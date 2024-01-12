@@ -12,7 +12,7 @@ class Vtkcontrib(CMakePackage):
     """Bibliotheque d'utilitaires VTK"""
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib'
-    url = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib/archive/refs/tags/5.4.1.tar.gz'
+    url = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib.git' 
     maintainers = ['meshing_team']
 
