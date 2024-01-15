@@ -96,6 +96,9 @@ class Magix3d(CMakePackage):
             env.prepend_path('PYTHONPATH', sphinx_pythonpath)
 
     def cmake_args(self):
+        return self.cmake_args(False, 'not defined', 'not defined', 'not defined', 'not defined', 'unavailable')
+
+    def fill_cmake_args(self, batch, t_ext, erd_ext, team, dox_path, dkoc_lic):
         args = []
 
         args.append('-DBUILD_SHARED_LIBS:BOOL=ON')  # Toujours en mode shared, pour le scripting
@@ -112,17 +115,17 @@ class Magix3d(CMakePackage):
         args.append(self.define_from_variant('PYTHONADDON', 'pythonaddon'))
         args.append(self.define_from_variant('WITH_DOC', 'doc'))
 
-        args.append(self.define('T_INTERNAL_EXTENSION', 'not_defined'))
-        args.append(self.define('ERD_INTERNAL_EXTENSION', 'not_defined'))
-        args.append(self.define('USER_TEAM', 'not_defined'))
-        args.append(self.define('DOXYGEN_PATH', 'not_defined'))
-        args.append(self.define('DKOC_LICENCE', 'unavailable'))
+        args.append(self.define('T_INTERNAL_EXTENSION', t_ext))
+        args.append(self.define('ERD_INTERNAL_EXTENSION', erd_ext))
+        args.append(self.define('USER_TEAM', team))
+        args.append(self.define('DOXYGEN_PATH', dox_path))
+        args.append(self.define('DKOC_LICENCE', dkoc_lic))
         args.append(self.define('URL_WIKI', 'url_wiki'))
         args.append(self.define('URL_TUTORIAL', 'url_tuto'))
         args.append(self.define('URL_QUALIF', 'url_doc_qualif'))
 
-        args.append('-DBUILD_MAGIX3D:BOOL=ON')
-        args.append('-DBUILD_MAGIX3DBATCH:BOOL=OFF')
+        args.append(self.define('BUILD_MAGIX3D', True))
+        args.append(self.define('BUILD_MAGIX3DBATCH', batch))
 
         if ('+doc' in self.spec.variants):
             args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
