@@ -16,8 +16,6 @@ spack repo add ./spack_recipes/meshing_supersede
 spack compiler find
 spack external find cmake
 #==========================================
-git clone git@github.com:LIHPC-Computational-Geometry/magix3d.git
-#==========================================
 
 # +mpi should actually be ok, but currently the default openmpi install fails
 spack spec magix3d ^vtk-maillage~opengl2+qt~mpi ^hdf5~mpi ^cgns~mpi ^mesquite~mpi
