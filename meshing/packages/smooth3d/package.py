@@ -30,7 +30,7 @@ class Smooth3d(CMakePackage):
     depends_on('gmds')
     depends_on('mesquite')
     depends_on('lima')
-    #depends_on('machine-types', when='+machinetypes')
+    depends_on('machine-types', when='+machinetypes')
 
     def cmake_args(self):
         args = []
