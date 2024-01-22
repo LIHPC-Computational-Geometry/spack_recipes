@@ -15,7 +15,6 @@ class Gmdscea(CMakePackage):
 
     version('main', branch='main')
     version('2.0.1', sha256='c4848f095480c6a1b1b21a8f145f4151f194a3342ac8e78bf54ad33def573e84')
-    version('2.0.0', sha256='24ba659089d1ee281498a6fd863e5ae897611e5d2c25d25679cccce68306bfce')
 
     variant('shared', default=True, description='Build as a shared library.')
 
