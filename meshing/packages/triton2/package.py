@@ -33,7 +33,6 @@ class Triton2(CMakePackage):
 
     version('main', branch='main')
     version('1.0.1', sha256='2cbb5c1a20ce816e0c13762bcbeadbfeeb0abae4b2cd6014c788243ee1de5bbf')
-    version('1.0.0', sha256='40e17e5611bee25774507fe0f074a99d03b1755eeb22fa7fa59408d1701582ff')
 
     variant('shared', default=True, description='Build as a shared library.')
 
