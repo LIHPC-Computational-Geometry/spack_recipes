@@ -19,7 +19,7 @@ class Smooth3d(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/smooth3d.git'
     maintainers = ['meshing_team']
 
-    version('3.2.1', sha256='d8e1c87201293d8f76ced1d21f1f0c3d457023f2b5697c7cfbaa374ee8506e6d')
+    version('3.2.1', sha256='e26fde58bebdf64134ae52fb6d1d1e95490c725a479370038c3093a46de4c837')
     version('3.2.0', sha256='5e0132a5a6c75d18247db1fccfd7d64cdca7d9a8bb44c246616527a92fe809ea')
     version('3.0.2')#, sha256='0be62f149fa154621dbdeefdf00d026bb2bd26ff7bd88c8560bce652ff209038')
     version('3.0.1', sha256='534f067951629e5697a04d7965487193659877b0ec8dbdd1ed0200a01d60907d')
