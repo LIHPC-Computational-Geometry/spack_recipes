@@ -4,7 +4,7 @@ on:
   [push, pull_request]
 
 jobs:
-  Continuous:
+  main:
     name: ${{ matrix.config }}
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Linux, Windows or Mac. 
