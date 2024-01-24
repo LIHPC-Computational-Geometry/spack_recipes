@@ -1,32 +1,34 @@
 name: Check magix3d
 
 on:
-  push:
-    branches: 
-      - main
-    paths:
-      - '**/package.py'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '**/package.py'
+  [push, pull_request]
 
 jobs:
   main:
-    name: Check magix3d
+    name: ${{ matrix.config }}
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/lihpc-computational-geometry/spack-cgcore:latest
-
+    strategy:
+        fail-fast: false
+  
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2 # seems to be needed by codecov
+          submodules: recursive
+
+      - name: Initialize the environment
+        shell: bash
+        run: |
+          source /spack/share/spack/setup-env.sh
+          spack repo add $GITHUB_WORKSPACE/meshing
+          spack repo add $GITHUB_WORKSPACE/meshing_supersede
+
       - name: Build and install
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
-          cd /spack_recipes && git pull
-          spack repo add /spack_recipes/meshing
-          spack repo add /spack_recipes/meshing_supersede
           spack env activate meshing-env
           spack add magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
           spack install -v --no-checksum
