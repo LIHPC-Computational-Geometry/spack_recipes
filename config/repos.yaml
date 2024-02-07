@@ -1,0 +1,16 @@
+# -------------------------------------------------------------------------
+# This is the default spack repository configuration. It includes the
+# builtin spack package repository.
+#
+# Users can override these settings by editing the following files.
+#
+# Per-spack-instance settings (overrides defaults):
+#   $SPACK_ROOT/etc/spack/repos.yaml
+#
+# Per-user settings (overrides default and site settings):
+#   ~/.spack/repos.yaml
+# -------------------------------------------------------------------------
+repos:
+  - $spack/../spack_recipes_meshing/meshing_repo
+  - $spack/../spack_recipes_meshing/supersede_repo
+  - $spack/var/spack/repos/builtin
