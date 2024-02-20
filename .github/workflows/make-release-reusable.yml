@@ -11,7 +11,7 @@ jobs:
     steps:
       # Checkout source files used by the Python checker
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Release tag name == cmake eversion ?
       - name: Check cmake and release versions

@@ -27,7 +27,7 @@ jobs:
 
       # Checkout project source files
       - name: Checkout sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Build the current sources, run unit tests and install
       - name: Build and install
