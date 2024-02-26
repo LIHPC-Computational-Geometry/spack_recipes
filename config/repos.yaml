@@ -11,6 +11,6 @@
 #   ~/.spack/repos.yaml
 # -------------------------------------------------------------------------
 repos:
-  - $spack/../spack_recipes_meshing/meshing_repo
-  - $spack/../spack_recipes_meshing/supersede_repo
+  - $spack/../spack_recipes/meshing_repo
+  - $spack/../spack_recipes/supersede_repo
   - $spack/var/spack/repos/builtin
