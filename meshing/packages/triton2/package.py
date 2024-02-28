@@ -28,7 +28,7 @@ class Triton2(CMakePackage):
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/triton2'
     url = 'https://github.com/LIHPC-Computational-Geometry/triton2/archive/refs/tags/0.0.0.tar.gz'
-    git = 'https://github.com/LIHPC-Computational-Geometry/triton2.git' 
+    git = 'https://github.com/LIHPC-Computational-Geometry/triton2.git'
     maintainers = ['meshing_team']
 
     version('main', branch='main')

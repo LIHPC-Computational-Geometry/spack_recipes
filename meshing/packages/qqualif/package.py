@@ -31,7 +31,7 @@ class Qqualif(CMakePackage):
 #    depends_on('machine-types', type=('build', 'link'), when='+lima')
 
     # patch in order to compile the hexagen test
-  #  patch('qqualif-3.7.1_missing_lima_in_test.patch')
+    # patch('qqualif-3.7.1_missing_lima_in_test.patch')
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques')
     variant('lima', default=True, description='Utilisation de la structure de maillages Lima')
@@ -57,7 +57,7 @@ class Qqualif(CMakePackage):
         args.append(self.define_from_variant('BUILD_GQLima', 'lima'))
         args.append(self.define_from_variant('BUILD_GQGMDS', 'gmds'))
         args.append(self.define_from_variant('BUILD_GQVtk', 'vtk'))
-       
+
         if '+vtk' in self.spec:
             if self.spec['vtk-maillage'].version < Version('8'):
                 args.append('-DVTK_7:BOOL=ON')

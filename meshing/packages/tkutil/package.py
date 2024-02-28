@@ -13,7 +13,7 @@ class Tkutil(CMakePackage):
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/tkutil'
     url = 'https://github.com/LIHPC-Computational-Geometry/tkutil/archive/refs/tags/0.0.0.tar.gz'
-    git = 'https://github.com/LIHPC-Computational-Geometry/tkutil.git' 
+    git = 'https://github.com/LIHPC-Computational-Geometry/tkutil.git'
     maintainers = ['meshing_team']
 
     extends("python")		# For the PYTHONPATH in the generated modules
@@ -53,7 +53,7 @@ class Tkutil(CMakePackage):
         args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
         args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
-	    # Fix cmake taking python3 even if `which python` is python2
+        # Fix cmake taking python3 even if `which python` is python2
         py = self.spec['python']
         args.extend([
            # find_package(PythonInterp) # Deprecated, but used by pybind11

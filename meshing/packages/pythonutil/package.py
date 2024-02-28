@@ -9,7 +9,7 @@ class Pythonutil(CMakePackage):
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/pythonutil'
     url = 'https://github.com/LIHPC-Computational-Geometry/pythonutil/archive/refs/tags/0.0.0.tar.gz'
-    git = 'https://github.com/LIHPC-Computational-Geometry/pythonutil.git' 
+    git = 'https://github.com/LIHPC-Computational-Geometry/pythonutil.git'
     maintainers = ['meshing_team']
 
     depends_on('guitoolkitsvariables', type=('build'))
@@ -32,7 +32,7 @@ class Pythonutil(CMakePackage):
         args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
         args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
-	# Fix cmake taking python3 even if `which python` is python2
+        # Fix cmake taking python3 even if `which python` is python2
         py = self.spec['python']
         args.extend([
            # find_package(PythonInterp) # Deprecated, but used by pybind11
