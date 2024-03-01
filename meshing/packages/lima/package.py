@@ -29,15 +29,20 @@ class Lima(CMakePackage):
 
     variant('scripting', default=False, description='Build python binding')
     variant('shared', default=True, description='Build shared library')
-    variant('xlmlima', default=False,
-            description='Build xlmlima tool (converts and prepares meshes)')
+    variant('xlmlima', default=True,
+            description='Build xlmlima tool (converts and prepares meshes, necessary for non-regression tests)')
     variant('i4', default=False, description="int_type=int32 instead of int64")
     variant('r4', default=False, description="real=float instead of double")
+    variant('tests', default=True, 
+            description="Builds the mesh comparison tool (necessary for non-regression tests)")
+    variant('disable_mli_warning', default=False, 
+            description="Disables warning messages displayed when reading or writing a file in mli format (obsolete)")
 
     patch('cmake.patch', when='@7.4.3')
     patch('cmake-7.6.0.patch', when='@7.6.0')
 
     version('main', branch='main')
+    version('7.10.0', sha256='95d6d0f3d696945fd88a70572eb3ec769f484e2315017566f3b971f9048632bb')
     version('7.9.6', sha256='650f071afb420cab80cfb4f25913b59f2cff68f6ceb921ea91f58d6985460cba')
     version('7.9.5', sha256='48d06f71cefb7253d24b4ae5f9803219ab861281806521d97f335d6a2a209ccd')
     version('7.9.4', sha256='ab2fae0938b08c86685b0b2809dff5f6f69bb139e50179c952b391447d5833ec')
@@ -58,6 +63,8 @@ class Lima(CMakePackage):
         args = [self.define_from_variant('BUILD_SHARED_LIBS', 'shared'),
                 self.define_from_variant('BUILD_SCRIPTING', 'scripting'),
                 self.define_from_variant('BUILD_XLMLIMA', 'xlmlima'),
+                self.define_from_variant('BUILD_TESTS', 'tests'),
+                self.define_from_variant('DISABLE_MLI_WARNING', 'disable_mli_warning'),
                ]
 
         args.append(self.define('MACHINE_TYPES', False))
