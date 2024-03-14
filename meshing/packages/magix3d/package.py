@@ -48,7 +48,6 @@ class Magix3d(CMakePackage):
    # depends_on('separatrice3d +shared', type=('build', 'link'), when='+sepa3d')
     depends_on('smooth3d +shared', type=('build', 'link'), when='+smooth3d')
     depends_on('swig', type='build')
-    depends_on('triton2 +shared', type=('build', 'link'), when='+triton2')
     depends_on('mesquite')
     depends_on('python')
     depends_on('qt')
