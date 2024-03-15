@@ -32,14 +32,14 @@ class Qtutil(CMakePackage):
     version('5.0.2', sha256='9ca1d5fd687d90398ca45ca3e1a07f9d7c0b591943d231e8c088e026cb4d7cc2')
     version('5.0.0', sha256='c15f4c25a3db68ed90dc7ded6b53085a3f66181972936cdc247818b17f94dc21')
 
-    variant('shared', default=True, description='Creation de bibliotheques dynamiques')
+    variant('shared', default=True, description='Création de bibliothèques dynamiques')
 
 # to avoid QtWebEngine or QtWebkit
     variant('qtbrowser', default=True, description='Use Qt base browser')
 
     def cmake_args(self):
         args = []
-        args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
-        args.append(self.define_from_variant('USE_QT_TEXT_BROWSER', 'qtbrowser'))
+        args	+= [self.define_from_variant('BUILD_SHARED_LIBS', 'shared')]
+        args	+= [self.define_from_variant('USE_QT_TEXT_BROWSER', 'qtbrowser')]
 
         return args
