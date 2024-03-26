@@ -16,18 +16,23 @@ class Qtvtk(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/qtvtk.git'
     maintainers = ['meshing_team']
 
-    depends_on('guitoolkitsvariables', type=('build'))
+    depends_on('guitoolkitsvariables@:1.4.3', type=('build'))
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
-    depends_on('vtkcontrib@4: +shared', type=('build', 'link'), when='+shared')
-    depends_on('vtkcontrib@4: ~shared', type=('build', 'link'), when='~shared')
+    depends_on('vtkcontrib@5.4.0: +shared', type=('build', 'link'), when='+shared')
+    depends_on('vtkcontrib@5.4.0: ~shared', type=('build', 'link'), when='~shared')
+    depends_on('vtkcontrib@5.4.0: +vtk7', type=('build', 'link'), when='+vtk7')
+    depends_on('vtkcontrib@5.4.0: ~vtk7', type=('build', 'link'), when='~vtk7')
     depends_on('xerces-c@3.1.4', type=('build', 'link'))
     depends_on('preferences', type=('build', 'link'))
     depends_on('qt')
-    depends_on('vtk-maillage +qt', type=('build', 'link'))
+    # On écarte ici la possibilité de VTK v 8 qui ne présente pas d'intérêt particulier :
+    depends_on('vtk-maillage@=7.1.1 +qt', type=('build', 'link'), when='+vtk7')
+    depends_on('vtk@8.99: +qt', type=('build', 'link'), when='~vtk7')
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
-
+    variant('vtk7', default=True, description='Utilisation de VTK 7/backend open GL compatible GLX')
+    
     version('8.5.0', sha256='134ecd42a13e2409f3cbc9a634ec8d1ab0ed763cdb9c6c05a4ca72586af8b0b7')
     version('8.4.1', sha256='8b5b0f74a27fd0664b4c94229d8488fb62fa34b2fd7a7367085215a2f850f786')
     version('8.4.0', sha256='851bcf977d03f514dec6e1c220f3585e80ad043c4b11ef45805a5916b1c16d64')
@@ -44,12 +49,5 @@ class Qtvtk(CMakePackage):
         # Sous spack on est en mode "production", ce qui conditionne le repertoire ou est l'aide :
         args.append('-DPRODUCTION=ON')
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
-
-        if self.spec['vtk-maillage'].version < Version('8'):
-            args.append('-DVTK_7:BOOL=ON')
-        elif self.spec['vtk-maillage'].version < Version('9'):
-            args.append('-DVTK_8:BOOL=ON')
-        else:
-            args.append('-DVTK_9:BOOL=ON')
 
         return args

@@ -52,7 +52,7 @@ class VtkMaillage(CMakePackage):
 
     # patch against underallocations for meshes of more than 10 million nodes/meshs
     patch('vtk-maillage_vtkAbstractArray_SetNumberOfValues.patch')
-
+    
     depends_on('mpi', when='+mpi')
 
 #    depends_on('ffmpeg', when='+ffmpeg')
