@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -21,7 +21,7 @@
 # ----------------------------------------------------------------------------
 
 from spack import *
-import os
+
 
 class Gmds(CMakePackage):
     """GMDS: Generic Mesh Data and Services."""
@@ -31,14 +31,9 @@ class Gmds(CMakePackage):
     git = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
 
     version('main', branch='main')
-    version('1.2.1', sha256='3c98826d643cc24dde83a57288dafe85f47b5f72f5097d46f75be177f9421e54')
+    version('1.2.1')
     version('1.1.0')
     version('1.0.0')
-
-    # NB : blocking variant mandatory
-    # else ERROR : spack-src/pygmds/src/gmds_binding.cpp:2:10: fatal error: gmds/blocking
-    # /CurvedBlocking.h: No such file or directory
-    # 934        2 | #include "gmds/blocking/CurvedBlocking.h"
 
     variant('kmds', default=False, description='Build with Kokkos')
     variant('elg3d', default=False, description='Build Elg3D')
@@ -80,8 +75,4 @@ class Gmds(CMakePackage):
         args.append(self.define_from_variant('WITH_PYTHON_API', 'python'))
         args.append(self.define_from_variant('WITH_LIMA', 'lima'))
         args.append(self.define_from_variant('WITH_CGNS', 'cgns'))
-
-        glpk = self.spec['glpk'].prefix
-        args.append(self.define('GLPK_INC', os.path.join(glpk,'include')))
-        args.append(self.define('GLPK_LIB', os.path.join(glpk,'lib')))
         return args
