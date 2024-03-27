@@ -4,7 +4,7 @@
 # INSTALL_DIR is defined in the containers using this script
 
 GH_BASE=https://github.com/LIHPC-Computational-Geometry
-PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds072 gmdscea qtpython triton2 vtkcontrib qtvtk qqualif machine_types smooth3d magix3d)
+PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds qtpython vtkcontrib qtvtk qqualif machine_types smooth3d magix3d)
 
 print_usage() {
 	echo "Usage:"
@@ -43,10 +43,6 @@ download_release() {
 	fi
 
 	echo -e "\e[1;32mDownloading $url in meshing_mirrors\e[0m"
-
-	# TO REMOVE WHEN GMDS072 IS REPLACED BY GMDS
-	if [[ $prj == gmds072 ]]; then prj=gmds; fi
-
 	mkdir -p meshing_mirror/$prj
 	curl -L $url > meshing_mirror/$prj/$prj-$version.tar.gz || exit 1
 }
@@ -80,8 +76,7 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	do
 		echo -e "\n\e[1;33m=== Project $prj\e[0m"
 		clone $prj LIHPC-Computational-Geometry/$prj
-		# TO REMOVE WHEN GMDS072 IS REPLACED BY GMDS
-		if [[ $prj == gmds072 ]]; then prj_version=${products[gmds]}; else prj_version=${products[$prj]}; fi
+		prj_version=${products[$prj]}
 		download_release $prj $prj_version
 	done
 
@@ -115,8 +110,7 @@ elif [[ $1 = "build-releases" ]] && [ $# -eq 2 ]; then
 	for prj in ${PRJS[@]}
 	do
 		echo -e "\n\e[1;33m=== Project $prj\e[0m"
-		# TO REMOVE WHEN GMDS072 IS REPLACED BY GMDS
-		if [[ $prj == gmds072 ]]; then prj_version=${products[gmds]}; else prj_version=${products[$prj]}; fi
+		prj_version=${products[$prj]}
 		download_release_and_untar $prj $prj_version src
 		build src/$prj-$prj_version build/$prj $INSTALL_DIR/$prj
 	done
