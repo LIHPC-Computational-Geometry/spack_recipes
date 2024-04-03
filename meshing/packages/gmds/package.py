@@ -39,7 +39,7 @@ class Gmds(CMakePackage):
     variant('elg3d', default=False, description='Build Elg3D')
     variant('blocking', default=False, description='Build the blocking component')
     variant('lima',default=False, description='Provide Lima IO')
-    variant('python',default=True, description='Provide GMDS Python API')
+    variant('python',default=False, description='Provide GMDS Python API')
     variant('cgns', default=False, description='Provide CGNS blocking export')
     
     depends_on('glpk')
