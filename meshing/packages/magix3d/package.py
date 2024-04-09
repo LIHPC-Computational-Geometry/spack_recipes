@@ -53,7 +53,7 @@ class Magix3d(CMakePackage):
     depends_on('python')
     depends_on('qt')
     depends_on('doxygen')
-    depends_on('lima+mli2')
+    depends_on('lima')
   #  depends_on('experimentalroom')
     depends_on('pkgconfig', type=('build'))
 
