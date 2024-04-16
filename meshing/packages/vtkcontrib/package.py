@@ -28,6 +28,7 @@ class Vtkcontrib(CMakePackage):
 # for undefined reference in util-linux/libmount to intl_....
 #    depends_on('gettext')
 
+    version('5.4.2', sha256='5d93d8051f4a1546932f201368bc2d4222ec617c1344dbc9ee1413beb7e24ec2')
     version('5.4.1', sha256='de31db5778628eb8b01a67517379b2abe524944a038a348c00d65b1935ad0081')
     version('5.4.0', sha256='c3c7d6b9491cbb273084ef1f5795e88599d23a041b568b61d1da426277cefcea')
 
