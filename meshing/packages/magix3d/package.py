@@ -35,7 +35,7 @@ class Magix3d(CMakePackage):
     depends_on('qtpython@4: +shared', type=('build', 'link'))
     depends_on('qtvtk@7: +shared', type=('build', 'link'))
     depends_on('cgns', type=('build', 'link'))
-    depends_on('gmds@1.2.1:', type=('build', 'link'))
+    depends_on('gmds@1.2.1: +blocking +lima', type=('build', 'link'))
     depends_on('gts', type=('build', 'link'))
     depends_on('glib', type=('build', 'link'))
     depends_on('pcre', type=('build', 'link'))
