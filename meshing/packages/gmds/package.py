@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -24,17 +24,55 @@ from spack import *
 
 
 class Gmds(CMakePackage):
+    """GMDS: Generic Mesh Data and Services."""
 
-    homepage = 'https://gitlab.com/meshing'
-    url = 'https://github.com/LIHPC-Computational-Geometry/gmds072/archive/refs/tags/0.0.0.tar.gz'
-    git = 'https://github.com/LIHPC-Computational-Geometry/gmds072'
+    homepage = "https://github.com/LIHPC-Computational-Geometry/gmds"
+    url      = "https://github.com/LIHPC-Computational-Geometry/gmds/archive/refs/tags/v1.2.1.tar.gz"
+    git = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
 
-    maintainers = ['meshing_team']
+    version('main', branch='main')
+    version('1.2.1')
+    version('1.1.0')
+    version('1.0.0')
 
-    version('0.7.2', sha256='acba4344cb4f892275c9cb6580b1e6b99056346ecca02604350a5b5e84f73687')
+    variant('kmds', default=False, description='Build with Kokkos')
+    variant('elg3d', default=False, description='Build Elg3D')
+    variant('blocking', default=False, description='Build the blocking component')
+    variant('lima',default=False, description='Provide Lima IO')
+    variant('python',default=False, description='Provide GMDS Python API')
+    variant('cgns', default=False, description='Provide CGNS blocking export')
+    
+    depends_on('glpk')
+    # necessary to build the internal glpk
+    depends_on('libtool', type='build')
+    depends_on('eigen')
 
-    # depends_on('foo')
+    depends_on('kokkos', when='+kmds')
+    depends_on('gts', when='+elg3d')
+    # necessary to find gts
+    depends_on('pkg-config', type='build', when='+elg3d')
+    depends_on('exodusii', when='+elg3d')
 
+    depends_on('cgns', when='+cgns')
+
+    conflicts('+elg3d', when='~kmds',
+             msg='elg3d cannot be built without kmds.')
+
+    depends_on('cgal', when='+blocking')
+    depends_on('py-pybind11', when='+python')
+    depends_on('lima', when='+lima')
+
+    # testing dependencies
+    depends_on('lcov')
+    depends_on('googletest')
+    depends_on('py-pytest', when='+python')
+    
     def cmake_args(self):
         args = []
+        args.append(self.define_from_variant('ENABLE_KMDS', 'kmds'))
+        args.append(self.define_from_variant('ENABLE_ELG3D', 'elg3d'))
+        args.append(self.define_from_variant('ENABLE_BLOCKING', 'blocking'))
+        args.append(self.define_from_variant('WITH_PYTHON_API', 'python'))
+        args.append(self.define_from_variant('WITH_LIMA', 'lima'))
+        args.append(self.define_from_variant('WITH_CGNS', 'cgns'))
         return args
