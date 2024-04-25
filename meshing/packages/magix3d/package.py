@@ -40,7 +40,7 @@ class Magix3d(CMakePackage):
     depends_on('gts', type=('build', 'link'))
     depends_on('glib', type=('build', 'link'))
     depends_on('pcre', type=('build', 'link'))
-#    depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'))
+    depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
 #    depends_on('opencascade@7.1.0+foundationclasses+dataexchange+visualization', type=('build', 'link'))
     depends_on('opencascade@7.1.0+foundationclasses+dataexchange', type=('build', 'link'))
    # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
