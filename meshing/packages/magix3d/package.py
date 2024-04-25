@@ -15,7 +15,6 @@ class Magix3d(CMakePackage):
     variant('mdlparser', default=False, description='Utilisation du lecteur du format mdl')
     variant('meshgems', default=False, description='Utilisation de la bibliotheque de maillage volumique MeshGems')
     variant('sepa3d', default=False, description='Utilisation du celebre outil de separatrices 3D')
-    # 2023/06/02 - BL: Waiting for a GitHub smooth3d version, True ==> False
     variant('smooth3d', default=False, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
     variant('triton2', default=True, description='Utilisation du mailleur tetraedrique Tetgen')
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
@@ -40,12 +39,7 @@ class Magix3d(CMakePackage):
     depends_on('gts', type=('build', 'link'))
     depends_on('glib', type=('build', 'link'))
     depends_on('pcre', type=('build', 'link'))
-    depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
-#    depends_on('opencascade@7.1.0+foundationclasses+dataexchange+visualization', type=('build', 'link'))
     depends_on('opencascade@7.1.0+foundationclasses+dataexchange', type=('build', 'link'))
-   # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
-   # depends_on('meshgems', type=('build', 'link'), when='+meshgems')
-   # depends_on('separatrice3d +shared', type=('build', 'link'), when='+sepa3d')
     depends_on('smooth3d +shared', type=('build', 'link'), when='+smooth3d')
     depends_on('swig', type='build')
     depends_on('mesquite')
@@ -53,8 +47,12 @@ class Magix3d(CMakePackage):
     depends_on('qt')
     depends_on('doxygen')
     depends_on('lima')
-  #  depends_on('experimentalroom')
     depends_on('pkgconfig', type=('build'))
+    # depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
+    # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
+    # depends_on('meshgems', type=('build', 'link'), when='+meshgems')
+    # depends_on('separatrice3d +shared', type=('build', 'link'), when='+sepa3d')
+    # depends_on('experimentalroom')
 
     # the limitations on the version number comes
     # when we are in python2
