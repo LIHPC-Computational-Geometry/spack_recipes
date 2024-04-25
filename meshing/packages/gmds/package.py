@@ -27,8 +27,8 @@ class Gmds(CMakePackage):
     """GMDS: Generic Mesh Data and Services."""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/gmds"
-    url      = "https://github.com/LIHPC-Computational-Geometry/gmds/archive/refs/tags/v1.2.1.tar.gz"
-    git = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
+    url      = "https://github.com/LIHPC-Computational-Geometry/gmds/archive/refs/tags/0.0.0.tar.gz"
+    git      = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
 
     version('main', branch='main')
     version('1.3.0', sha256='a21ae0d8941e91c37d7a255cb3b639823d33a0111f1a0a321adec58a027d7723')
