@@ -21,10 +21,11 @@ SHELL ["/bin/bash", "-c"]
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
+# eigen added for gmds
 RUN apt update &&\
     apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release &&\
     apt install -y openmpi-bin libopenmpi-dev python3-dev swig doxygen libhdf5-dev libhdf5-mpi-dev libxerces-c-dev qtbase5-dev libqwt-qt5-dev libqt5x11extras5-dev qttools5-dev &&\
-    apt install -y tcllib tklib tcl-dev tk-dev libfreetype-dev libfreeimage-dev rapidjson-dev libdraco-dev libxmu-dev libxi-dev libgts-dev libqt5svg5-dev &&\
+    apt install -y tcllib tklib tcl-dev tk-dev libfreetype-dev libfreeimage-dev rapidjson-dev libdraco-dev libxmu-dev libxi-dev libgts-dev libqt5svg5-dev apt libeigen3-dev &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
