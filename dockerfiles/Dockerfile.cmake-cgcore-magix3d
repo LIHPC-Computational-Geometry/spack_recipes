@@ -19,7 +19,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
 WORKDIR /containerws
 #==========================================
-# documentation
+# documentation and pybind11 for gmds
 RUN apt update &&\
     apt install -y graphviz sphinx &&\
     apt clean &&\
@@ -30,7 +30,8 @@ RUN python3 -m venv .venv &&\
     pip install sphinx_rtd_theme &&\
     pip install sphinx-copybutton &&\
     pip install breathe &&\
-    pip install rst2pdf
+    pip install rst2pdf &&\
+    pip install "pybind11[global]"
 #==========================================
 ENV MIRROR_SCRIPT=mirror.sh
 RUN source .venv/bin/activate &&\
