@@ -19,7 +19,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
 WORKDIR /containerws
 #==========================================
-# documentation and pybind11 for gmds
+# python modules for documentation and pybind11 for gmds
 RUN apt update &&\
     apt install -y graphviz sphinx &&\
     apt clean &&\
