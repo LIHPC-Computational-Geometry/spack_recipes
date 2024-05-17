@@ -86,12 +86,5 @@ It will clone all repositories needed by magix3d and will prepare Spack mirrors 
 
 If you just need to compile magix3d (no mirroring of github repositories), you can also use [Spack mirroring feature](./docs/spack-mirroring.md).
 
-## Under construction
-
-- replace `meshing` term with `lihpccg`
-- upgrade `mirror.sh` to the new repository
-- fix bug on test_link of `triton2` repository
-- fix bug on lima 7.8.0 (MachineTypes)
-
 
 
