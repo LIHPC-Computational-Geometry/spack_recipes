@@ -38,7 +38,7 @@ To install Podman:
 
 You will build an image on your computer. Download the [`Dockerfile.x11ogl`](https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes/main/dockerfiles/Dockerfile.x11ogl) file and enter the following command:
 
-    podman build -t lihpccg/x11ogl . -f Dockerfile_x11ogl --format docker
+    podman build -t lihpccg/x11ogl:latest . -f Dockerfile_x11ogl --format docker
 
 **Note:** Podman and docker commands are identical. To build an image with Podman and a Docker file do not forget the `--format docker` option for the build command (see below).
 

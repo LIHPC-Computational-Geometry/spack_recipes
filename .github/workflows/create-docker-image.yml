@@ -9,6 +9,7 @@ on:
         default: 'base'
         type: choice
         options:
+        - spack-magix3d
         - spack-gmds
         - spack-gmds-macos
         - x11ogl

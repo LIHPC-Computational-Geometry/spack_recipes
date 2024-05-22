@@ -52,3 +52,10 @@ RUN source /spack/share/spack/setup-env.sh &&\
     spack install &&\
     rm -rf /spack/var/spack/cache/*
 #==========================================
+# Entry point for Magix3D
+RUN printf "#!/bin/bash\n\
+source /spack/share/spack/setup-env.sh\n\
+spack load magix3d\n\
+Magix3D" > Magix3D.sh
+RUN chmod +x Magix3D.sh
+ENTRYPOINT [ "/Magix3D.sh" ]
