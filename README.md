@@ -70,9 +70,7 @@ These images are built when the `main` branch is tagged. The tag defines the ver
 
 **Handmade images**
 
-The `spack-magix3d` image is "handmade": it takes more than 6 hours to create (exceeds the maximum possible free time on GitHub).
-
-The others images can be created thanks to the `create-docker-image` workflow available [in the actions tab](https://github.com/LIHPC-Computational-Geometry/spack_recipes/actions/workflows/create-docker-image.yml): click on "Run workflow" button on the right and select the desired image.
+The others images, like `spack-magix3d`, can be created thanks to the `create-docker-image` workflow available [in the actions tab](https://github.com/LIHPC-Computational-Geometry/spack_recipes/actions/workflows/create-docker-image.yml): click on "Run workflow" button on the right and select the desired image.
 
 ## Build a mirror for sites that do not have an internet connection
 
