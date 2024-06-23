@@ -28,7 +28,7 @@ jobs:
 
       # Create a Github Release
       - name: Create github release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
             body_path: ${{ github.workspace }}/recipes.md
             files: ${{ github.workspace }}/recipes.sh
