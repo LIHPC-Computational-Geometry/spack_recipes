@@ -43,7 +43,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: [cmake-cgcore-magix3d, spack-cgcore-magix3d]
+        image: [cmake-cgcore-magix3d, spack-cgcore-magix3d, spack-magix3d]
     permissions:
       contents: read
       packages: write
