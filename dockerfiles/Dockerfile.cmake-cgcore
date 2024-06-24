@@ -53,6 +53,8 @@ RUN PRJ=mesquite-2.3.0 &&\
 RUN PRJ=tetgen1.6.0 &&\
     curl -L http://www.tetgen.org/1.5/src/tetgen1.6.0.tar.gz | tar xz --directory src &&\
     cd src/${PRJ} &&\
+    cp makefile makefile.old &&\
+    sed "s%CXX = g++%CXX = g++ -fPIC%g" makefile.old > makefile &&\
     make &&\
     make tetlib &&\
     mkdir ${INSTALL_DIR}/${PRJ} &&\
