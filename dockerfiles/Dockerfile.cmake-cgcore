@@ -10,7 +10,8 @@ LABEL description="LIHPC-CG cmake core image" \
     version.mesquite="2.3.0" \
     version.cgns="4.3.0" \
     version.vtk="7.1.1" \
-    version.occt="7.1.0"
+    version.occt="7.1.0" \
+    version.tetgen="1.6.0"
 #==========================================
 # Do not use /dev as the HOME if you use containers in vscode
 # /dev is too small to store .vscode-server directory containing user preferences
@@ -47,6 +48,20 @@ RUN PRJ=mesquite-2.3.0 &&\
     ./configure --prefix=${INSTALL_DIR}/${PRJ} --without-cppunit --with-pic &&\
     make -j4 &&\
     make install &&\
+    cd ../..
+#==========================================
+RUN PRJ=tetgen1.6.0 &&\
+    curl -L http://www.tetgen.org/1.5/src/tetgen1.6.0.tar.gz | tar xz --directory src &&\
+    cd src/${PRJ} &&\
+    make &&\
+    make tetlib &&\
+    mkdir ${INSTALL_DIR}/${PRJ} &&\
+    mkdir ${INSTALL_DIR}/${PRJ}/include &&\
+    cp tetgen.h ${INSTALL_DIR}/${PRJ}/include &&\
+    mkdir ${INSTALL_DIR}/${PRJ}/lib &&\
+    cp libtet.a ${INSTALL_DIR}/${PRJ}/lib &&\
+    mkdir ${INSTALL_DIR}/${PRJ}/bin &&\
+    cp tetgen ${INSTALL_DIR}/${PRJ}/bin &&\
     cd ../..
 #==========================================
 # -DHDF5_NEED_MPI=true works only if libhdf5-dev is not installed
@@ -86,4 +101,3 @@ RUN PRJ=occt-V7_1_0 &&\
     cmake -S src/${PRJ} -B build/${PRJ} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${PRJ} &&\
     cmake --build build/${PRJ} --parallel 4 --target install
 #==========================================
-
