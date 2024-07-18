@@ -3,6 +3,7 @@
 from spack import *
 import os
 
+
 class Magix3d(CMakePackage):
     """Mailleur 3D"""
 
@@ -10,7 +11,7 @@ class Magix3d(CMakePackage):
     url = 'https://github.com/LIHPC-Computational-Geometry/magix3d/archive/refs/tags/0.0.0.tar.gz'
     git = 'https://github.com/LIHPC-Computational-Geometry/magix3d.git'
     maintainers = ['meshing_team']
-    
+
     variant('dkoc', default=False, description='Utilisation du lecteur Catia DKOC pour OpenCascade')
     variant('mdlparser', default=False, description='Utilisation du lecteur du format mdl')
     variant('meshgems', default=False, description='Utilisation de la bibliotheque de maillage volumique MeshGems')
@@ -149,6 +150,6 @@ class Magix3d(CMakePackage):
                 python_path.append(os.path.join(self.spec[py_dep].prefix, 'lib',
                                                 'python' + str(python_version),
                                                 'site-packages'))
-            args.append('-DADDPYTHONPACKAGES='+':'.join(python_path)+':')
+            args.append('-DADDPYTHONPACKAGES=' + ':'.join(python_path) + ':')
 
         return args

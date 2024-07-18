@@ -13,7 +13,7 @@ class Vtkcontrib(CMakePackage):
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib'
     url = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib/archive/refs/tags/0.0.0.tar.gz'
-    git = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib.git' 
+    git = 'https://github.com/LIHPC-Computational-Geometry/vtkcontrib.git'
     maintainers = ['meshing_team']
 
 # Rem : peu de variants pour VTK au regard de ce qui pourrait etre fait : opengl2, python, xdmf, qt, mpi, ffmpeg
@@ -22,13 +22,13 @@ class Vtkcontrib(CMakePackage):
 #    depends_on('qt@5.9.1', type=('build', 'link'))
     depends_on('guitoolkitsvariables', type=('build'))
     depends_on('vtk-maillage', type=('build', 'link'))
- #   depends_on('mpi', type=('build', 'link'))
+#   depends_on('mpi', type=('build', 'link'))
 
 # for undefined reference in util-linux/libmount to intl_....
 #    depends_on('gettext')
 
     patch('vtkcontrib-4.6.0_calc_mpi.patch', when='@4.6.0')
-    
+
     version('5.6.0', sha256='848c2576f870b3e3dc5cb1d84d3f073f676497d865109642c7ab05f355d5a4c4')
     version('5.5.0', sha256='cb3056a9448fed7e738febc1382a5d1b6ae9ed29c0e1340f99dd03d0af913eba')
     version('5.4.3', sha256='80f8b6e2f29f8d79e16f96874d4b5b336ca7e16e86d21f69376b285a0cd70469')
