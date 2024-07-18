@@ -41,7 +41,7 @@ class Qtutil(CMakePackage):
 
     def cmake_args(self):
         args = []
-        args	+= [self.define_from_variant('BUILD_SHARED_LIBS', 'shared')]
-        args	+= [self.define_from_variant('USE_QT_TEXT_BROWSER', 'qtbrowser')]
+        args += [self.define_from_variant('BUILD_SHARED_LIBS', 'shared')]
+        args += [self.define_from_variant('USE_QT_TEXT_BROWSER', 'qtbrowser')]
 
         return args

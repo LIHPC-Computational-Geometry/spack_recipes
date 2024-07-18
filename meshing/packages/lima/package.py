@@ -15,11 +15,11 @@ class Lima(CMakePackage):
 
     homepage = 'https://github.com/LIHPC-Computational-Geometry/lima'
     url = 'https://github.com/LIHPC-Computational-Geometry/lima/archive/refs/tags/0.0.0.tar.gz'
-    git = 'https://github.com/LIHPC-Computational-Geometry/lima.git' 
+    git = 'https://github.com/LIHPC-Computational-Geometry/lima.git'
     maintainers = ['meshing_team']
 
     extends("python", when='+scripting')		# For the PYTHONPATH in the generated modules
-    
+
 #    depends_on('sumesh +shared', type=('build', 'link'))
     depends_on('swig', type=('build'), when='+scripting')
     depends_on('python +shared', type=('build', 'link'), when='+scripting')
@@ -33,10 +33,10 @@ class Lima(CMakePackage):
             description='Build xlmlima tool (converts and prepares meshes, necessary for non-regression tests)')
     variant('i4', default=False, description="int_type=int32 instead of int64")
     variant('r4', default=False, description="real=float instead of double")
-    variant('tests', default=True, 
+    variant('tests', default=True,
             description="Builds the mesh comparison tool (necessary for non-regression tests)")
-    variant('disable_mli_warning', default=False, 
-            description="Disables warning messages displayed when reading or writing a file in mli format (obsolete)")
+    variant('disable_mli_warning',
+            default=False, description="Disables warning messages displayed when reading or writing a file in mli format (obsolete)")
 
     patch('cmake.patch', when='@7.4.3')
     patch('cmake-7.6.0.patch', when='@7.6.0')
@@ -65,8 +65,7 @@ class Lima(CMakePackage):
                 self.define_from_variant('BUILD_SCRIPTING', 'scripting'),
                 self.define_from_variant('BUILD_XLMLIMA', 'xlmlima'),
                 self.define_from_variant('BUILD_TESTS', 'tests'),
-                self.define_from_variant('DISABLE_MLI_WARNING', 'disable_mli_warning'),
-               ]
+                self.define_from_variant('DISABLE_MLI_WARNING', 'disable_mli_warning')]
 
         args.append(self.define('MACHINE_TYPES', False))
         args.append(self.define('FORMAT_MLI', False))

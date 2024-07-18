@@ -27,8 +27,8 @@ class Gmds(CMakePackage):
     """GMDS: Generic Mesh Data and Services."""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/gmds"
-    url      = "https://github.com/LIHPC-Computational-Geometry/gmds/archive/refs/tags/0.0.0.tar.gz"
-    git      = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
+    url = "https://github.com/LIHPC-Computational-Geometry/gmds/archive/refs/tags/0.0.0.tar.gz"
+    git = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
 
     version('main', branch='main')
     version('1.3.3', sha256='a8387dfb4e023877a271dd862aa2a6ec301623daccc4aef1455861368e90daea')
@@ -42,10 +42,10 @@ class Gmds(CMakePackage):
     variant('kmds', default=False, description='Build with Kokkos')
     variant('elg3d', default=False, description='Build Elg3D')
     variant('blocking', default=False, description='Build the blocking component')
-    variant('lima',default=False, description='Provide Lima IO')
-    variant('python',default=False, description='Provide GMDS Python API')
+    variant('lima', default=False, description='Provide Lima IO')
+    variant('python', default=False, description='Provide GMDS Python API')
     variant('cgns', default=False, description='Provide CGNS blocking export')
-    
+
     depends_on('glpk')
     # necessary to build the internal glpk
     depends_on('libtool', type='build')
@@ -59,8 +59,7 @@ class Gmds(CMakePackage):
 
     depends_on('cgns', when='+cgns')
 
-    conflicts('+elg3d', when='~kmds',
-             msg='elg3d cannot be built without kmds.')
+    conflicts('+elg3d', when='~kmds', msg='elg3d cannot be built without kmds.')
 
     depends_on('cgal', when='+blocking')
     depends_on('py-pybind11', when='+python')
@@ -70,7 +69,7 @@ class Gmds(CMakePackage):
     depends_on('lcov')
     depends_on('googletest')
     depends_on('py-pytest', when='+python')
-    
+
     def cmake_args(self):
         args = []
         args.append(self.define_from_variant('ENABLE_KMDS', 'kmds'))
