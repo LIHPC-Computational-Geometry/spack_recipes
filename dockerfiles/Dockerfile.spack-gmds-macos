@@ -1,7 +1,7 @@
 #============== OS LAYER ==================
 FROM sickcodes/docker-osx
 #==========================================
-ARG SPACK_VERSION=0.20.1
+ARG SPACK_VERSION=0.20.3
 # METADATA OF THE IMAGE
 LABEL description="GMDS image built with spack for macos" \
       version.spack=${SPACK_VERSION}

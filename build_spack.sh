@@ -1,6 +1,6 @@
 #==========================================
 # First get a spack release
-git clone --depth=1 -b v0.20.1  https://github.com/spack/spack.git
+git clone --depth=1 -b v0.20.3  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user 
@@ -15,8 +15,6 @@ git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
 # Optionnal: modifying the install_tree variable to make it shorter and more human readable;
 # the HASH part in install directory names is removed which can lead to collisions.
 # The spack/etc/spack/defaults/config.yaml file can be modified by hand
-# - in spack version 0.19.2
-#sed -i 's#"${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}"#"${PACKAGE}"#g' spack/etc/spack/defaults/config.yaml
 # - in spack version 0.20.1
 #sed -i 's#"{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}"#"{name}"#g' spack/etc/spack/defaults/config.yaml
 
@@ -75,7 +73,7 @@ cat magix3d/spack-build-env.txt  | grep CMAKE_PREFIX_PATH | awk -F "=" {'print $
 
 # Note: I have issues building the doc this way, I guess other variables from spack-build-env.txt
 # are required. In this case -DWITH_DOC:BOOL=OFF can be specified
-cat gmds/spack-configure-args.txt
+cat magix3d/spack-configure-args.txt
 
 #==========================================
 # testing the install
