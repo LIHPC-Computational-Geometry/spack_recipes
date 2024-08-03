@@ -3,7 +3,7 @@
 # Ubuntu 22.04 allows to execute glxgears in a docker container
 FROM ubuntu:22.04
 #==========================================
-ARG SPACK_VERSION=0.20.1
+ARG SPACK_VERSION=0.20.3
 # METADATA OF THE IMAGE
 LABEL description="LIHPC-CG Spack core image" \
       version.ubuntu="22.04" \
