@@ -19,4 +19,4 @@ jobs:
         uses: py-actions/flake8@v2
         with:
           ignore: "E501,F405,F403"
-          path: "meshing/packages"
+          path: "meshing*"
