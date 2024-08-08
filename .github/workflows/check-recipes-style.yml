@@ -1,0 +1,22 @@
+name: 'Check recipes style'
+
+on:
+  workflow_dispatch
+
+jobs:
+  main:
+    name: Check recipes style
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Flake8 lint on meshing recipes
+        uses: py-actions/flake8@v2
+        with:
+          ignore: "E501,F405,F403"
+          path: "meshing/packages"
