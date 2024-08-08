@@ -29,6 +29,8 @@ jobs:
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
-          spack env activate meshing-env
+          spack clean -a
+          spack clean -m
+          spack env activate -V meshing-env
           spack add magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
           spack install -v --no-checksum
