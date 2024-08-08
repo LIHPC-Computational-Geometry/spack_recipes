@@ -15,8 +15,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Flake8 lint on meshing recipes
+      - name: Flake8 lint on meshing
         uses: py-actions/flake8@v2
         with:
           ignore: "E501,F405,F403"
-          path: "meshing*"
+          path: "meshing"
+
+      - name: Flake8 lint on meshing_supersede
+        uses: py-actions/flake8@v2
+        with:
+          ignore: "E501,F405,F403"
+          path: "meshing_supersede"
