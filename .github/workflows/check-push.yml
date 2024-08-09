@@ -4,7 +4,7 @@ on:
   [push, pull_request]
 
 jobs:
-  lint:
+  lint-recipes:
     name: Lint Recipes
     runs-on: ubuntu-latest
     permissions:
@@ -24,18 +24,50 @@ jobs:
       - name: Flake8 on meshing_supersede
         uses: py-actions/flake8@v2
         with:
-          ignore: "E501,F405,F403"
+          ignore: "E501,F405,F403,W504"
           path: "meshing_supersede"
 
-  magix3d:
-    name: Install Magix3D
+  spack-spec-mgx3d:
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Linux, Windows or Mac.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    name: Check Magix3D
+    runs-on:  ubuntu-latest
+    needs: [lint-recipes]
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # seems to be needed by codecov
+          submodules: recursive
+
+      - name: Initialize Spack environment
+        shell: bash
+        run: |
+          git clone --depth=1 -b releases/latest https://github.com/spack/spack.git ${{github.workspace}}/spack
+          source ${{github.workspace}}/spack/share/spack/setup-env.sh
+          spack repo add ${{github.workspace}}/meshing
+          spack repo add ${{github.workspace}}/meshing_supersede
+
+      - name: Check Spack spec
+        # We create a subdirectory that will stand as our working directory for all
+        # subsequent commands
+        run: |
+          source ${{github.workspace}}/spack/share/spack/setup-env.sh
+          spack spec magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
+
+  spack-install-mgx3d:
+    name: Spack Install Magix3D
     runs-on: ubuntu-latest
-    needs: [lint]
+    needs: [spack-spec-mgx3d]
     container:
       image: ghcr.io/lihpc-computational-geometry/spack-cgcore:latest
     strategy:
         fail-fast: false
-  
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -47,10 +79,10 @@ jobs:
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
-          spack repo add $GITHUB_WORKSPACE/meshing
-          spack repo add $GITHUB_WORKSPACE/meshing_supersede
+          spack repo add ${{github.workspace}}/meshing
+          spack repo add ${{github.workspace}}/meshing_supersede
 
-      - name: Spack Install Magix3D
+      - name: Build and Install Magix3D
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
