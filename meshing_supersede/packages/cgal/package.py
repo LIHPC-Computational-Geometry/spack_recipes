@@ -104,7 +104,9 @@ class Cgal(CMakePackage):
         # Installation instructions:
         # https://doc.cgal.org/latest/Manual/installation.html
         spec = self.spec
-        variant_bool = lambda feature: str(feature in spec)
+
+        def variant_bool(feature):
+            str(feature in spec)
         cmake_args = []
 
         cmake_args.append("-DBUILD_SHARED_LIBS:BOOL=%s" % variant_bool("+shared"))

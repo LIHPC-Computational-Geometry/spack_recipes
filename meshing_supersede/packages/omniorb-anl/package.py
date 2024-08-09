@@ -39,21 +39,22 @@
 #
 from spack import *
 
+
 #
-# omniORB 4.1.7 de ATT tres legerement retouche pour qu'il puisse s'installe dans 
+# omniORB 4.1.7 de ATT tres legerement retouche pour qu'il puisse s'installe dans
 # un environnement spack (de base il y a un probleme de shebang ...)
 #
 class OmniorbAnl(AutotoolsPackage):
     """ORB de ATT"""
 
     homepage = ""
-    url      = "omniorb-anl-4.1.7.tar.gz"
+    url = "omniorb-anl-4.1.7.tar.gz"
     version('4.1.7', sha256='3f42d97cb0344afb25c3b203ec874ad3d2ea944ea75a16bcb5e084c66273691d')
     version('4.3.0')
 
-	# On a besoin de 2.7 <= python < 3.0.0 :
-#    depends_on('python@2.7:', type=('link'))
-#    depends_on('python@:2.7.16', type=('build', 'link'))
+    # On a besoin de 2.7 <= python < 3.0.0 :
+    #    depends_on('python@2.7:', type=('link'))
+    #    depends_on('python@:2.7.16', type=('build', 'link'))
     depends_on('python@:2.7.16', type='run', when="@:4.2.99")
     depends_on('python@3:', type='run', when="@4.3.0:")
 
