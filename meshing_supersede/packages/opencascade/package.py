@@ -15,11 +15,11 @@ class Opencascade(CMakePackage):
 
 
 ##############################################
-# WARNING this supersedes the upstream recipe 
+# WARNING this supersedes the upstream recipe
 ##############################################
 
     homepage = "https://www.opencascade.com"
-    url      = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_1_0;sf=tgz"
+    url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_1_0;sf=tgz"
 
 #    version('7.4.0', extension='tar.gz',
 #            sha256='1eace85115ea178f268e9d803ced994b66b72455b5484074b6ad7f643261f0a0')
@@ -38,7 +38,7 @@ class Opencascade(CMakePackage):
 
     # modifications for internal use
     patch('opencascade-7.1.0_a.patch', when='@7.1.0')
-    
+
     variant('tbb', default=False,
             description='Build with Intel Threading Building Blocks')
     variant('vtk', default=False,
@@ -60,14 +60,13 @@ class Opencascade(CMakePackage):
     variant('draw', default=False,
             description='Sets BUILD_MODULE_Draw')
     variant('foundationclasses', default=False,
-            description='Sets BUILD_MODULE_FoundationClasses (probably always ON)' )
+            description='Sets BUILD_MODULE_FoundationClasses (probably always ON)')
     variant('modelingalgorithm', default=False,
             description='Sets BUILD_MODULE_ModelingAlgorithm')
     variant('modelingdata', default=False,
             description='Sets BUILD_MODULE_ModelingData')
     variant('visualization', default=False,
             description='Sets BUILD_MODULE_Visualization')
-    
 
     depends_on('intel-tbb', when='+tbb')
     depends_on('vtk', when='+vtk')
@@ -75,7 +74,6 @@ class Opencascade(CMakePackage):
     depends_on('rapidjson', when='+rapidjson')
     depends_on('gl2ps', when='@7.1.0+gl2ps')
     depends_on('doxygen', when='+documentation')
-
 
     depends_on('freetype')
     depends_on('tcl')
@@ -87,11 +85,11 @@ class Opencascade(CMakePackage):
 
     depends_on('gl')
 
-    # those two libraries are always used at link phase, but it could be a 
-    # remnant of the optionnal gl2ps module. We might be able to remove 
+    # those two libraries are always used at link phase, but it could be a
+    # remnant of the optionnal gl2ps module. We might be able to remove
     # those dependencies in a future release of OCC.
-    depends_on('libxmu', type=('build','link'))
-    depends_on('libxi', type=('build','link'))
+    depends_on('libxmu', type=('build', 'link'))
+    depends_on('libxi', type=('build', 'link'))
 
     def cmake_args(self):
         args = []
@@ -131,7 +129,6 @@ class Opencascade(CMakePackage):
         else:
             args.append('-DUSE_GL2PS=OFF')
 
-        
         if '+documentation' in self.spec:
             args.append('-DBUILD_DOC_Overview=ON')
         else:
@@ -151,7 +148,7 @@ class Opencascade(CMakePackage):
             args.append('-DBUILD_MODULE_Draw=ON')
         else:
             args.append('-DBUILD_MODULE_Draw=OFF')
-        
+
         if '+foundationclasses' in self.spec:
             args.append('-DBUILD_MODULE_FoundationClasses=ON')
         else:
