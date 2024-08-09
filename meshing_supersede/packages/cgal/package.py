@@ -104,6 +104,7 @@ class Cgal(CMakePackage):
         # Installation instructions:
         # https://doc.cgal.org/latest/Manual/installation.html
         spec = self.spec
+
         def variant_bool(feature):
             str(feature in spec)
         cmake_args = []

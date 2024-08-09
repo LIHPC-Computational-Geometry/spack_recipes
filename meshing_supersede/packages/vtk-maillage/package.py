@@ -5,7 +5,6 @@
 
 
 import os
-import sys
 from spack import *
 
 
@@ -16,27 +15,27 @@ class VtkMaillage(CMakePackage):
     processing and visualization. """
 
     homepage = "http://www.vtk.org"
-    url = 'https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz'	# VTK-7.1.1.tar.gz
+    url = 'https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz'
 
     # VTK7 defaults to OpenGL2 rendering backend
     variant('opengl2', default=True, description='Enable OpenGL2 backend')
     variant('osmesa', default=False, description='Enable OSMesa support')
-#    variant('python', default=False, description='Enable Python support')
+    # variant('python', default=False, description='Enable Python support')
     variant('qt', default=False, description='Build with support for Qt')
-#    variant('xdmf', default=False, description='Build XDMF file support')
-#    variant('ffmpeg', default=False, description='Build with FFMPEG support')
+    # variant('xdmf', default=False, description='Build XDMF file support')
+    # variant('ffmpeg', default=False, description='Build with FFMPEG support')
     variant('mpi', default=True, description='Enable MPI support')
 
     # At the moment, we cannot build with both osmesa and qt, but as of
     # VTK 8.1, that should change
-#    conflicts('+osmesa', when='+qt')
+    # conflicts('+osmesa', when='+qt')
 
     # The use of the OpenGL2 backend requires at least OpenGL Core Profile
     # version 3.2 or higher.
     depends_on('gl@3.2:', when='+opengl2')
     depends_on('gl@1.2:', when='~opengl2')
 
-     # Note: it is recommended to use mesa+llvm, if possible.
+    # Note: it is recommended to use mesa+llvm, if possible.
     # mesa default is software rendering, llvm makes it faster
     depends_on('mesa+osmesa', when='+osmesa')
 
@@ -55,28 +54,25 @@ class VtkMaillage(CMakePackage):
 
     depends_on('mpi', when='+mpi')
 
-#    depends_on('ffmpeg', when='+ffmpeg')
-
+    # depends_on('ffmpeg', when='+ffmpeg')
     depends_on('expat')
     depends_on('freetype')
     depends_on('glew')
-#    depends_on('hdf5')
+    # depends_on('hdf5')
     depends_on('jpeg')
-#    depends_on('jsoncpp')
-#    depends_on('libxml2')
-#    depends_on('lz4')
-#    depends_on('netcdf')
-#    depends_on('netcdf-cxx')
+    # depends_on('jsoncpp')
+    # depends_on('libxml2')
+    # depends_on('lz4')
+    # depends_on('netcdf')
+    # depends_on('netcdf-cxx')
     depends_on('libpng')
     depends_on('libtiff')
     depends_on('zlib')
 
- #   def url_for_version(self, version):
- #       url = "http://www.vtk.org/files/release/{0}/VTK-{1}.tar.gz"
- #       return url.format(version.up_to(2), version)
-
+    #   def url_for_version(self, version):
+    #       url = "http://www.vtk.org/files/release/{0}/VTK-{1}.tar.gz"
+    #       return url.format(version.up_to(2), version)
     version('7.1.1', sha256='2d5cdd048540144d821715c718932591418bb48f5b6bb19becdae62339efa75a')
-
 
     def setup_environment(self, spack_env, run_env):
         # VTK has some trouble finding freetype unless it is set in
@@ -94,8 +90,8 @@ class VtkMaillage(CMakePackage):
 
             # In general, we disable use of VTK "ThirdParty" libs, preferring
             # spack-built versions whenever possible
-#            '-DVTK_USE_SYSTEM_LIBRARIES:BOOL=ON',
-            '-DVTK_USE_SYSTEM_LIBRARIES:BOOL=OFF',	# CP
+            # '-DVTK_USE_SYSTEM_LIBRARIES:BOOL=ON',
+            '-DVTK_USE_SYSTEM_LIBRARIES:BOOL=OFF',  # CP
 
             # However, in a few cases we can't do without them yet
             '-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF',
@@ -103,12 +99,12 @@ class VtkMaillage(CMakePackage):
             '-DVTK_USE_SYSTEM_LIBPROJ4:BOOL=OFF',
             '-DVTK_USE_SYSTEM_OGGTHEORA:BOOL=OFF',
 
-#            '-DNETCDF_DIR={0}'.format(spec['netcdf'].prefix),
-#            '-DNETCDF_C_ROOT={0}'.format(spec['netcdf'].prefix),
-#            '-DNETCDF_CXX_ROOT={0}'.format(spec['netcdf-cxx'].prefix),
+            # '-DNETCDF_DIR={0}'.format(spec['netcdf'].prefix),
+            # '-DNETCDF_C_ROOT={0}'.format(spec['netcdf'].prefix),
+            # '-DNETCDF_CXX_ROOT={0}'.format(spec['netcdf-cxx'].prefix),
 
             # Allow downstream codes (e.g. VisIt) to override VTK's classes
-#            '-DVTK_ALL_NEW_OBJECT_FACTORY:BOOL=ON',	# CP
+            # '-DVTK_ALL_NEW_OBJECT_FACTORY:BOOL=ON',  # CP
 
             # Disable wrappers for other languages.
             '-DVTK_WRAP_JAVA=OFF',
@@ -144,15 +140,15 @@ class VtkMaillage(CMakePackage):
             # NOTE: The following definitions are required in order to allow
             # VTK to build with qt~webkit versions (see the documentation for
             # more info: http://www.vtk.org/Wiki/VTK/Tutorials/QtSetup).
-# CP comments
-#            if '~webkit' in spec['qt']:
-#                cmake_args.extend([
-#                    '-DVTK_Group_Qt:BOOL=OFF',
-#                    '-DModule_vtkGUISupportQt:BOOL=ON',
-#                    '-DModule_vtkGUISupportQtOpenGL:BOOL=ON',
-#                ])
+            # CP comments
+            #            if '~webkit' in spec['qt']:
+            #                cmake_args.extend([
+            #                    '-DVTK_Group_Qt:BOOL=OFF',
+            #                    '-DModule_vtkGUISupportQt:BOOL=ON',
+            #                    '-DModule_vtkGUISupportQtOpenGL:BOOL=ON',
+            #                ])
 
-# CP ADDON FLAGS :
+            # CP ADDON FLAGS :
             cmake_args.extend([
                 "-DBUILD_SHARED_LIBS:BOOL=ON",
                 "-DCMAKE_SKIP_INSTALL_RPATH:BOOL=ON",
@@ -166,9 +162,9 @@ class VtkMaillage(CMakePackage):
                 "-DVTK_Group_Imaging:BOOL=ON",
                 "-DVTK_Group_Rendering:BOOL=ON",
                 "-DVTK_ALL_NEW_OBJECT_FACTORY=OFF",
-#                "-DVTK_QT_VERSION=5",
+                # "-DVTK_QT_VERSION=5",
                 "-DVTK_USE_SYSTEM_NETCDF=OFF",
-#                "-DNETCDF_ENABLE_CXX=OFF",
+                # "-DNETCDF_ENABLE_CXX=OFF",
             ])
             if '+mpi' in spec:
                 cmake_args.extend([
@@ -182,7 +178,7 @@ class VtkMaillage(CMakePackage):
                     "-DModule_vtkFiltersParallelMPI:BOOL=OFF",
                     "-DModule_vtkRenderingParallel:BOOL=OFF"
                 ])
-# !CP ADDON FLAGS
+            # !CP ADDON FLAGS
 
         if '+xdmf' in spec:
             if spec.satisfies('^cmake@3.12:'):
@@ -247,12 +243,12 @@ class VtkMaillage(CMakePackage):
             # NETCDF_CXX_ROOT to detect NetCDF C++ bindings, so
             # NETCDF_CXX_INCLUDE_DIR and NETCDF_CXX_LIBRARY must be
             # used instead to detect these bindings
-#            netcdf_cxx_lib = spec['netcdf-cxx'].libs.joined()
-#            cmake_args.extend([
-#                '-DNETCDF_CXX_INCLUDE_DIR={0}'.format(
-#                    spec['netcdf-cxx'].prefix.include),
-#                '-DNETCDF_CXX_LIBRARY={0}'.format(netcdf_cxx_lib),
-#            ])
+            #            netcdf_cxx_lib = spec['netcdf-cxx'].libs.joined()
+            #            cmake_args.extend([
+            #                '-DNETCDF_CXX_INCLUDE_DIR={0}'.format(
+            #                    spec['netcdf-cxx'].prefix.include),
+            #                '-DNETCDF_CXX_LIBRARY={0}'.format(netcdf_cxx_lib),
+            #            ])
 
             # Garbage collection is unsupported in Xcode starting with
             # version 5.1; if the Apple clang version of the compiler
@@ -262,9 +258,7 @@ class VtkMaillage(CMakePackage):
             # string. This fix was recommended on the VTK mailing list
             # in March 2014 (see
             # https://public.kitware.com/pipermail/vtkusers/2014-March/083368.html)
-            if (self.spec.satisfies('%clang') and
-                self.compiler.is_apple and
-                self.compiler.version >= Version('5.1.0')):
+            if (self.spec.satisfies('%clang') and self.compiler.is_apple and self.compiler.version >= Version('5.1.0')):
                 cmake_args.extend(['-DVTK_REQUIRED_OBJCXX_FLAGS='])
 
             # A bug in tao pegtl causes build failures with intel compilers
