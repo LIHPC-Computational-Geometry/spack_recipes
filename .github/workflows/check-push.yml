@@ -60,6 +60,8 @@ jobs:
           spack spec magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
 
   spack-install-mgx3d:
+    # Do not replace $GITHUB_WORKSPACE by ${{github.workspace}}
+    # See https://github.com/actions/runner/issues/2058
     name: Spack Install Magix3D
     runs-on: ubuntu-latest
     needs: [spack-spec-mgx3d]
@@ -79,8 +81,8 @@ jobs:
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
-          spack repo add ${{github.workspace}}/meshing
-          spack repo add ${{github.workspace}}/meshing_supersede
+          spack repo add $GITHUB_WORKSPACE/meshing
+          spack repo add $GITHUB_WORKSPACE/meshing_supersede
 
       - name: Build and Install Magix3D
         shell: bash
