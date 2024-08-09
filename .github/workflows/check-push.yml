@@ -31,7 +31,7 @@ jobs:
     # The CMake configure and build commands are platform agnostic and should work equally
     # well on Linux, Windows or Mac.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    name: Check Magix3D
+    name: Spack Spec Magix3D
     runs-on:  ubuntu-latest
     needs: [lint-recipes]
     strategy:
