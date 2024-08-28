@@ -32,6 +32,7 @@ class Qtpython(CMakePackage):
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
+    version('6.4.2', sha256='1a1967412fa11dcbac9e5eeb7361c1b5e013beb97dfa3c0717dee8e211206299')
     version('6.4.1', sha256='439274455fe500d1f1bca2cef53433d2f4428ad96a57b060c4345872c04f9c64')
     version('6.4.0', sha256='0ec68d7699450ef924cd1ab4c333cd1045451aa698a09184af56cc2f3db89c04')
     version('6.3.3', sha256='060eb5832f39e1bd4c78e1abab7fad7dbcff2b098c9ac0764b6015bf46209d5b')
