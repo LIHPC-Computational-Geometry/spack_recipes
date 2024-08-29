@@ -21,6 +21,7 @@ class Magix3d(CMakePackage):
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
     variant('doc', default=False, description='Installation de la documentation utilisateur')
 
+    version('2.3.5', sha256='28808a4c5893f84e2de43c8913c6609f97b1a6b213b3bb2d7dd37a8a6c8f8d39')
     version('2.3.4', sha256='934475f0738f7f6d48eb3e33336b4ce6625811722aebc5a566b7327d9dbdd255')
     version('2.3.3', sha256='fd1fbbde688dcfd2ab5e7f102d3209c0e1da7c8bdc8cb0691a5701f9c382f4de')
     version('2.3.2', sha256='5ae3afda57218c0dd6dea8373256f353112ae9156bbef2dd84666b6e32e65b74')
@@ -78,6 +79,7 @@ class Magix3d(CMakePackage):
     depends_on('py-setuptools@:44.1.0', when='+pythonaddon ^python@2')
     depends_on('py-setuptools-scm', when='+pythonaddon')
     depends_on('py-six', when='+pythonaddon')
+    depends_on('py-packaging', when='+pythonaddon')
 
     # documentation
     depends_on("py-breathe", when="+doc")
@@ -144,7 +146,7 @@ class Magix3d(CMakePackage):
                           'py-cycler', 'py-kiwisolver',
                           'py-pillow', 'py-pyparsing', 'py-python-dateutil',
                           'py-pytz', 'py-setuptools', 'py-setuptools-scm',
-                          'py-six']
+                          'py-six', 'py-packaging']
             python_path = []
             for py_dep in py_depends:
                 python_path.append(os.path.join(self.spec[py_dep].prefix, 'lib',
