@@ -36,7 +36,7 @@ RUN source ./spack/share/spack/setup-env.sh && \
     spack external find cmake
 #==========================================
 RUN source ./spack/share/spack/setup-env.sh && \
-    spack install --only dependencies gmds+kmds+blocking ^kokkos+openmp ^cgns~mpi
+    spack install --only dependencies gmds+kmds+blocking+python ^kokkos+openmp ^cgns~mpi
 #==========================================
 RUN rm -rf /spack/var/spack/cache/*
 #==========================================
