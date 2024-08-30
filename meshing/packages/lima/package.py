@@ -42,6 +42,7 @@ class Lima(CMakePackage):
     patch('cmake-7.6.0.patch', when='@7.6.0')
 
     version('main', branch='main')
+    version('7.10.3', sha256='ccd943aeeee3cf28e9e12a5596b94adfe7d63bb8514858556481494fd8b2cdcd')
     version('7.10.2', sha256='60975df285defe7f8aee8f5858b4ab2c917053279db4b4b2adab7ce25f1aeb9c')
     version('7.10.1', sha256='27480c4df5ddba0738f5f916cf3c53b054feeae78d14cc669bb633ba745f4ca0')
     version('7.10.0', sha256='95d6d0f3d696945fd88a70572eb3ec769f484e2315017566f3b971f9048632bb')
