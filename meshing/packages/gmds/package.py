@@ -74,6 +74,8 @@ class Gmds(CMakePackage):
     depends_on('googletest')
     depends_on('py-pytest', when='+python')
 
+    depends_on('nlohmann-json')
+
     def cmake_args(self):
         args = []
         args.append(self.define_from_variant('ENABLE_KMDS', 'kmds'))
