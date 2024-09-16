@@ -101,7 +101,7 @@ class Magix3d(CMakePackage):
             env.prepend_path('PYTHONPATH', sphinx_pythonpath)
 
     def cmake_args(self):
-        return self.fill_cmake_args(False, 'not defined', 'not defined', 'not defined', 'not defined', 'unavailable')
+        return self.fill_cmake_args(False, 'undefined', 'undefined', 'undefined', 'undefined', 'unavailable')
 
     def fill_cmake_args(self, batch, t_ext, erd_ext, team, dox_path, dkoc_lic):
         args = []
