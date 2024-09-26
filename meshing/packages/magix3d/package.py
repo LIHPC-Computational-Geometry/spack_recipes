@@ -14,7 +14,6 @@ class Magix3d(CMakePackage):
 
     variant('dkoc', default=False, description='Utilisation du lecteur Catia DKOC pour OpenCascade')
     variant('mdlparser', default=False, description='Utilisation du lecteur du format mdl')
-    variant('meshgems', default=False, description='Utilisation de la bibliotheque de maillage volumique MeshGems')
     variant('sepa3d', default=False, description='Utilisation du celebre outil de separatrices 3D')
     variant('smooth3d', default=False, description='Utilisation de la bibliotheque de lissage volumique Smooth3D')
     variant('triton2', default=True, description='Utilisation du mailleur tetraedrique Tetgen')
@@ -56,7 +55,6 @@ class Magix3d(CMakePackage):
     depends_on('pkgconfig', type=('build'))
     # depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
     # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
-    # depends_on('meshgems', type=('build', 'link'), when='+meshgems')
     # depends_on('separatrice3d +shared', type=('build', 'link'), when='+sepa3d')
     # depends_on('experimentalroom')
 
@@ -113,7 +111,6 @@ class Magix3d(CMakePackage):
 
         args.append(self.define_from_variant('DKOC', 'dkoc'))
         args.append(self.define_from_variant('MDLPARSER', 'mdlparser'))
-        args.append(self.define_from_variant('MESHGEMS', 'meshgems'))
         args.append(self.define_from_variant('SEPA3D', 'sepa3d'))
         args.append(self.define_from_variant('SMOOTH3D', 'smooth3d'))
         args.append(self.define_from_variant('TRITON', 'triton2'))
