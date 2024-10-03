@@ -56,10 +56,13 @@ class Gmds(CMakePackage):
     depends_on('eigen')
 
     depends_on('kokkos', when='+kmds')
-    depends_on('glib')
-    depends_on('gts')
+
     # necessary to find gts
     depends_on('pkgconfig', type=('build'))
+    depends_on('pcre2')
+    depends_on('glib')
+    depends_on('gts')
+
     depends_on('exodusii', when='+elg3d')
 
     depends_on('cgns', when='+cgns')
