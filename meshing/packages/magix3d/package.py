@@ -53,6 +53,8 @@ class Magix3d(CMakePackage):
     depends_on('doxygen')
     depends_on('lima')
     depends_on('pkgconfig', type=('build'))
+    depends_on('nlohmann-json')
+
     # depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
     # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
     # depends_on('separatrice3d +shared', type=('build', 'link'), when='+sepa3d')
