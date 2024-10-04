@@ -40,37 +40,39 @@
 from spack import *
 
 #
-# omniORB 4.1.7 de ATT tres legerement retouche pour qu'il puisse s'installe dans 
+# omniORB 4.1.7 de ATT tres legerement retouche pour qu'il puisse s'installe dans
 # un environnement spack (de base il y a un probleme de shebang ...)
 #
+
+
 class OmniorbAnl(AutotoolsPackage):
     """ORB de ATT"""
 
-    homepage 	= ""
-    url      	= "omniorb-anl-4.1.7.tar.gz"
+    homepage = ""
+    url = "omniorb-anl-4.1.7.tar.gz"
     maintainers = ['meshing_team']
     version('4.1.7', sha256='3f42d97cb0344afb25c3b203ec874ad3d2ea944ea75a16bcb5e084c66273691d')
     version('4.3.0.1', sha256="9a33c5ba83f3c8a0fc5e7f30ad10acea9923b1787c50feb6c0b20cbee64f8e85")
 
-	# On a besoin de 2.7 <= python < 3.0.0 :
+    # On a besoin de 2.7 <= python < 3.0.0 :
     depends_on('python', type=('build', 'link', 'run'))
 
     def configure_args(self):
         # FIXME: Add arguments other than --prefix
         # FIXME: If not needed delete this function
-        args	= []
-        py		= self.spec['python']
-        args.append (f'PYTHON={py.command.path}')
-        if self.spec.satisfies ('@4.2.99:') :
-            args.append ('CXXFLAGS=-std=c++11')
-                    
+        args = []
+        py = self.spec['python']
+        args.append(f'PYTHON={py.command.path}')
+        if self.spec.satisfies('@4.2.99:'):
+            args.append('CXXFLAGS=-std=c++11')
+
         return args
 
 # Positionnement de l'environnement PYTHON nécéssaire sous RedHat 7/Spack Organizer master 200923
-    def setup_build_environment (self, env):
-        py		= self.spec['python']
-        env.set ('PYTHON', py.command.path)
+    def setup_build_environment(self, env):
+        py = self.spec['python']
+        env.set('PYTHON', py.command.path)
 
-    def setup_run_environment (self, env):
-        py		= self.spec['python']
-        env.set ('PYTHON', py.command.path)
+    def setup_run_environment(self, env):
+        py = self.spec['python']
+        env.set('PYTHON', py.command.path)
