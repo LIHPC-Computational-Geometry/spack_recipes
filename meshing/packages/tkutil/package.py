@@ -49,8 +49,7 @@ class Tkutil(CMakePackage):
     def cmake_args(self):
         args = []
         args = [self.define_from_variant('BUILD_SHARED_LIBS', 'shared')]
-        if self.spec.satisfies('%intel'):
-            args.append('-DCMAKE_CXX_FLAGS="-std=c++11"')
+        args.append('-DCMAKE_CXX_FLAGS="-std=c++17"')
 
         args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
         args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
