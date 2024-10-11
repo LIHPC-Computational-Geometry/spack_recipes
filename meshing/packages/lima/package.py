@@ -6,6 +6,7 @@
 # REPLACE_NAME_SERVICE_LABO, 2020
 ##############################################################################
 
+# From version 7.11.0 writing support for the mli format is no longer provided.
 
 from spack import *
 
