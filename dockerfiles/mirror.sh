@@ -4,7 +4,7 @@
 # INSTALL_DIR is defined in the containers using this script
 
 GH_BASE=https://github.com/LIHPC-Computational-Geometry
-PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds qtpython vtkcontrib qtvtk qqualif machine_types smooth3d magix3d)
+PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds qtpython vtkcontrib qtvtk qqualif smooth3d magix3d)
 
 print_usage() {
 	echo "Usage:"
@@ -83,16 +83,16 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	#### Special cooking to prepare bundle
 	# Spack needs vtk-maillage tarball == VTK 7.1.1 tarball
 	# Spack recipe applies patches on VTK tarball
-	echo -e "\n\e[1;33m=== Project vtk-maillage\e[0m"
-	download_release vtk-maillage '7.1.1' https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz
+	#echo -e "\n\e[1;33m=== Project vtk-maillage\e[0m"
+	#download_release vtk-maillage '7.1.1' https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz
 
 	# Mirroring spack_recipes from mirrors
 	echo -e "\n\e[1;33m=== Spack recipes\e[0m"
 	prj=spack_recipes
 	download_release_and_untar $prj $2 .
-	mv $prj-$2 meshing_recipes
-	tar cvfz meshing_recipes.tar.gz meshing_recipes
-	rm -rf meshing_recipes
+	mv $prj-$2/meshing/packages packages
+	tar cvfz meshing_recipes.tar.gz packages
+	rm -rf packages $prj-$2
 
 	# Tar all mirrors
 	tar cvfz meshing_mirror.tar.gz meshing_mirror && rm -rf meshing_mirror
