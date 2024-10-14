@@ -91,6 +91,7 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	prj=spack_recipes
 	download_release_and_untar $prj $2 .
 	mv $prj-$2/meshing/packages packages
+	rm -rf packages/machine_types
 	tar cvfz meshing_recipes.tar.gz packages
 	rm -rf packages $prj-$2
 
