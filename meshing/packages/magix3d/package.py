@@ -54,6 +54,7 @@ class Magix3d(CMakePackage):
     depends_on('lima')
     depends_on('pkgconfig', type=('build'))
     depends_on('nlohmann-json')
+    depends_on('gmsh@4.12: ~fltk+opencascade')
 
     # depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
     # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
