@@ -38,6 +38,7 @@ class Qqualif(CMakePackage):
     variant('gmds', default=True, description='Utilisation de la structure de maillages GMDS')
     variant('vtk', default=True, description='Utilisation de la structure de maillages VTK')
 
+    version('4.4.0', sha256='0d8d315c1131ec36af92b6455880c4071ef3b06c36bebca55075c94b3e347224')
     version('4.3.2', sha256='3be7b1615df727fecd8d590048745ea4fe51922c1745e0e78fe449a57aa28ab3')
     version('4.3.1', sha256='93bf0c9cce52c7bc7157f3e728063d9699a88fb84875e649c31386cbab230b47')
     version('4.3.0', sha256='4f7cfd222c207f634837ba93e319f0f57a18fcead04d1aa265ae825031c59537')
