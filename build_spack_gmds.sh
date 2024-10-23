@@ -1,13 +1,13 @@
 #==========================================
 # First get a spack release
-git clone --depth=1 -b v0.20.3  https://github.com/spack/spack.git
+git clone --depth=1 -b v0.22.2  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user  in order to 
 # have a fresh start 
 #==========================================
 # get our recipes
-git clone --depth=1 https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
+git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
 #==========================================
 # modifying spack configuration
 #==========================================
@@ -67,6 +67,7 @@ spack install gmds+python+blocking+cgns dev_path=$PWD/gmds build_type=Debug ^cgn
 # spack created files and directories named gmds/spack-* in the gmds source tree, where the necessary
 # options are set up
 # get the CMAKE_PREFIX_PATH with ';' as separators
+# NOTE: in spack version >= 0.22 the spack-build-env.txt is located in gmds/build-systemname-hash/spack-build-env.txt
 cat gmds/spack-build-env.txt  | grep CMAKE_PREFIX_PATH | awk -F "=" {'print $2'} | awk -F ";" {'print $1'} | sed 's/:/;/g'
 
 # get the cmake options that were explicitly set by spack; add -DWITH_TEST:BOOL=ON
