@@ -1,6 +1,6 @@
 #==========================================
 # First get a spack release
-git clone --depth=1 -b v0.20.3  https://github.com/spack/spack.git
+git clone --depth=1 -b v0.22.2  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user 
@@ -68,6 +68,7 @@ spack install magix3d+smooth3d+triton2+doc dev_path=$PWD/magix3d build_type=Debu
 # spack created files and directories named gmds/spack-* in the gmds source tree, where the necessary
 # options are set up
 # get the CMAKE_PREFIX_PATH with ';' as separators
+# NOTE: in spack version >= 0.22 the spack-build-env.txt is located in magix3d/build-systemname-hash/spack-build-env.txt
 cat magix3d/spack-build-env.txt  | grep CMAKE_PREFIX_PATH | awk -F "=" {'print $2'} | awk -F ";" {'print $1'} | sed 's/:/;/g'
 #spack load --only dependencies --sh magix3d | grep CMAKE_PREFIX_PATH | awk -F "=" {'print $2'} | sed 's/:/;/g'
 
