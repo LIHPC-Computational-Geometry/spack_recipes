@@ -74,7 +74,7 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 
 	for prj in ${PRJS[@]}
 	do
-		echo -e "\n\e[1;33m=== Project $prj\e[0m"
+		echo -e "\n\e[1;34m=== Project $prj\e[0m"
 		clone $prj LIHPC-Computational-Geometry/$prj
 		prj_version=${products[$prj]}
 		download_release $prj $prj_version
@@ -83,23 +83,25 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	#### Special cooking to prepare bundle
 	# Spack needs vtk-maillage tarball == VTK 7.1.1 tarball
 	# Spack recipe applies patches on VTK tarball
-	#echo -e "\n\e[1;33m=== Project vtk-maillage\e[0m"
+	#echo -e "\n\e[1;34m=== Project vtk-maillage\e[0m"
 	#download_release vtk-maillage '7.1.1' https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz
 
 	# Mirroring spack_recipes from mirrors
-	echo -e "\n\e[1;33m=== Spack recipes\e[0m"
+	echo -e "\n\e[1;34m=== Spack recipes\e[0m"
 	prj=spack_recipes
 	download_release_and_untar $prj $2 .
 	mv $prj-$2/meshing/packages packages
 	rm -rf packages/machine_types
-	tar cvfz meshing_recipes.tar.gz packages
+
+	echo -e "\n\e[1;34m=== Tar recipes and mirrors\e[0m"
+	tar cvfz meshing_recipes.tar.gz -C packages .
 	rm -rf packages $prj-$2
 
 	# Tar all mirrors
-	tar cvfz meshing_mirror.tar.gz meshing_mirror && rm -rf meshing_mirror
+	tar cvfz meshing_mirror.tar.gz -C meshing_mirror . && rm -rf meshing_mirror
 	#### End of Special cooking
 
-	echo -e "\n\e[1;33mMirror available in: $MIRROR_DIR\e[0m"
+	echo -e "\n\e[1;34mMirror available in: $MIRROR_DIR\e[0m"
 	cd ..
 
 elif [[ $1 = "build-releases" ]] && [ $# -eq 2 ]; then
@@ -110,7 +112,7 @@ elif [[ $1 = "build-releases" ]] && [ $# -eq 2 ]; then
 
 	for prj in ${PRJS[@]}
 	do
-		echo -e "\n\e[1;33m=== Project $prj\e[0m"
+		echo -e "\n\e[1;34m=== Project $prj\e[0m"
 		prj_version=${products[$prj]}
 		download_release_and_untar $prj $prj_version src
 		build src/$prj-$prj_version build/$prj $INSTALL_DIR/$prj
@@ -120,6 +122,6 @@ else
 	print_usage
 fi
 
-echo -e "\n\e[1;33m=== DONE \e[0m"
+echo -e "\n\e[1;34m=== DONE \e[0m"
 exit 0
 
