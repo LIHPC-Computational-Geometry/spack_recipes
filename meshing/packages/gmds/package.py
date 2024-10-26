@@ -71,7 +71,7 @@ class Gmds(CMakePackage):
 
     depends_on('cgal', when='+blocking')
     depends_on('py-pybind11', when='+python')
-    depends_on('lima', when='+lima')
+    depends_on('lima+mli2', when='+lima')
 
     # testing dependencies
     depends_on('lcov')
