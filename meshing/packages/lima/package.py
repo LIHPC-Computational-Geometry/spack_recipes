@@ -32,6 +32,8 @@ class Lima(CMakePackage):
     variant('shared', default=True, description='Build shared library')
     variant('xlmlima', default=True,
             description='Build xlmlima tool (converts and prepares meshes, necessary for non-regression tests)')
+    variant('mli2', default=True, description='Build Lima with mli2 format support (requires HDF5 >=1.10.0)')
+
     variant('i4', default=False, description="int_type=int32 instead of int64")
     variant('r4', default=False, description="real=float instead of double")
     variant('tests', default=True,
@@ -69,7 +71,8 @@ class Lima(CMakePackage):
                 self.define_from_variant('BUILD_SCRIPTING', 'scripting'),
                 self.define_from_variant('BUILD_XLMLIMA', 'xlmlima'),
                 self.define_from_variant('BUILD_TESTS', 'tests'),
-                self.define_from_variant('DISABLE_MLI_WARNING', 'disable_mli_warning')]
+                self.define_from_variant('DISABLE_MLI_WARNING', 'disable_mli_warning'),
+                self.define_from_variant('FORMAT_MLI2', 'mli2')]
 
         args.append(self.define('MACHINE_TYPES', False))
         args.append(self.define('FORMAT_MLI', False))
