@@ -41,7 +41,9 @@ jobs:
           spack add python@3
           spack add py-pytest
           # Must set a version number > last version to take right variants in recipes
-          spack develop -p $GITHUB_WORKSPACE --no-clone ${{ github.event.repository.name }}@999
+          export version_number=`spack info ${{ github.event.repository.name }} | grep -A 1 "Preferred version:" | tail -n 1 | awk {'print $1'}`
+          echo $version_number
+          spack develop -p $GITHUB_WORKSPACE --no-clone ${{ github.event.repository.name }}@$version_number
           spack concretize --reuse
           spack install -v --test=root
 
@@ -54,7 +56,8 @@ jobs:
           spack env activate ci-env
           spack load python
           spack load py-pytest
-          spack load ${{ github.event.repository.name }}@999
+          export version_number=`spack info ${{ github.event.repository.name }} | grep -A 1 "Preferred version:" | tail -n 1 | awk {'print $1'}`
+          spack load ${{ github.event.repository.name }}@$version_number
 
           # trace for logs
           python --version
@@ -64,7 +67,7 @@ jobs:
           echo $PYTHONPATH
 
           # set PYTHONPATH variable
-          export PACKAGE_PATH=$PACKAGE_PATH/lib/python3.10/site-packages
+          export PACKAGE_PATH=$PACKAGE_PATH/lib/python3.11/site-packages
           export PYTHONPATH=$PYTHONPATH:$PACKAGE_PATH
           echo $PYTHONPATH
 
