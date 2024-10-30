@@ -3,7 +3,6 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-
 import os
 from spack import *
 
@@ -12,19 +11,22 @@ class VtkMaillage(CMakePackage):
     """Recette "pole maillage" de VTK, en vue d'eviter d'entrer en collision avec toute autre recette de VTK.
     The Visualization Toolkit (VTK) is an open-source, freely
     available software system for 3D computer graphics, image
-    processing and visualization. """
+    processing and visualization. 
+    WARNING : this recipe is primarily for use with VTK v 7.1.1 with OpenGL
+    backend and without MPI.
+    """
 
     homepage = "http://www.vtk.org"
     url = 'https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz'
 
     # VTK7 defaults to OpenGL2 rendering backend
-    variant('opengl2', default=True, description='Enable OpenGL2 backend')
+    variant('opengl2', default=False, description='Enable OpenGL2 backend')		# ICI default=False
     variant('osmesa', default=False, description='Enable OSMesa support')
     # variant('python', default=False, description='Enable Python support')
     variant('qt', default=False, description='Build with support for Qt')
     # variant('xdmf', default=False, description='Build XDMF file support')
     # variant('ffmpeg', default=False, description='Build with FFMPEG support')
-    variant('mpi', default=True, description='Enable MPI support')
+    variant('mpi', default=False, description='Enable MPI support')				# ICI default=False
 
     # At the moment, we cannot build with both osmesa and qt, but as of
     # VTK 8.1, that should change
@@ -153,12 +155,12 @@ class VtkMaillage(CMakePackage):
                 "-DBUILD_SHARED_LIBS:BOOL=ON",
                 "-DCMAKE_SKIP_INSTALL_RPATH:BOOL=ON",
                 "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON",
-                "-DModule_vtkIOExportOpenGL:BOOL=ON",
+#                "-DModule_vtkIOExportOpenGL:BOOL=ON",	# ICI inutile pour nous
                 "-DModule_vtkImagingOpenGL:BOOL=ON",
                 "-DModule_vtkIOExportOpenGL2:BOOL=OFF",
                 "-DModule_vtkImagingOpenGL2:BOOL=OFF",
                 "-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF",
-                "-DVTK_RENDERING_BACKEND=OpenGL",
+#                "-DVTK_RENDERING_BACKEND=OpenGL",		# ICI déjà fait en L91
                 "-DVTK_Group_Imaging:BOOL=ON",
                 "-DVTK_Group_Rendering:BOOL=ON",
                 "-DVTK_ALL_NEW_OBJECT_FACTORY=OFF",
@@ -206,7 +208,7 @@ class VtkMaillage(CMakePackage):
             if '+mpi' in spec:
                 cmake_args.extend(["-DModule_vtkIOParallelXdmf3:BOOL=ON"])
 
-        cmake_args.append('-DVTK_RENDERING_BACKEND:STRING=' + opengl_ver)
+#        cmake_args.append('-DVTK_RENDERING_BACKEND:STRING=' + opengl_ver)	# ICI déjà fait en L91
 
         if spec.satisfies('@:8.1.0'):
             cmake_args.append('-DVTK_USE_SYSTEM_GLEW:BOOL=ON')
