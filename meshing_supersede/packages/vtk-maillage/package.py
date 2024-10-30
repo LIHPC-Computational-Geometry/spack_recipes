@@ -155,12 +155,10 @@ class VtkMaillage(CMakePackage):
                 "-DBUILD_SHARED_LIBS:BOOL=ON",
                 "-DCMAKE_SKIP_INSTALL_RPATH:BOOL=ON",
                 "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON",
-            #    "-DModule_vtkIOExportOpenGL:BOOL=ON", ICI inutile pour nous
                 "-DModule_vtkImagingOpenGL:BOOL=ON",
                 "-DModule_vtkIOExportOpenGL2:BOOL=OFF",
                 "-DModule_vtkImagingOpenGL2:BOOL=OFF",
                 "-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF",
-            #    "-DVTK_RENDERING_BACKEND=OpenGL",	 ICI déjà fait en L91
                 "-DVTK_Group_Imaging:BOOL=ON",
                 "-DVTK_Group_Rendering:BOOL=ON",
                 "-DVTK_ALL_NEW_OBJECT_FACTORY=OFF",
