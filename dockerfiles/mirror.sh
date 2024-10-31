@@ -4,7 +4,10 @@
 # INSTALL_DIR is defined in the containers using this script
 
 GH_BASE=https://github.com/LIHPC-Computational-Geometry
-PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds qtpython vtkcontrib qtvtk qqualif smooth3d magix3d)
+PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds qtpython vtkcontrib qtvtk qqualif machine_types smooth3d magix3d)
+# machine_types must stay in the list of projects for the cmake-cgcore container to work
+# even if machine_types is removed from mirror (it must not be imported)
+
 
 print_usage() {
 	echo "Usage:"
@@ -98,6 +101,7 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	rm -rf packages $prj-$2
 
 	# Tar all mirrors
+	rm -rf meshing_mirror/machine_types
 	tar cvfz meshing_mirror.tar.gz -C meshing_mirror . && rm -rf meshing_mirror
 	#### End of Special cooking
 
