@@ -79,7 +79,7 @@ jobs:
 
       - name: Archive test_link logs
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-of-link-logs
           path: ${{ github.workspace }}/test_link/build/Testing/Temporary/LastTest.log
