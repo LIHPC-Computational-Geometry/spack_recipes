@@ -64,6 +64,7 @@ RUN source /spack/share/spack/setup-env.sh &&\
     spack add doxygen &&\
     spack add graphviz &&\
     spack add openmpi &&\
+    spack add gmsh@4.12~fltk+opencascade &&\
     spack concretize &&\
     spack install &&\
     rm -rf /spack/var/spack/cache/*
