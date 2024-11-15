@@ -21,6 +21,9 @@ jobs:
         shell: bash
         run : |
           source /spack/share/spack/setup-env.sh
+          spack external find cmake
+          spack compiler list
+          spack compiler info gcc
           cd /spack_recipes && git pull
           spack repo add /spack_recipes/meshing
           spack repo add /spack_recipes/meshing_supersede
