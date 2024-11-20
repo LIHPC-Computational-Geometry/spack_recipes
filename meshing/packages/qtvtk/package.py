@@ -21,7 +21,7 @@ class Qtvtk(CMakePackage):
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('vtkcontrib@4: +shared', type=('build', 'link'), when='+shared')
     depends_on('vtkcontrib@4: ~shared', type=('build', 'link'), when='~shared')
-    depends_on('xerces-c@3.1.4', type=('build', 'link'))
+    depends_on('xerces-c', type=('build', 'link'))
     depends_on('preferences', type=('build', 'link'))
     depends_on('qt')
     depends_on('vtk-maillage +qt', type=('build', 'link'))
