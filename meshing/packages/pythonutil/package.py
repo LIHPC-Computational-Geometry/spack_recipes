@@ -20,6 +20,7 @@ class Pythonutil(CMakePackage):
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
+    version('6.2.3', sha256='dc0e2bb9289e51b9678433cfc50385d5529e9b44f1b784d6ac9857be6d6089bf')
     version('6.2.2', sha256='71d74499b53cbf865cc0d161e59358c5d535be407bde44e7fbca30e9232051b0')
     version('6.2.1', sha256='14425325f2627bb410d9effb022aa0d1f7d7ee490766093668e3552630809acb')
     version('6.2.0', sha256='6c513802336821be8895bc7f46bc580d80a564e2d7ec6c4ee2b1c7d6383a383f')
