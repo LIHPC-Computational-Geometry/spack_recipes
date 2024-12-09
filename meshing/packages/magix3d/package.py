@@ -50,7 +50,7 @@ class Magix3d(CMakePackage):
     depends_on('mesquite')
     depends_on('python')
     depends_on('qt')
-    depends_on('doxygen')
+    depends_on('doxygen', type=('build'))
     depends_on('lima')
     depends_on('pkgconfig', type=('build'))
     depends_on('nlohmann-json')
@@ -61,23 +61,16 @@ class Magix3d(CMakePackage):
     # depends_on('separatrice3d +shared', type=('build', 'link'), when='+sepa3d')
     # depends_on('experimentalroom')
 
-    # the limitations on the version number comes
-    # when we are in python2
     depends_on('py-numpy', when='+pythonaddon')
-    depends_on('py-numpy@:1.16.2', when='+pythonaddon ^python@2')
     depends_on('py-matplotlib', when='+pythonaddon')
-    depends_on('py-matplotlib@:2.2.3', when='+pythonaddon ^python@2')
     depends_on('py-scipy', when='+pythonaddon')
-    depends_on('py-scipy@:1.1.0', when='+pythonaddon ^python@2')
     depends_on('py-cycler', when='+pythonaddon')
     depends_on('py-kiwisolver', when='+pythonaddon')
     depends_on('py-pillow', when='+pythonaddon')
-    depends_on('py-pillow@:6.2.2', when='+pythonaddon ^python@2')
     depends_on('py-pyparsing', when='+pythonaddon')
     depends_on('py-python-dateutil', when='+pythonaddon')
     depends_on('py-pytz', when='+pythonaddon')
     depends_on('py-setuptools', when='+pythonaddon')
-    depends_on('py-setuptools@:44.1.0', when='+pythonaddon ^python@2')
     depends_on('py-setuptools-scm', when='+pythonaddon')
     depends_on('py-six', when='+pythonaddon')
     depends_on('py-packaging', when='+pythonaddon')
@@ -102,9 +95,9 @@ class Magix3d(CMakePackage):
             env.prepend_path('PYTHONPATH', sphinx_pythonpath)
 
     def cmake_args(self):
-        return self.fill_cmake_args(False, 'undefined', 'undefined', 'undefined', 'undefined', 'unavailable')
+        return self.fill_cmake_args(False, 'undefined', 'undefined', 'undefined', 'unavailable')
 
-    def fill_cmake_args(self, batch, t_ext, erd_ext, team, dox_path, dkoc_lic):
+    def fill_cmake_args(self, batch, t_ext, erd_ext, team, dkoc_lic):
         args = []
 
         args.append('-DBUILD_SHARED_LIBS:BOOL=ON')  # Toujours en mode shared, pour le scripting
@@ -123,7 +116,6 @@ class Magix3d(CMakePackage):
         args.append(self.define('T_INTERNAL_EXTENSION', t_ext))
         args.append(self.define('ERD_INTERNAL_EXTENSION', erd_ext))
         args.append(self.define('USER_TEAM', team))
-        args.append(self.define('DOXYGEN_PATH', dox_path))
         args.append(self.define('DKOC_LICENCE', dkoc_lic))
         args.append(self.define('URL_WIKI', 'url_wiki'))
         args.append(self.define('URL_TUTORIAL', 'url_tuto'))
@@ -136,7 +128,6 @@ class Magix3d(CMakePackage):
             args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
         args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
-        args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
         # only py-numpy py-matplotlib py-scipy are necessary
         # the rest are here because we are not in an environment
