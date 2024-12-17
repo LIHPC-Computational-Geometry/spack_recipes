@@ -9,7 +9,10 @@ from spack import *
 
 
 class VtkMaillage(CMakePackage):
-    """Recette "pole maillage" de VTK, en vue d'eviter d'entrer en collision avec toute autre recette de VTK.
+    """Recette "pole maillage" de VTK, en vue d'eviter d'entrer en collision
+    avec toute autre recette de VTK.
+    Par défaut on désactivele backend OpenGL2 et MPI (GUIToolkitsVariables 
+    v 1.5.0 du 07/06/24).
     The Visualization Toolkit (VTK) is an open-source, freely
     available software system for 3D computer graphics, image
     processing and visualization. """
@@ -18,13 +21,13 @@ class VtkMaillage(CMakePackage):
     url = 'https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz'
 
     # VTK7 defaults to OpenGL2 rendering backend
-    variant('opengl2', default=True, description='Enable OpenGL2 backend')
+    variant('opengl2', default=False, description='Enable OpenGL2 backend')
     variant('osmesa', default=False, description='Enable OSMesa support')
     # variant('python', default=False, description='Enable Python support')
     variant('qt', default=False, description='Build with support for Qt')
     # variant('xdmf', default=False, description='Build XDMF file support')
     # variant('ffmpeg', default=False, description='Build with FFMPEG support')
-    variant('mpi', default=True, description='Enable MPI support')
+    variant('mpi', default=False, description='Enable MPI support')
 
     # At the moment, we cannot build with both osmesa and qt, but as of
     # VTK 8.1, that should change
