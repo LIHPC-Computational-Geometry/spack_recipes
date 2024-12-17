@@ -11,7 +11,7 @@ from spack import *
 class VtkMaillage(CMakePackage):
     """Recette "pole maillage" de VTK, en vue d'eviter d'entrer en collision
     avec toute autre recette de VTK.
-    Par défaut on désactivele backend OpenGL2 et MPI (GUIToolkitsVariables 
+    Par défaut on désactive le backend OpenGL2 et MPI (GUIToolkitsVariables
     v 1.5.0 du 07/06/24).
     The Visualization Toolkit (VTK) is an open-source, freely
     available software system for 3D computer graphics, image
