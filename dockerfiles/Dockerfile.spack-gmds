@@ -4,7 +4,7 @@ FROM ubuntu:22.04
 ARG SPACK_VERSION=0.22.2
 # METADATA OF THE IMAGE
 LABEL description="GMDS image built with spack" \
-      version.ubuntu="24.04" \
+      version.ubuntu="22.04" \
       version.spack=${SPACK_VERSION}
 ARG SPACK_VERSION
 #==========================================
@@ -40,7 +40,7 @@ RUN source ./spack/share/spack/setup-env.sh && \
     spack external find cmake
 #==========================================
 RUN source ./spack/share/spack/setup-env.sh && \
-    spack install --only dependencies gmds+kmds+blocking+python ^kokkos+openmp ^cgns~mpi
+    spack install --only dependencies gmds+kmds+blocking+python ^kokkos+openmp ^cgns~mpi ^lcov@1.16
 #==========================================
 RUN rm -rf /spack/var/spack/cache/*
 #==========================================
