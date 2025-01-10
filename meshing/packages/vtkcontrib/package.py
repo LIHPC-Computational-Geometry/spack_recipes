@@ -20,7 +20,7 @@ class Vtkcontrib(CMakePackage):
 # On veut dans cette version un VTK 7.*
 #    depends_on('vtk@7.1:7.99~opengl2~python~xdmf+qt', type=('build', 'link'))
 #    depends_on('qt@5.9.1', type=('build', 'link'))
-    depends_on('guitoolkitsvariables', type=('build', 'link'))
+    depends_on('guitoolkitsvariables@1.5.99:', type=('build', 'link'))
     depends_on('vtk-maillage', type=('build', 'link'))
 #   depends_on('mpi', type=('build', 'link'))
 
@@ -46,15 +46,10 @@ class Vtkcontrib(CMakePackage):
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
     def cmake_args(self):
+        # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which 
+        # sets VTK 7, VTK 8 or VTK 9 to ON.
         args = []
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
-
-        if self.spec['vtk-maillage'].version < Version('8'):
-            args.append('-DVTK_7:BOOL=ON')
-        elif self.spec['vtk-maillage'].version < Version('9'):
-            args.append('-DVTK_8:BOOL=ON')
-        else:
-            args.append('-DVTK_9:BOOL=ON')
 
         # if OFF does vtkcontrib uses OPENGL2 ?
         # see VTK_OPENGL_BACKEND in src/VtkContrib/CMakeLists.txt
