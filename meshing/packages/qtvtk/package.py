@@ -41,7 +41,7 @@ class Qtvtk(CMakePackage):
     version('7.0.0', sha256='75abca1906b3c6a535515a29be8fddbe1e1ff39c1bb609fe423d5bd309b8d61b')
 
     def cmake_args(self):
-        # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which 
+        # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which
         # sets VTK 7, VTK 8 or VTK 9 to ON.
         args = []
         # Sous spack on est en mode "production", ce qui conditionne le repertoire ou est l'aide :

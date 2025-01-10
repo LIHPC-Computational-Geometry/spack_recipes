@@ -46,7 +46,7 @@ class Vtkcontrib(CMakePackage):
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
     def cmake_args(self):
-        # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which 
+        # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which
         # sets VTK 7, VTK 8 or VTK 9 to ON.
         args = []
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))

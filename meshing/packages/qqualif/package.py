@@ -57,7 +57,7 @@ class Qqualif(CMakePackage):
     version('3.0.1', sha256='9a942e63fbcce101e8231215bd52fff00bca8106b3c9d0ffd01dbacd606c988c')
 
     def cmake_args(self):
-        # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which 
+        # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which
         # sets VTK 7, VTK 8 or VTK 9 to ON.
         args = []
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
