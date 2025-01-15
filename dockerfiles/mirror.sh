@@ -93,12 +93,11 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	echo -e "\n\e[1;34m=== Spack recipes\e[0m"
 	prj=spack_recipes
 	download_release_and_untar $prj $2 .
-	mv $prj-$2/meshing/packages packages
-	rm -rf packages/machine_types
+	rm -rf $prj-$2/meshing/packages/machine_types
 
 	echo -e "\n\e[1;34m=== Tar recipes and mirrors\e[0m"
-	tar cvfz meshing_recipes.tar.gz -C packages .
-	rm -rf packages $prj-$2
+	tar cvfz meshing_recipes.tar.gz -C $prj-$2/meshing .
+	rm -rf $prj-$2
 
 	# Tar all mirrors
 	rm -rf meshing_mirror/machine_types
