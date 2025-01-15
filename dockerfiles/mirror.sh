@@ -96,6 +96,7 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	rm -rf $prj-$2/meshing/packages/machine_types
 
 	echo -e "\n\e[1;34m=== Tar recipes and mirrors\e[0m"
+	rm $prj-$2/meshing/repo.yaml
 	tar cvfz meshing_recipes.tar.gz -C $prj-$2/meshing .
 	rm -rf $prj-$2
 
