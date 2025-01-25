@@ -2,7 +2,7 @@
 # First get a spack release
 # On macos v0.22.3 or v0.23 should be chosen (because of the system's python-3.12 version ?)
 git clone --depth=1 -b v0.22.2  https://github.com/spack/spack.git
-# git clone --depth=1 -b v0.23  https://github.com/spack/spack.git
+# git clone --depth=1 -b v0.23.0  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user  in order to 
