@@ -33,6 +33,7 @@ class Gmds(CMakePackage):
     version('main', branch='main')
     version('1.3.8', sha256='4856ea2dac23f19e7b5cbe16c64cbc8083e3a2da14bcb12644f33bef28faa76a')
     version('1.3.7', sha256='102a1370257a22c7a864629507113fecb91c68f63eafb12f95dd7fd44a2f992a')
+    version('1.3.6', sha256='135282c214c9a4f2c7fd1281001b026b7a35e260acb58093df1cc2907e159304')
     version('1.3.5', sha256='9391e4f6858080fe38538fa7ad3650a1237a1db5fd4c165de6b1f62c1e0a1a74')
     version('1.3.4', sha256='1d8c28e948eb26d20cac63e1884d4bac032ee74f1a5dfa70b532e847f48b9bb0')
     version('1.3.3', sha256='a8387dfb4e023877a271dd862aa2a6ec301623daccc4aef1455861368e90daea')
