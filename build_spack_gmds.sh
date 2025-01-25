@@ -1,6 +1,8 @@
 #==========================================
 # First get a spack release
+# On macos v0.22.3 or v0.23 should be chosen (because of the system's python-3.12 version ?)
 git clone --depth=1 -b v0.22.2  https://github.com/spack/spack.git
+# git clone --depth=1 -b v0.23  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user  in order to 
@@ -60,7 +62,17 @@ git clone git@github.com:LIHPC-Computational-Geometry/gmds.git
 # you will probably want build_type=Debug or RelWithDebInfo.
 # Choose the variants you need, you can check them using `spack info gmds`.
 # The dev_path option does not seem to handle relative paths.
-spack install gmds+python+blocking+cgns dev_path=$PWD/gmds build_type=Debug ^cgns~mpi ^hdf5~mpi
+spack install gmds+python+blocking+cgns dev_path=$PWD/gmds build_type=Debug ^cgns~mpi ^hdf5~mpi ^cgal@5.6
+
+# On macos for the MCTS component :
+# 1. In the blocking component used for the MCTS the latest cgal-6.0.1 does not work, 
+# cgal-5.6 should be installed instead
+# 2. the glib .pc interface file contains an incorrect rpath option; in the file 
+# spack/opt/spack/linux-ubuntu22.04-icelake/gcc-11.4.0/glib-2.78.3-3vfyja7wiuk536ni2jpm6b2e2lv34s45//lib/pkgconfig/glib-2.0.pc
+# appears an option 
+# -rpath=/home/legoffn/travail/gmds/build_20240904/spack/opt/spack/linux-ubuntu22.04-icelake/gcc-11.4.0/gettext-0.22.5-z3gxvfsrgp25buly2kju6ktqv73qk7aj/lib
+# where the '=' character is not recognized by the apple-clang linker; the comma ',' character should be used instead. 
+# The compilation of gmds will fail; so replace the '=' character and launch 'spack install' again
 
 
 # to configure an IDE
