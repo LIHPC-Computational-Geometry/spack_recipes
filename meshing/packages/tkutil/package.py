@@ -27,6 +27,7 @@ class Tkutil(CMakePackage):
     depends_on('libiconv', type=('build', 'link'))
 
     version('develop', branch='main')
+    version('6.12.0', sha256='459281ff909ce856a3641a8ea331a8d8801321ac5d20a2b3067ecb4a3afecbde')
     version('6.11.0', sha256='51b6934c847e3728183abd3260829b5b0fb31f75d4f6e43422e271c2c09ea3b8')
     version('6.10.3', sha256='d13279c80cc77902daecc5175429da703a85085a6a60fb839ccc3a428a10bed0')
     version('6.10.2', sha256='d4ef63fa7e7357fc8bdaecab4d69c9a3c36ba479e5aa842628bf8b32e0edbcbf')
