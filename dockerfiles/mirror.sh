@@ -4,9 +4,9 @@
 # INSTALL_DIR is defined in the containers using this script
 
 GH_BASE=https://github.com/LIHPC-Computational-Geometry
-PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds qtpython vtkcontrib qtvtk qqualif machine_types smooth3d magix3d)
-# machine_types must stay in the list of projects for the cmake-cgcore container to work
-# even if machine_types is removed from mirror (it must not be imported)
+PRJS=(guitoolkitsvariables tkutil qtutil lima pythonutil preferences qualif qwtcharts gmds qtpython vtkcontrib qtvtk qqualif machine-types smooth3d magix3d)
+# machine-types must stay in the list of projects for the cmake-cgcore container to work
+# even if machine-types is removed from mirror (it must not be imported)
 
 
 print_usage() {
@@ -93,7 +93,9 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	echo -e "\n\e[1;34m=== Spack recipes\e[0m"
 	prj=spack_recipes
 	download_release_and_untar $prj $2 .
-	rm -rf $prj-$2/meshing/packages/machine_types
+	# Remove machine-types and Lima to keep internal version of recipes
+	rm -rf $prj-$2/meshing/packages/machine-types
+	rm -rf $prj-$2/meshing/packages/lima
 
 	echo -e "\n\e[1;34m=== Tar recipes and mirrors\e[0m"
 	rm $prj-$2/meshing/repo.yaml
@@ -101,7 +103,7 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	rm -rf $prj-$2
 
 	# Tar all mirrors
-	rm -rf meshing_mirror/machine_types
+	rm -rf meshing_mirror/machine-types
 	tar cvfz meshing_mirror.tar.gz -C meshing_mirror . && rm -rf meshing_mirror
 	#### End of Special cooking
 
