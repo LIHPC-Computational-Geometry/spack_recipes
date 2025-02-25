@@ -20,7 +20,7 @@ class Magix3d(CMakePackage):
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
     variant('doc', default=False, description='Installation de la documentation utilisateur')
 
-    version('2.4.1', sha256='ee8f1df25fd4cfc79d5e36b278f67b1fc743a554110b207fb6c4507371576542')
+    version('2.4.1', sha256='07934ea3d7a3ff99a8c6e8a7419e6b1f7311d430de4bcb8a7b089376b581adb1')
     version('2.4.0', sha256='c2b0644355025f35f6dda29fe14ab72e0375f0aef67cd300d89b8050dd698232')
     version('2.3.5', sha256='28808a4c5893f84e2de43c8913c6609f97b1a6b213b3bb2d7dd37a8a6c8f8d39')
     version('2.3.4', sha256='934475f0738f7f6d48eb3e33336b4ce6625811722aebc5a566b7327d9dbdd255')
@@ -56,7 +56,7 @@ class Magix3d(CMakePackage):
     depends_on('lima')
     depends_on('pkgconfig', type=('build'))
     depends_on('nlohmann-json')
-    depends_on('gmsh@4.12: ~fltk+opencascade')
+    depends_on('gmsh@4.12: ~mmg~fltk+opencascade')
 
     # depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
     # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
