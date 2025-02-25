@@ -108,5 +108,5 @@ RUN PRJ=occt-V7_1_0 &&\
     cmake --build build/${PRJ} --parallel 4 --target install
 #==========================================
 RUN PRJ=gmsh-4.13.1-Linux64-sdk &&\
-    curl -L https://gmsh.info/bin/Linux/${PRJ}.tgz | tar xz --directory install &&\
+    curl -L https://gmsh.info/bin/Linux/${PRJ}.tgz | tar xz --directory install
 #==========================================
