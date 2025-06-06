@@ -20,7 +20,7 @@ class Magix3d(CMakePackage):
     variant('pythonaddon', default=False, description='Additional python modules to enrich PYTHONPATH')
     variant('doc', default=False, description='Installation de la documentation utilisateur')
 
-    version('2.5.0', sha256='cd055700eb37aceb375bb53d6b90dc133cb5cc1d7dab64980492fb5de26a673c')
+    version('2.5.0', sha256='b3dfed9dadef3f3ef80219d7d7f9a8c54f2d979efc1e83877c8c59df8e25a56b')
     version('2.4.2', sha256='7a81bea88a85dea0e30c311053807449f354a5c7859af9c099b8da2c8af23113')
     version('2.4.1', sha256='07934ea3d7a3ff99a8c6e8a7419e6b1f7311d430de4bcb8a7b089376b581adb1')
     version('2.4.0', sha256='c2b0644355025f35f6dda29fe14ab72e0375f0aef67cd300d89b8050dd698232')
