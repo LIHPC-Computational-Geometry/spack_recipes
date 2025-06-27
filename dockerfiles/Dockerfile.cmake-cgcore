@@ -1,11 +1,11 @@
 #============== OS LAYER ==================
 # In ubuntu:20.4 the Open GL version is too old to execute in container
 # Ubuntu 22.04 allows to execute glxgears in a docker container
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 #==========================================
 # METADATA OF THE IMAGE
 LABEL description="LIHPC-CG cmake core image" \
-    version.ubuntu="22.04" \
+    version.ubuntu="24.04" \
     version.qwt="6.1.5" \
     version.mesquite="2.3.0" \
     version.cgns="4.3.0" \
@@ -24,7 +24,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
 # libeigen3-dev and libglpk-dev added for gmds
 RUN apt update &&\
-    apt install -y build-essential cmake python3 python3-distutils python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release &&\
+    apt install -y build-essential cmake python3 python3-venv unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release &&\
     apt install -y openmpi-bin libopenmpi-dev python3-dev swig doxygen libhdf5-dev libhdf5-mpi-dev libxerces-c-dev qtbase5-dev libqwt-qt5-dev libqt5x11extras5-dev qttools5-dev &&\
     apt install -y tcllib tklib tcl-dev tk-dev libfreetype-dev libfreeimage-dev rapidjson-dev libdraco-dev libxmu-dev libxi-dev libgts-dev libqt5svg5-dev libeigen3-dev libglpk-dev wget &&\
     apt clean &&\
