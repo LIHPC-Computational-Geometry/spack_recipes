@@ -1,7 +1,7 @@
 #============== OS LAYER ==================
 # In ubuntu:20.4 the Open GL version is too old to execute in container
 # Ubuntu 22.04 allows to execute glxgears in a docker container
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 #==========================================
 ARG SPACK_VERSION=0.22.2
 # METADATA OF THE IMAGE
@@ -19,10 +19,10 @@ SHELL ["/bin/bash", "-c"]
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #==========================================
-# wget libasound2 libdbus-glib-1-2 packagekit-gtk3-module used by firefox for documentation
+# wget libasound2t64 libdbus-glib-1-2 packagekit-gtk3-module used by firefox for documentation
 RUN apt update &&\
-    apt install -y build-essential cmake python3 python3-distutils unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file &&\
-    apt install -y wget libasound2 libdbus-glib-1-2 packagekit-gtk3-module &&\
+    apt install -y build-essential cmake python3 unzip zip curl git libxt-dev libgl-dev gfortran autoconf pkg-config lsb-release file &&\
+    apt install -y wget libasound2t64 libdbus-glib-1-2 packagekit-gtk3-module &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
