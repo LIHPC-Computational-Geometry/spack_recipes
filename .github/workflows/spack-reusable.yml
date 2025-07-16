@@ -76,6 +76,8 @@ jobs:
 
           # build test_link and run tests
           cd test_link/
+          git clone --recurse-submodules https://github.com/LIHPC-Computational-Geometry/magix3d_test_data_dir.git
+          export MAGIX3D_TEST_DATA_DIR=$PWD/magix3d_test_data_dir
           cmake -S . -B build
           cmake --build build
           cmake --build build --target test
