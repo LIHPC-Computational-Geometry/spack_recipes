@@ -51,6 +51,8 @@ jobs:
         shell: bash
         run: |
           cd test_link/
+          git clone --recurse-submodules https://github.com/LIHPC-Computational-Geometry/magix3d_test_data_dir.git
+          export MAGIX3D_TEST_DATA_DIR=$PWD/magix3d_test_data_dir
           cp ../CMakePresets.json .
           # Do not use ${{ github.event.repository.name }}_ROOT variable: package names != project names (sometimes)
           cmake -S . -B build --preset=ci -DCMAKE_PREFIX_PATH=$INSTALL_DIR/${{ github.event.repository.name }}
