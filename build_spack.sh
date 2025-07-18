@@ -78,7 +78,14 @@ cat magix3d/spack-configure-args.txt
 
 #==========================================
 # testing the install
-#export PYTHONPATH=spack/opt/spack/gmds/lib:$PYTHONPATH
-#spack load py-pytest
-#pytest gmds/pygmds/tst gmds/test_samples
+
+# fetch the test data 
+git clone --recurse-submodules https://github.com/LIHPC-Computational-Geometry/magix3d_test_data_dir.git
+export MAGIX3D_TEST_DATA_DIR=$PWD/magix3d_test_data_dir
+
+spack load python
+spack load py-pytest
+# when developing be careful to take the correct pyMagix3d library
+export PYTHONPATH=`spack find -p magix3d | awk 'NR==2 {print $2}'`/lib:$PYTHONPATH
+pytest -v -s magix3d/test_link
 #==========================================
