@@ -47,7 +47,7 @@ jobs:
       - name: Initialize Spack environment
         shell: bash
         run: |
-          git clone --depth=1 -b releases/latest https://github.com/spack/spack.git ${{github.workspace}}/spack
+          git clone --depth=1 -b v0.23.1 https://github.com/spack/spack.git ${{github.workspace}}/spack
           source ${{github.workspace}}/spack/share/spack/setup-env.sh
           spack repo add ${{github.workspace}}/meshing
           spack repo add ${{github.workspace}}/meshing_supersede
