@@ -3,7 +3,7 @@
 # Ubuntu 22.04 allows to execute glxgears in a docker container
 FROM ubuntu:24.04
 #==========================================
-ARG SPACK_VERSION=0.22.2
+ARG SPACK_VERSION=0.23.1
 # METADATA OF THE IMAGE
 LABEL description="Magix3d image built with spack" \
       version.ubuntu="24.04" \
@@ -26,9 +26,9 @@ RUN apt update &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.30.5/cmake-3.30.5-linux-x86_64.tar.gz
-RUN tar xvf cmake-3.30.5-linux-x86_64.tar.gz
-RUN cp -r cmake-3.30.5-linux-x86_64/* /usr/
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-linux-x86_64.tar.gz
+RUN tar xvf cmake-3.31.8-linux-x86_64.tar.gz
+RUN cp -r cmake-3.31.8-linux-x86_64/* /usr/
 #==========================================
 # Installation of firefox for magix3d documentation (wget installed above)
 RUN wget -O FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64" &&\
