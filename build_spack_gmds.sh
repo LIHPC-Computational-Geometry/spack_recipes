@@ -1,8 +1,8 @@
 #==========================================
 # First get a spack release
 # On macos v0.22.5 or v0.23.1 should be chosen (because of the system's python-3.12 version ?)
-git clone --depth=1 -b v0.22.5  https://github.com/spack/spack.git
-# git clone --depth=1 -b v0.23.1  https://github.com/spack/spack.git
+#git clone --depth=1 -b v0.22.5  https://github.com/spack/spack.git
+ git clone --depth=1 -b v0.23.1  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user  in order to 
@@ -80,11 +80,11 @@ spack install gmds+python+blocking+cgns dev_path=$PWD/gmds build_type=Debug ^cgn
 # options are set up
 # get the CMAKE_PREFIX_PATH with ';' as separators
 # NOTE: in spack version >= 0.22 the spack-build-env.txt is located in gmds/build-systemname-hash/spack-build-env.txt
-cat gmds/spack-build-env.txt  | grep CMAKE_PREFIX_PATH | awk -F "=" {'print $2'} | awk -F ";" {'print $1'} | sed 's/:/;/g'
+cat gmds/build-*/spack-build-env.txt  | grep CMAKE_PREFIX_PATH | awk -F "=" {'print $2'} | awk -F ";" {'print $1'} | sed 's/:/;/g'
 
 # get the cmake options that were explicitly set by spack; add -DWITH_TEST:BOOL=ON
 # to activate the tests
-cat gmds/spack-configure-args.txt
+cat gmds/build-*/spack-configure-args.txt
 
 #==========================================
 # testing the install
