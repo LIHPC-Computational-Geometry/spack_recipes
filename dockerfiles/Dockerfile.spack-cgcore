@@ -3,7 +3,7 @@
 # Ubuntu 22.04 allows to execute glxgears in a docker container
 FROM ubuntu:22.04
 #==========================================
-ARG SPACK_VERSION=0.22.2
+ARG SPACK_VERSION=0.23.1
 # METADATA OF THE IMAGE
 LABEL description="LIHPC-CG Spack core image" \
       version.ubuntu="22.04" \
@@ -29,9 +29,9 @@ RUN apt update &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.30.5/cmake-3.30.5-linux-x86_64.tar.gz
-RUN tar xvf cmake-3.30.5-linux-x86_64.tar.gz
-RUN cp -r cmake-3.30.5-linux-x86_64/* /usr/
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-linux-x86_64.tar.gz
+RUN tar xvf cmake-3.31.8-linux-x86_64.tar.gz
+RUN cp -r cmake-3.31.8-linux-x86_64/* /usr/
 #==========================================
 RUN git clone --depth=1 -b v${SPACK_VERSION} https://github.com/spack/spack.git &&\
     git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git &&\
