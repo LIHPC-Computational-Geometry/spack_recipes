@@ -44,7 +44,7 @@ class Magix3d(CMakePackage):
     depends_on('qtpython@4: +shared', type=('build', 'link'))
     depends_on('qtvtk@7: +shared', type=('build', 'link'))
     depends_on('cgns', type=('build', 'link'))
-    depends_on('gmds@1.2.1: +lima', type=('build', 'link'))
+    depends_on('gmds+lima+cgns', type=('build', 'link'))
     depends_on('gts', type=('build', 'link'))
     depends_on('opencascade@7.1.0+foundationclasses+dataexchange', type=('build', 'link'))
     depends_on('tetgen@1.6.0', when='+triton2')
