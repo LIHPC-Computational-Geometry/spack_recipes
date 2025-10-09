@@ -36,20 +36,6 @@ download_release_and_untar() {
 	curl -L $url | tar xz --directory $outputdir || exit 1
 }
 
-download_release() {
-	prj=$1
-	version=$2
-	if [ $# -eq 3 ]; then
-		url=$3
-	else
-		url=$GH_BASE/$prj/archive/refs/tags/$version.tar.gz
-	fi
-
-	echo -e "\e[1;32mDownloading $url in meshing_mirrors\e[0m"
-	mkdir -p meshing_mirror/$prj
-	curl -L $url > meshing_mirror/$prj/$prj-$version.tar.gz || exit 1
-}
-
 clone() {
 	prj=$1
 	outputdir=$2
@@ -80,15 +66,9 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 		echo -e "\n\e[1;34m=== Project $prj\e[0m"
 		clone $prj LIHPC-Computational-Geometry/$prj
 		prj_version=${products[$prj]}
-		download_release $prj $prj_version
 	done
 
 	#### Special cooking to prepare bundle
-	# Spack needs vtk-maillage tarball == VTK 7.1.1 tarball
-	# Spack recipe applies patches on VTK tarball
-	#echo -e "\n\e[1;34m=== Project vtk-maillage\e[0m"
-	#download_release vtk-maillage '7.1.1' https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz
-
 	# Mirroring spack_recipes from mirrors
 	echo -e "\n\e[1;34m=== Spack recipes\e[0m"
 	prj=spack_recipes
@@ -97,14 +77,10 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	rm -rf $prj-$2/meshing/packages/machine-types
 	rm -rf $prj-$2/meshing/packages/lima
 
-	echo -e "\n\e[1;34m=== Tar recipes and mirrors\e[0m"
+	echo -e "\n\e[1;34m=== Tar recipes\e[0m"
 	rm $prj-$2/meshing/repo.yaml
 	tar cvfz meshing_recipes.tar.gz -C $prj-$2/meshing .
 	rm -rf $prj-$2
-
-	# Tar all mirrors
-	rm -rf meshing_mirror/machine-types
-	tar cvfz meshing_mirror.tar.gz -C meshing_mirror . && rm -rf meshing_mirror
 	#### End of Special cooking
 
 	echo -e "\n\e[1;34mMirror available in: $MIRROR_DIR\e[0m"
