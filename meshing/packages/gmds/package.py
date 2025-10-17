@@ -31,6 +31,7 @@ class Gmds(CMakePackage):
     git = "https://github.com/LIHPC-Computational-Geometry/gmds.git"
 
     version('main', branch='main')
+    version('1.4.1', sha256='fda3eed76c05d3893ce2f5a6080315e3ed62daa43c0aac8b9c7d8e1338a5237f')
     version('1.4.0', sha256='bf1b11ee4e50f199babb83ddcaa41ab6b21d5db1bbac2d1f892791f303578fa7')
     version('1.3.9', sha256='b3aff5062559beb52d885bcec3bfe1f473c99963751d2545dbf55232cfa589e1')
     version('1.3.8', sha256='4856ea2dac23f19e7b5cbe16c64cbc8083e3a2da14bcb12644f33bef28faa76a')
