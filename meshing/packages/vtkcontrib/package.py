@@ -28,7 +28,10 @@ class Vtkcontrib(CMakePackage):
 #    depends_on('gettext')
 
     patch('vtkcontrib-4.6.0_calc_mpi.patch', when='@4.6.0')
-
+    
+    version('5.13.0', sha256='c2df1b2171fd72216e6279fa234e71203a7d3904e850bc3342fa2cee4f67e385')
+    version('5.12.0', sha256='6cbd668f33c3df5f48aa34687239ad3fdf76d0d5f3e71b20893b2ae3fcef34c9')
+    version('5.11.0', sha256='cdf69401fbb16f5d02546193ba49377852cdb6328a4bb00c0268869e05827e03')
     version('5.10.0', sha256='7d2a940d43827eff135fbcd51345876ed10354656a8fffee455702b130a1e853')
     version('5.9.0', sha256='eb6440b9c6cb386352f12faa420a61ed889c13c675856ed9846ffeaee259a632')
     version('5.8.0', sha256='a8da685e29f302a5e2c78fd53eb9b8eb81d1d62b3a60dc03a9fab0e0f9fb196b')
