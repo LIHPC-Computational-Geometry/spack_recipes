@@ -19,14 +19,16 @@ class Qualif(CMakePackage):
 # On a besoin de 7.2 <= Lima :
     depends_on('lima', type=('build', 'link'))
     version('2.3.6', sha256='2c2993805248d218a56334c931af575bc0b0a89e0773f2211b9f88014bd2a135')
-    version('2.3.5', sha256='29a0135fc9d9348922d8513225b8e693b48c0dcb423c9d18cbff2278153c3794')
-    version('2.3.4')
-    version('2.3.2', sha256='c5049581fb01c240b6ea0662129d8a2ee9002901090e5be8805ed738ea1e34a7')
-    version('2.3.1', sha256='b2a4f936539db69de061e5552bea780b098eca8221b40204a0888b9f9a3f7718')
-    version('2.1.0', sha256='8ab87dd38752ecab4b4af73c8405d57b0daf5301a63e59f088649039ac4eb525')
-    version('2.0.2', sha256='3ffcf3dee735a5d631f6e0f16422df9c22910156d0cbd82aa99b7733c89a7c41')
-    version('2.0.1', sha256='28f01315224e4174c6ba44717afdfc3799560ec14488493f7d738122179092be')
-    version('2.0.0', sha256='470cb7d25d34f2b19458c6a43e9ca5e3e2def7f3f4f0efdf0dbef5bbfe8dc9cc')
+    # versions below are deprecated as sources are in the infinite void of space
+    version('2.3.5', sha256='29a0135fc9d9348922d8513225b8e693b48c0dcb423c9d18cbff2278153c3794', deprecated=True)
+    version('2.3.2', sha256='c5049581fb01c240b6ea0662129d8a2ee9002901090e5be8805ed738ea1e34a7', deprecated=True)
+    version('2.3.1', sha256='b2a4f936539db69de061e5552bea780b098eca8221b40204a0888b9f9a3f7718', deprecated=True)
+    version('2.1.0', sha256='8ab87dd38752ecab4b4af73c8405d57b0daf5301a63e59f088649039ac4eb525', deprecated=True)
+    version('2.0.2', sha256='3ffcf3dee735a5d631f6e0f16422df9c22910156d0cbd82aa99b7733c89a7c41', deprecated=True)
+    version('2.0.1', sha256='28f01315224e4174c6ba44717afdfc3799560ec14488493f7d738122179092be', deprecated=True)
+    version('2.0.0', sha256='470cb7d25d34f2b19458c6a43e9ca5e3e2def7f3f4f0efdf0dbef5bbfe8dc9cc', deprecated=True)
+
+    depends_on("cxx", type="build")  # generated
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 

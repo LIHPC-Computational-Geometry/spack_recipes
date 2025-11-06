@@ -13,7 +13,7 @@ class Guitoolkitsvariables(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables.git'
     maintainers = ['meshing_team']
 
-    version('develop', branch='main')
+    version('main', branch='main')
     version('1.6.0', sha256='a3c218b46dc37ca72f05399cc8f94f71f23c5ed0b26fc27541cd830cc2201818')
     version('1.5.3', sha256='485706d072f222e232811357e1ac3eff42fe08f32e8a4b996e7d92c3023c0756')
     version('1.5.2', sha256='e0be5879b87fc9661c0f66ed3d2cd188a5769c75ea63a280a7b3c1067824c6e0')
