@@ -26,7 +26,8 @@ class Pythonutil(CMakePackage):
     version('6.2.1', sha256='14425325f2627bb410d9effb022aa0d1f7d7ee490766093668e3552630809acb')
     version('6.2.0', sha256='6c513802336821be8895bc7f46bc580d80a564e2d7ec6c4ee2b1c7d6383a383f')
     version('5.6.6', sha256='6edd64ff6ac22ea3483a551c49e490f77071aebe50d5586ece6f8ff929d6e84f')
-    version('5.0.2')
+
+    depends_on("cxx", type="build")  # generated
 
     def cmake_args(self):
         args = []
