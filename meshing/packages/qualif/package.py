@@ -16,7 +16,7 @@ class Qualif(CMakePackage):
     git = 'https://github.com/LIHPC-Computational-Geometry/qualif.git'
 
     depends_on('cmake', type='build')
-# On a besoin de 7.2 <= Lima :
+    # On a besoin de 7.2 <= Lima :
     depends_on('lima', type=('build', 'link'))
     version('2.3.6', sha256='2c2993805248d218a56334c931af575bc0b0a89e0773f2211b9f88014bd2a135')
     # versions below are deprecated as sources are in the infinite void of space
