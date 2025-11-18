@@ -37,7 +37,7 @@ class Qqualif(CMakePackage):
     variant('shared', default=True, description='Creation de bibliotheques dynamiques')
     variant('lima', default=True, description='Utilisation de la structure de maillages Lima')
     variant('gmds', default=True, description='Utilisation de la structure de maillages GMDS')
-# The difficulty with QQualif is that we do or do not want VTK, and that, for VtkContrib and 
+# The difficulty with QQualif is that we do or do not want VTK, and that, for VtkContrib and
 # QtVtk, we can use vtk-maillage or vtk 9.
 # The use here of the 2 variants vtk7 and vtk9 allows us to cover these 3 cases.
     variant('vtk7', default=True, description='Utilisation de la structure de maillages vtkUnstructuredGrid de VTK 7')
