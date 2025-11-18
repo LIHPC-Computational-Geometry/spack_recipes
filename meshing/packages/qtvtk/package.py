@@ -19,14 +19,15 @@ class Qtvtk(CMakePackage):
     depends_on('guitoolkitsvariables', type=('build'))
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
-    depends_on('vtkcontrib@4: +shared', type=('build', 'link'), when='+shared')
-    depends_on('vtkcontrib@4: ~shared', type=('build', 'link'), when='~shared')
+    depends_on('vtkcontrib@5: +shared', type=('build', 'link'), when='+shared')
+    depends_on('vtkcontrib@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('preferences', type=('build', 'link'))
     depends_on('qt')
-    depends_on('vtk-maillage +qt', type=('build', 'link'))
+    depends_on('vtk-maillage +qt', type=('build', 'link'), when='^vtkcontrib+vtk7')
+    depends_on('vtk +qt', type=('build', 'link'), when='^vtkcontrib~vtk7')
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
-
+    
     version('8.8.4', sha256='436fc9ea484f308e529f8ba7c60e963c48e315dc6d22fabf6bccb34ea13d4568')
     version('8.8.3', sha256='c1408a43b7d2832de99d2e3fa170ef7c7ed2a94e978b05eda5327b7ca0a7a500')
     version('8.8.2', sha256='be755be155304572c7c2eae81a67c5ecbcd3dcd3aa6372d7f4afeb7ffaad6356')

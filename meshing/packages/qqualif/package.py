@@ -19,13 +19,14 @@ class Qqualif(CMakePackage):
     depends_on('guitoolkitsvariables', type=('build'))
     depends_on('qwtcharts@4: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qwtcharts@4: +shared', type=('build', 'link'), when='+shared')
-    depends_on('vtkcontrib@4: ~shared', type=('build', 'link'), when='~shared+vtk')
-    depends_on('vtkcontrib@4: +shared', type=('build', 'link'), when='+shared+vtk')
+#    depends_on('vtkcontrib@4: ~shared', type=('build', 'link'), when='~shared+vtk')
+#    depends_on('vtkcontrib@4: +shared', type=('build', 'link'), when='+shared+vtk')
     depends_on('qualif@2: ~shared', type=('build', 'link'), when='~shared')
     depends_on('qualif@2: +shared', type=('build', 'link'), when='+shared')
     depends_on('gmds', type=('build', 'link'), when='+gmds')
     depends_on('lima', type=('build', 'link'), when='+lima')
-    depends_on('vtk-maillage', type=('build', 'link'), when='+vtk')
+    depends_on('vtk-maillage', type=('build', 'link'), when='+vtk7')
+    depends_on('vtk', type=('build', 'link'), when='+vtk9')
 
 # necessary because it is probably missing in the lima cmake files
 #    depends_on('machine-types', type=('build', 'link'), when='+lima')
@@ -36,7 +37,12 @@ class Qqualif(CMakePackage):
     variant('shared', default=True, description='Creation de bibliotheques dynamiques')
     variant('lima', default=True, description='Utilisation de la structure de maillages Lima')
     variant('gmds', default=True, description='Utilisation de la structure de maillages GMDS')
-    variant('vtk', default=True, description='Utilisation de la structure de maillages VTK')
+# The difficulty with QQualif is that we do or do not want VTK, and that, for VtkContrib and 
+# QtVtk, we can use vtk-maillage or vtk 9.
+# The use here of the 2 variants vtk7 and vtk9 allows us to cover these 3 cases.
+    variant('vtk7', default=True, description='Utilisation de la structure de maillages vtkUnstructuredGrid de VTK 7')
+    variant('vtk9', default=False, description='Utilisation de la structure de maillages vtkUnstructuredGrid de VTK 9')
+    conflicts('+vtk7', when='+vtk9')
 
     version('4.6.0', sha256='78fbbbd4919b5b6a96ee684e66baafa074c2a36328829ac120625e1a6540da14')
     version('4.5.0', sha256='ae16c1e0c44a5ad3843e9bc7e6beca3d800ce0c887faf646e06b8f0dfb40363e')
@@ -65,6 +71,7 @@ class Qqualif(CMakePackage):
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
         args.append(self.define_from_variant('BUILD_GQLima', 'lima'))
         args.append(self.define_from_variant('BUILD_GQGMDS', 'gmds'))
-        args.append(self.define_from_variant('BUILD_GQVtk', 'vtk'))
+        if self.spec.satisfies('+vtk7') or self.spec.satisfies('+vtk9'):
+            args.append('-DBUILD_GQVtk:BOOL=ON')
 
         return args
