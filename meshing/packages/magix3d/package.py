@@ -56,7 +56,7 @@ class Magix3d(CMakePackage):
     depends_on('python')
     depends_on('qt')
     depends_on('doxygen', type=('build'))
-    depends_on('lima')
+    depends_on('lima@7.12.1: +scripting')
     depends_on('pkgconfig', type=('build'))
     depends_on('nlohmann-json')
     depends_on('gmsh@4.12: ~mmg~fltk+opencascade')
