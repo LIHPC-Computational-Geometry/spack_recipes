@@ -73,9 +73,8 @@ if [[ $1 = "mirror-releases" ]] && [ $# -eq 2 ]; then
 	echo -e "\n\e[1;34m=== Spack recipes\e[0m"
 	prj=spack_recipes
 	download_release_and_untar $prj $2 .
-	# Remove machine-types and Lima to keep internal version of recipes
+	# Remove machine-types to keep internal version of recipes
 	rm -rf $prj-$2/meshing/packages/machine-types
-	rm -rf $prj-$2/meshing/packages/lima
 
 	echo -e "\n\e[1;34m=== Tar recipes\e[0m"
 	rm $prj-$2/meshing/repo.yaml
