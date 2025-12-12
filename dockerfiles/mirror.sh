@@ -33,7 +33,8 @@ download_release_and_untar() {
 
 	url=$GH_BASE/$prj/archive/refs/tags/$version.tar.gz
 	echo -e "\e[1;32mDownloading $url and untar in $outputdir directory\e[0m"
-	curl -L $url | tar xz --directory $outputdir || exit 1
+	# bsdtar instead of tar (tar bug on ubuntu 22.04: permission denied after xvf)
+	curl -L $url | bsdtar xz --directory $outputdir || exit 1
 }
 
 clone() {

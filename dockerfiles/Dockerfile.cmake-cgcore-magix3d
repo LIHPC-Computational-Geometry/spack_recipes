@@ -20,8 +20,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /containerws
 #==========================================
 # python modules for documentation and pybind11 for gmds
+# libarchivetools for bsdtar due to tar bug on ubuntu 22.04 (permission denied after xvf)
 RUN apt update &&\
     apt install -y graphviz sphinx &&\
+    apt install -y libarchive-tools &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 RUN python3 -m venv .venv &&\
