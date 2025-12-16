@@ -33,8 +33,7 @@ download_release_and_untar() {
 
 	url=$GH_BASE/$prj/archive/refs/tags/$version.tar.gz
 	echo -e "\e[1;32mDownloading $url and untar in $outputdir directory\e[0m"
-	# bsdtar instead of tar (tar bug on ubuntu 22.04: permission denied after xvf)
-	curl -L $url | bsdtar xz --directory $outputdir || exit 1
+	curl -L $url | tar xz --directory $outputdir || exit 1
 }
 
 clone() {
@@ -92,6 +91,8 @@ elif [[ $1 = "build-releases" ]] && [ $# -eq 2 ]; then
 	download_recipes_sh $2
 	source /tmp/recipes.sh || exit 1
 
+	# bsdtar instead of tar (tar bug on ubuntu 22.04: permission denied after xvf)
+	alias tar=bsdtar
 	for prj in ${PRJS[@]}
 	do
 		echo -e "\n\e[1;34m=== Project $prj\e[0m"
