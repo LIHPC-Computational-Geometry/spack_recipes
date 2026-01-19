@@ -86,6 +86,9 @@ export MAGIX3D_TEST_DATA_DIR=$PWD/magix3d_test_data_dir
 spack load python
 spack load py-pytest
 # when developing be careful to take the correct pyMagix3d library
+# use the one in the build directory if needed
 export PYTHONPATH=`spack find -p magix3d | awk 'NR==2 {print $2}'`/lib:$PYTHONPATH
-pytest -v -s magix3d/test_link
+# pytest should be executed from the magix3d/test_link directory as there are relative paths in some tests
+cd pytest -v -s magix3d/test_link
+pytest -v -s .
 #==========================================
