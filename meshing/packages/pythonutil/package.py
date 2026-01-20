@@ -32,8 +32,6 @@ class Pythonutil(CMakePackage):
     def cmake_args(self):
         args = []
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
-        args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
-        args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
 
         # Fix cmake taking python3 even if `which python` is python2
         py = self.spec['python']

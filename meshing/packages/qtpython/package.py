@@ -58,9 +58,6 @@ class Qtpython(CMakePackage):
         args = []
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
 
-        args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
-        args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
-
         args.append('-DBUILD_PY_CONSOLE:BOOL=ON')
 
         # Fix cmake taking python3 even if `which python` is python2

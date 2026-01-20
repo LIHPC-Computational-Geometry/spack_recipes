@@ -63,9 +63,6 @@ class Tkutil(CMakePackage):
         args = [self.define_from_variant('BUILD_SHARED_LIBS', 'shared')]
         args.append('-DCMAKE_CXX_FLAGS="-std=c++17"')
 
-        args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
-        args.append(self.define('USE_PYTHON_2', int(self.spec['python'].version[0]) < 3))
-
         # Fix cmake taking python3 even if `which python` is python2
         py = self.spec['python']
         args.extend([
