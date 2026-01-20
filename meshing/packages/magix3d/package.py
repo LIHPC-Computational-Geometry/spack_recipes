@@ -132,8 +132,6 @@ class Magix3d(CMakePackage):
         if ('+doc' in self.spec.variants):
             args.append('-DSPHINX_WARNINGS_AS_ERRORS=OFF')
 
-        args.append(self.define('USE_PYTHON_3', int(self.spec['python'].version[0]) >= 3))
-
         # only py-numpy py-matplotlib py-scipy are necessary
         # the rest are here because we are not in an environment
         if "+pythonaddon" in self.spec:
