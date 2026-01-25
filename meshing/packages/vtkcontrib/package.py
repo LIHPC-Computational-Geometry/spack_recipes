@@ -21,7 +21,8 @@ class Vtkcontrib(CMakePackage):
 #    depends_on('vtk@7.1:7.99~opengl2~python~xdmf+qt', type=('build', 'link'))
 #    depends_on('qt@5.9.1', type=('build', 'link'))
     depends_on('guitoolkitsvariables@1.5.99:', type=('build', 'link'))
-    depends_on('vtk-maillage', type=('build', 'link'))
+    depends_on('vtk-maillage', type=('build', 'link'), when='+vtk7')
+    depends_on('vtk@9.3:', type=('build', 'link'), when='~vtk7')
 #   depends_on('mpi', type=('build', 'link'))
 
 # for undefined reference in util-linux/libmount to intl_....
@@ -58,15 +59,12 @@ class Vtkcontrib(CMakePackage):
     depends_on("cxx", type="build")  # generated
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
+    variant('vtk7', default=True, description='Uses VTK v 7.1.1 and its OpenGL 1 backend. In its absence uses VTK 9.3 and its OpenGL 2 backend (does not pass through the GLX channel of ssh).')
 
     def cmake_args(self):
         # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which
         # sets VTK 7, VTK 8 or VTK 9 to ON.
         args = []
         args.append(self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
-
-        # if OFF does vtkcontrib uses OPENGL2 ?
-        # see VTK_OPENGL_BACKEND in src/VtkContrib/CMakeLists.txt
-        args.append('-DUSE_OPENGL_BACKEND:BOOL=ON')
 
         return args

@@ -19,11 +19,12 @@ class Qtvtk(CMakePackage):
     depends_on('guitoolkitsvariables', type=('build'))
     depends_on('qtutil@5: +shared', type=('build', 'link'), when='+shared')
     depends_on('qtutil@5: ~shared', type=('build', 'link'), when='~shared')
-    depends_on('vtkcontrib@4: +shared', type=('build', 'link'), when='+shared')
-    depends_on('vtkcontrib@4: ~shared', type=('build', 'link'), when='~shared')
+    depends_on('vtkcontrib@5: +shared', type=('build', 'link'), when='+shared')
+    depends_on('vtkcontrib@5: ~shared', type=('build', 'link'), when='~shared')
     depends_on('preferences', type=('build', 'link'))
     depends_on('qt')
-    depends_on('vtk-maillage +qt', type=('build', 'link'))
+    depends_on('vtk-maillage +qt', type=('build', 'link'), when='^vtkcontrib+vtk7')
+    depends_on('vtk +qt', type=('build', 'link'), when='^vtkcontrib~vtk7')
 
     variant('shared', default=True, description='Creation de bibliotheques dynamiques (defaut:shared, annuler le defaut par ~shared)')
 
