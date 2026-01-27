@@ -24,7 +24,7 @@ class Opencascade(CMakePackage):
 
     version('7.1.0', extension='tar.gz',
             sha256='eee7c0fef856d6380aa2acf31bce0b947cf72dd003c6795943075672fe513ce7')
- 
+
     # Opencascade depends on xlocale.h from glibc-headers but it was removed in 2.26.
     # This patch is a tentative backport from v7.4.0
     patch('xlocale-7_1.patch', when='@7.1.0')
