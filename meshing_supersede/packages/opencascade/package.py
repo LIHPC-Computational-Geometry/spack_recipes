@@ -18,19 +18,12 @@ class Opencascade(CMakePackage):
 # WARNING this supersedes the upstream recipe
 ##############################################
 
-    homepage = "https://www.opencascade.com"
-    url = "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_1_0;sf=tgz"
+    homepage = "https://github.com/Open-Cascade-SAS/OCCT"
+    url = "https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_1_0.tar.gz"
+    git = "https://github.com/Open-Cascade-SAS/OCCT.git"
 
-#    version('7.4.0', extension='tar.gz',
-#            sha256='1eace85115ea178f268e9d803ced994b66b72455b5484074b6ad7f643261f0a0')
     version('7.1.0', extension='tar.gz',
-            sha256='f28ca30bf939158c192df571d78b9dae0e34ab8d8ec9a8b2e8274acd81e138c8')
-
-    def url_for_version(self, version):
-        url = (
-            "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V{0};sf=tgz"
-        )
-        return url.format(version.underscored)
+            sha256='eee7c0fef856d6380aa2acf31bce0b947cf72dd003c6795943075672fe513ce7')
 
     # Opencascade depends on xlocale.h from glibc-headers but it was removed in 2.26.
     # This patch is a tentative backport from v7.4.0
@@ -90,6 +83,12 @@ class Opencascade(CMakePackage):
     # those dependencies in a future release of OCC.
     depends_on('libxmu', type=('build', 'link'))
     depends_on('libxi', type=('build', 'link'))
+
+    def url_for_version(self, version):
+        url = (
+            "https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V{0}.tar.gz"
+        )
+        return url.format(version.underscored)
 
     def cmake_args(self):
         args = []
