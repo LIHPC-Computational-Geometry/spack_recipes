@@ -6,12 +6,13 @@ FROM ubuntu:24.04
 # METADATA OF THE IMAGE
 LABEL description="LIHPC-CG cmake core image" \
     version.ubuntu="24.04" \
-    version.qwt="6.1.5" \
-    version.mesquite="2.3.0" \
-    version.cgns="4.3.0" \
+    version.qwt="6.1.6" \
+    version.mesquite="2.99" \
+    version.cgns="4.4.0" \
     version.vtk="7.1.1" \
-    version.occt="7.1.0" \
-    version.tetgen="1.6.0"
+    version.occt="7.8.1" \
+    version.tetgen="1.6.0" \
+    version.gmsh="4.13.1"
 #==========================================
 # Do not use /dev as the HOME if you use containers in vscode
 # /dev is too small to store .vscode-server directory containing user preferences
@@ -30,24 +31,33 @@ RUN apt update &&\
     apt clean &&\
     rm -rf /var/lib/apt/lists/*
 #==========================================
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.8/cmake-3.31.8-linux-x86_64.tar.gz
-RUN tar xvf cmake-3.31.8-linux-x86_64.tar.gz
-RUN cp -r cmake-3.31.8-linux-x86_64/* /usr/
-#==========================================
 WORKDIR /containerws
 RUN mkdir src && mkdir build && mkdir install
 ARG PATCH_BASE=https://raw.githubusercontent.com/LIHPC-Computational-Geometry/spack_recipes/main/meshing_supersede/packages
 ENV INSTALL_DIR=/containerws/install
 #==========================================
-RUN PRJ=qwt-6.1.5 &&\
-    curl -L https://sourceforge.net/projects/qwt/files/qwt/6.1.5/${PRJ}.tar.bz2 | tar jxv --directory src &&\
+# ATTENTION BUG https://bugs.launchpad.net/ubuntu/+source/tar/+bug/2059734
+# DEVRAIT DISPARAITRE AVEC UBUNTU > 24.04 ?
+# Pb de permission denied sans raison avec la commande tar
+# oblige à isoler les tar et ignorer le retour d'erreur 
+# en finissant la ligne par "|| true"
+#==========================================
+RUN PRJ=cmake-3.31.8-linux-x86_64 &&\
+    curl -L https://github.com/Kitware/CMake/releases/download/v3.31.8/${PRJ}.tar.gz -o ${PRJ}.tar.gz &&\
+    tar -xvf ${PRJ}.tar.gz || true &&\
+    cp -r cmake-3.31.8-linux-x86_64/* /usr/
+#==========================================
+RUN PRJ=qwt-6.1.6 &&\
+    curl -L https://sourceforge.net/projects/qwt/files/qwt/6.1.6/${PRJ}.tar.bz2 -o ${PRJ}.tar.bz2 &&\
+    tar jxvf ${PRJ}.tar.bz2 --directory src || true &&\
     cd src/${PRJ} &&\
     qmake qwt.pro &&\
     make -j4 &&\
     cd ../..
 #==========================================
-RUN PRJ=mesquite-2.3.0 &&\
-    curl -L https://github.com/sandialabs/mesquite/blob/main/mesquite/${PRJ}.tar.gz?raw=true | tar xz --directory src &&\
+RUN PRJ=mesquite-2.99 &&\
+    curl -L https://github.com/sandialabs/mesquite/blob/main/mesquite/${PRJ}.tar.gz?raw=true -o ${PRJ}.tar.gz &&\
+    tar xzf ${PRJ}.tar.gz --directory src || true &&\
     cd src/${PRJ} &&\
     ./configure --prefix=${INSTALL_DIR}/${PRJ} --without-cppunit --with-pic &&\
     make -j4 &&\
@@ -55,8 +65,9 @@ RUN PRJ=mesquite-2.3.0 &&\
     cd ../..
 #==========================================
 RUN PRJ=tetgen1.6.0 &&\
-    curl -L http://www.tetgen.org/1.5/src/tetgen1.6.0.tar.gz | tar xz --directory src &&\
-    cd src/${PRJ} &&\
+    curl -L https://codeberg.org/TetGen/TetGen/archive/v1.6.0.tar.gz -o ${PRJ}.tar.gz &&\
+    tar xzf ${PRJ}.tar.gz --directory src || true &&\
+    cd src/tetgen &&\
     cp makefile makefile.old &&\
     sed "s%CXX = g++%CXX = g++ -fPIC%g" makefile.old > makefile &&\
     make &&\
@@ -72,13 +83,15 @@ RUN PRJ=tetgen1.6.0 &&\
 #==========================================
 # -DHDF5_NEED_MPI=true works only if libhdf5-dev is not installed
 # but, in this case, lima does not compile
-RUN PRJ=CGNS-4.3.0 &&\
-    curl -L https://github.com/CGNS/CGNS/archive/v4.3.0.tar.gz | tar xz --directory src &&\
+RUN PRJ=CGNS-4.4.0 &&\
+    curl -L https://github.com/CGNS/CGNS/archive/v4.4.0.tar.gz -o ${PRJ}.tar.gz &&\
+    tar xzf ${PRJ}.tar.gz --directory src || true &&\
     cmake -S src/${PRJ} -B build/${PRJ} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${PRJ} &&\
     cmake --build build/${PRJ} --parallel 4 --target install
 #==========================================
 RUN PRJ=VTK-7.1.1 &&\
-    curl -L https://vtk.org/files/release/7.1/${PRJ}.tar.gz | tar xz --directory src &&\
+    curl -L https://vtk.org/files/release/7.1/${PRJ}.tar.gz -o ${PRJ}.tar.gz &&\
+    tar xzf ${PRJ}.tar.gz --directory src || true &&\
     cd src/${PRJ} &&\
     curl -L -O ${PATCH_BASE}/vtk-maillage/vtk-maillage_qt515.patch &&\
     patch -p1 < vtk-maillage_qt515.patch &&\
@@ -96,17 +109,13 @@ RUN PRJ=VTK-7.1.1 &&\
     -DVTK_PYTHON_VERSION=3 -DVTK_USE_OFFSCREEN=OFF -DVTK_OPENGL_HAS_OSMESA=OFF &&\
     cmake --build build/${PRJ} --parallel 4 --target install
 #==========================================
-RUN PRJ=occt-V7_1_0 &&\
-    curl -L "https://git.dev.opencascade.org/gitweb/?p=occt.git;a=snapshot;h=refs/tags/V7_1_0;sf=tgz" | tar xz --directory src &&\
-    cd src/${PRJ} &&\
-    curl -L -O ${PATCH_BASE}/opencascade/xlocale-7_1.patch &&\
-    patch -p1 < xlocale-7_1.patch &&\
-    curl -L -O ${PATCH_BASE}/opencascade/opencascade-7.1.0_a.patch &&\
-    patch -p1 < opencascade-7.1.0_a.patch &&\
-    cd ../.. &&\
+RUN PRJ=OCCT-7_8_1 &&\
+    curl -L https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_8_1.tar.gz -o ${PRJ}.tar.gz &&\
+    tar xzf ${PRJ}.tar.gz --directory src || true &&\
     cmake -S src/${PRJ} -B build/${PRJ} -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/${PRJ} &&\
     cmake --build build/${PRJ} --parallel 4 --target install
 #==========================================
 RUN PRJ=gmsh-4.13.1-Linux64-sdk &&\
-    curl -L https://gmsh.info/bin/Linux/${PRJ}.tgz | tar xz --directory install
+    curl -L https://gmsh.info/bin/Linux/${PRJ}.tgz -o ${PRJ}.tar.gz &&\
+    tar xzf ${PRJ}.tar.gz --directory install || true
 #==========================================
