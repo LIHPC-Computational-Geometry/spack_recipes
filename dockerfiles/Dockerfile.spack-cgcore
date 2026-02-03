@@ -48,7 +48,6 @@ RUN source /spack/share/spack/setup-env.sh &&\
 RUN sed -i 's#"${ARCHITECTURE}/${COMPILERNAME}-${COMPILERVER}/${PACKAGE}-${VERSION}-${HASH}"#"${PACKAGE}-${VERSION}"#g' spack/etc/spack/defaults/config.yaml
 #==========================================
 # 2023/02/01-BL: qwt must be installed early due to its qt@5.14 dependency (5.15 otherwise)
-# 2023/02/03-BL: @7.1.0+foundationclasses+dataexchange added on opencascade for mgx
 RUN source /spack/share/spack/setup-env.sh &&\
     spack env create meshing-env &&\
     spack env activate meshing-env &&\
@@ -56,7 +55,7 @@ RUN source /spack/share/spack/setup-env.sh &&\
     spack add py-pytest &&\
     spack add qt+opengl~examples &&\
     spack add hdf5+cxx~mpi &&\
-    spack add opencascade@7.1.0+foundationclasses+dataexchange &&\
+    spack add opencascade@7.8.1 &&\
     spack add vtk-maillage+mpi~opengl2+qt &&\
     spack add cgns &&\
     spack add swig &&\
@@ -64,7 +63,7 @@ RUN source /spack/share/spack/setup-env.sh &&\
     spack add doxygen &&\
     spack add graphviz &&\
     spack add openmpi &&\
-    spack add gmsh@4.12~fltk~mmg+opencascade &&\
+    spack add gmsh~fltk~mmg+opencascade &&\
     spack concretize &&\
     spack install &&\
     rm -rf /spack/var/spack/cache/*
