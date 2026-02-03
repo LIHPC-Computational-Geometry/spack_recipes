@@ -48,7 +48,7 @@ class Magix3d(CMakePackage):
     depends_on('cgns', type=('build', 'link'))
     depends_on('gmds+lima+cgns', type=('build', 'link'))
     depends_on('gts', type=('build', 'link'))
-    depends_on('opencascade@7.1.0+foundationclasses+dataexchange', type=('build', 'link'))
+    depends_on('opencascade@7.8.1', type=('build', 'link'))
     depends_on('tetgen@1.6.0', when='+triton2')
     depends_on('smooth3d +shared', type=('build', 'link'), when='+smooth3d')
     depends_on('swig', type='build')
@@ -59,7 +59,7 @@ class Magix3d(CMakePackage):
     depends_on('lima@7.12.1: +scripting')
     depends_on('pkgconfig', type=('build'))
     depends_on('nlohmann-json')
-    depends_on('gmsh@4.12: ~mmg~fltk+opencascade')
+    depends_on('gmsh ~mmg~fltk+opencascade')
 
     # depends_on('mdl-parser@1.5.2: +shared', type=('build', 'link'), when='+mdlparser')
     # depends_on('dkoc', type=('build', 'link'), when='+dkoc')
