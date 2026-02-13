@@ -50,8 +50,8 @@ jobs:
       - name: Install lcov
         if: inputs.coverage == true
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lcov
+          apt-get update
+          apt-get install -y lcov
       
       # Build the current sources, run unit tests and install
       - name: Build and install
