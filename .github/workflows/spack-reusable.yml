@@ -113,6 +113,7 @@ jobs:
       - name: Capture C++ coverage
         if: inputs.coverage == true
         run: |
+          source /spack/share/spack/setup-env.sh
           BUILD_DIR=$(spack location -b ${{ github.event.repository.name }})
           echo "Capturing coverage from $BUILD_DIR"
           lcov --capture --directory $BUILD_DIR --output-file coverage.info
