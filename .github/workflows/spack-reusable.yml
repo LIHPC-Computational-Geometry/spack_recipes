@@ -116,6 +116,8 @@ jobs:
         run: |
           source /spack/share/spack/setup-env.sh
           export BUILD_DIR=$(spack location -b ${{ github.event.repository.name }})
+          find $BUILD_DIR -name "*.gcda" | head
+          find $BUILD_DIR -name "*.gcno" | head
           echo "Capturing coverage from $BUILD_DIR"
           lcov --capture --directory $BUILD_DIR --output-file coverage.info
           lcov --extract coverage.info "$GITHUB_WORKSPACE/*" --output-file coverage.info
