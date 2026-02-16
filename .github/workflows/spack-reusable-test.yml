@@ -117,10 +117,11 @@ jobs:
           source /spack/share/spack/setup-env.sh
           spack env activate ci-env
           export BUILD_DIR=$(spack location -b ${{ github.event.repository.name }})
-          find $BUILD_DIR -name "*.gcda" | head
-          find $BUILD_DIR -name "*.gcno" | head
+          echo "GCDA: $(find $BUILD_DIR -name "*.gcda" | head)"
+          echo "GCNO: $(find $BUILD_DIR -name "*.gcno" | head)"
           echo "Capturing coverage from $BUILD_DIR"
           lcov --capture --directory $BUILD_DIR --output-file coverage.info
+          echo "Extract extra information"
           lcov --extract coverage.info "$GITHUB_WORKSPACE/*" --output-file coverage.info
           lcov --remove coverage.info '/usr/*' '*/spack/*' --output-file coverage.info
           genhtml coverage.info --output-directory coverage-html
