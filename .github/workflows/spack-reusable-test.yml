@@ -123,7 +123,7 @@ jobs:
           lcov --capture --directory $BUILD_DIR --output-file coverage.info
           echo "Extract extra information"
           lcov --extract coverage.info "$GITHUB_WORKSPACE/*" --output-file coverage.info
-          lcov --remove coverage.info '/usr/*' '*/spack/*' --output-file coverage.info
+          lcov --remove coverage.info '*/spack/*' --output-file coverage.info
           genhtml coverage.info --output-directory coverage-html
 
       - name: Upload C++ coverage report
