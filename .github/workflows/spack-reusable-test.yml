@@ -57,7 +57,7 @@ jobs:
       - name: Build and install
         shell: bash
         run: |
-          # source /spack/share/spack/setup-env.sh
+          source /spack/share/spack/setup-env.sh
           spack env create ci-env
           spack env activate ci-env
           # ${{ github.event.repository.name }} represents the name of the project
@@ -75,7 +75,7 @@ jobs:
       - name: Build and run test_link
         shell: bash
         run: |
-          # source /spack/share/spack/setup-env.sh
+          source /spack/share/spack/setup-env.sh
           # load the environment
           spack env activate ci-env
           spack load python
@@ -114,7 +114,8 @@ jobs:
         if: inputs.coverage == true
         shell: bash
         run: |
-          # source /spack/share/spack/setup-env.sh
+          source /spack/share/spack/setup-env.sh
+          spack env activate ci-env
           export BUILD_DIR=$(spack location -b ${{ github.event.repository.name }})
           find $BUILD_DIR -name "*.gcda" | head
           find $BUILD_DIR -name "*.gcno" | head
