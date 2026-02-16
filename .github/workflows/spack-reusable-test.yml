@@ -126,6 +126,14 @@ jobs:
           # lcov --remove coverage.info '/usr/*' '*/spack/*' --output-file coverage.info
           genhtml coverage.info --output-directory coverage-html
 
+      - name: Upload coverage files to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: LIHPC-Computational-Geometry/magix3d
+          verbose: true
+          fail_ci_if_error: true
+
       - name: Upload C++ coverage report
         if: inputs.coverage == true
         uses: actions/upload-artifact@v4
