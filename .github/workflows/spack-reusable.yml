@@ -42,9 +42,9 @@ jobs:
       - name: Enable C++ coverage flags
         if: inputs.coverage == true
         run: |
-          export SPACK_CFLAGS=--coverage
-          export SPACK_CXXFLAGS=--coverage
-          export SPACK_LDFLAGS=--coverage
+          echo "SPACK_CFLAGS=--coverage" >> $GITHUB_ENV
+          echo "SPACK_CXXFLAGS=--coverage" >> $GITHUB_ENV
+          echo "SPACK_LDFLAGS=--coverage" >> $GITHUB_ENV
 
       # lcov installation (if coverage)
       - name: Install lcov
