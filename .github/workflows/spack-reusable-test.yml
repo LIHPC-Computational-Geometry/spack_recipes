@@ -117,8 +117,6 @@ jobs:
           source /spack/share/spack/setup-env.sh
           spack env activate ci-env
           export BUILD_DIR=$(spack location -b ${{ github.event.repository.name }})
-          echo "GCDA: $(find $BUILD_DIR -name "*.gcda" | head)"
-          echo "GCNO: $(find $BUILD_DIR -name "*.gcno" | head)"
           echo "Capturing coverage from $BUILD_DIR"
           lcov --capture --directory $BUILD_DIR --output-file coverage.info
           echo "Extract extra information"
@@ -131,8 +129,6 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: LIHPC-Computational-Geometry/magix3d
           verbose: true
           fail_ci_if_error: true
 
