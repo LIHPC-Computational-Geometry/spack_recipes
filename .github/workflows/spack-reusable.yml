@@ -109,20 +109,37 @@ jobs:
         with:
           name: test-of-link-logs
           path: ${{ github.workspace }}/test_link/build/Testing/Temporary/LastTest.log
+          retention-days: 3
 
       - name: Capture C++ coverage
         if: inputs.coverage == true
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
+          spack env activate ci-env
           export BUILD_DIR=$(spack location -b ${{ github.event.repository.name }})
-          find $BUILD_DIR -name "*.gcda" | head
-          find $BUILD_DIR -name "*.gcno" | head
           echo "Capturing coverage from $BUILD_DIR"
           lcov --capture --directory $BUILD_DIR --output-file coverage.info
+          echo "Extract extra information"
           lcov --extract coverage.info "$GITHUB_WORKSPACE/*" --output-file coverage.info
-          lcov --remove coverage.info '/usr/*' '*/spack/*' --output-file coverage.info
+          # lcov --remove coverage.info '/usr/*' '*/spack/*' --output-file coverage.info
           genhtml coverage.info --output-directory coverage-html
+
+      - name: Upload coverage files to Codecov
+        if: inputs.coverage == true
+        uses: codecov/codecov-action@v5
+        with:
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+
+      - name: Add Codecov commit link
+        if: inputs.coverage == true
+        run: |
+          echo "## 📊 Code Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Commit report:" >> $GITHUB_STEP_SUMMARY
+          echo "https://app.codecov.io/gh/${{ github.repository }}/commit/${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload C++ coverage report
         if: inputs.coverage == true
