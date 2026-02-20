@@ -125,11 +125,20 @@ jobs:
           genhtml coverage.info --output-directory coverage-html
 
       - name: Upload coverage files to Codecov
+        if: inputs.coverage == true
         uses: codecov/codecov-action@v5
         with:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
+
+      - name: Add Codecov commit link
+        if: inputs.coverage == true
+        run: |
+          echo "## 📊 Code Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Commit report:" >> $GITHUB_STEP_SUMMARY
+          echo "https://app.codecov.io/gh/${{ github.repository }}/commit/${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload C++ coverage report
         if: inputs.coverage == true
