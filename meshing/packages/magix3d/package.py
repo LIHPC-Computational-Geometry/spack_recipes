@@ -51,7 +51,7 @@ class Magix3d(CMakePackage):
     depends_on('cgns', type=('build', 'link'))
     depends_on('gmds+lima+cgns', type=('build', 'link'))
     depends_on('gts', type=('build', 'link'))
-    depends_on('opencascade@7.8.1', type=('build', 'link'))
+    depends_on('opencascade@7.8.1+data_exchange', type=('build', 'link'))
     depends_on('tetgen@1.6.0', when='+triton2')
     depends_on('smooth3d +shared', type=('build', 'link'), when='+smooth3d')
     depends_on('swig', type='build')
