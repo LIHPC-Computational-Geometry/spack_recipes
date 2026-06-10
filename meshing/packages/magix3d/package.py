@@ -103,9 +103,9 @@ class Magix3d(CMakePackage):
             env.prepend_path('PYTHONPATH', sphinx_pythonpath)
 
     def cmake_args(self):
-        return self.fill_cmake_args(False, 'undefined', 'undefined', 'undefined', 'unavailable')
+        return self.fill_cmake_args(False, 'undefined', 'undefined', 'undefined', 'unavailable', 'undefined', 'undefined')
 
-    def fill_cmake_args(self, batch, t_ext, erd_ext, team, dkoc_lic):
+    def fill_cmake_args(self, batch, t_ext, erd_ext, team, dkoc_lic, url_wiki, url_doc_qualif):
         args = []
 
         args.append('-DBUILD_SHARED_LIBS:BOOL=ON')  # Toujours en mode shared, pour le scripting
@@ -125,9 +125,8 @@ class Magix3d(CMakePackage):
         args.append(self.define('ERD_INTERNAL_EXTENSION', erd_ext))
         args.append(self.define('USER_TEAM', team))
         args.append(self.define('DKOC_LICENCE', dkoc_lic))
-        args.append(self.define('URL_WIKI', 'url_wiki'))
-        args.append(self.define('URL_TUTORIAL', 'url_tuto'))
-        args.append(self.define('URL_QUALIF', 'url_doc_qualif'))
+        args.append(self.define('URL_WIKI', url_wiki))
+        args.append(self.define('URL_QUALIF', url_doc_qualif))
 
         args.append(self.define('BUILD_MAGIX3D', True))
         args.append(self.define('BUILD_MAGIX3DBATCH', batch))
