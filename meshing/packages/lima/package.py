@@ -12,7 +12,7 @@ class Lima(CMakePackage):
     git = "https://github.com/LIHPC-Computational-Geometry/lima.git"
     maintainers = ["meshing_team"]
 
-    extends("python", when="+scripting")		# For the PYTHONPATH in the generated modules
+    extends("python", when="+scripting")  # For the PYTHONPATH in the generated modules
 
     depends_on("machine-types", when="+machinetypes")
     depends_on("swig", type=("build"), when="+scripting")
@@ -23,14 +23,34 @@ class Lima(CMakePackage):
 
     variant("scripting", default=False, description="Build python binding")
     variant("shared", default=True, description="Build shared library")
-    variant("xlmlima", default=True, description="Build xlmlima tool (converts and prepares meshes, necessary for non-regression tests)")
-    variant("mli2", default=True, description="Build Lima with mli2 format support (requires HDF5 >=1.10.0)")
-    variant("machinetypes", default=True, description="Build Lima MachineTypes API (shareable numeric types definitions)")
+    variant(
+        "xlmlima",
+        default=True,
+        description="Build xlmlima tool (converts and prepares meshes, necessary for non-regression tests)"
+    )
+    variant(
+        "mli2",
+        default=True,
+        description="Build Lima with mli2 format support (requires HDF5 >=1.10.0)"
+    )
+    variant(
+        "machinetypes",
+        default=True,
+        description="Build Lima MachineTypes API (shareable numeric types definitions)"
+    )
     variant("i4", default=False, description="int_type=int32 instead of int64")
     variant("r4", default=False, description="real=float instead of double")
-    variant("tests", default=True, description="Builds the mesh comparison tool (necessary for non-regression tests)")
+    variant(
+        "tests",
+        default=True,
+        description="Builds the mesh comparison tool (necessary for non-regression tests)"
+    )
     # disable_mli_warning=True for non regression testing, false otherwise (blue warning message when obsolete mli format is used)
-    variant("disable_mli_warning", default=False, description="Disables warning messages displayed when reading or writing a file in mli format (obsolete)")
+    variant(
+        "disable_mli_warning",
+        default=False,
+        description="Disables warning messages displayed when reading or writing a file in mli format (obsolete)",
+    )
 
     patch("cmake.patch", when="@7.4.3")
     patch("cmake-7.6.0.patch", when="@7.6.0")
@@ -63,13 +83,15 @@ class Lima(CMakePackage):
     conflicts("~shared", "+scripting")
 
     def cmake_args(self):
-        args = [self.define_from_variant("BUILD_SHARED_LIBS", "shared"),
-                self.define_from_variant("BUILD_SCRIPTING", "scripting"),
-                self.define_from_variant("BUILD_XLMLIMA", "xlmlima"),
-                self.define_from_variant("BUILD_TESTS", "tests"),
-                self.define_from_variant("DISABLE_MLI_WARNING", "disable_mli_warning"),
-                self.define_from_variant("FORMAT_MLI2", "mli2"),
-                self.define_from_variant("MACHINE_TYPES", "machinetypes")]
+        args = [
+            self.define_from_variant("BUILD_SHARED_LIBS", "shared"),
+            self.define_from_variant("BUILD_SCRIPTING", "scripting"),
+            self.define_from_variant("BUILD_XLMLIMA", "xlmlima"),
+            self.define_from_variant("BUILD_TESTS", "tests"),
+            self.define_from_variant("DISABLE_MLI_WARNING", "disable_mli_warning"),
+            self.define_from_variant("FORMAT_MLI2", "mli2"),
+            self.define_from_variant("MACHINE_TYPES", "machinetypes")
+        ]
 
         args.append(self.define("MACHINE_TYPES", False))
         args.append(self.define("FORMAT_MLI", False))
@@ -87,11 +109,13 @@ class Lima(CMakePackage):
 
         if "+scripting" in self.spec:
             py = self.spec["python"]
-            args.extend([
-                # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
-                self.define("Python_EXECUTABLE", py.command.path),
-                # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
-                self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path)
-            ])
+            args.extend(
+                [
+                    # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
+                    self.define("Python_EXECUTABLE", py.command.path),
+                    # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
+                    self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path)
+                ]
+            )
 
         return args
