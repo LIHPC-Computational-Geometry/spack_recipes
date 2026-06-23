@@ -16,7 +16,7 @@ def computeSha256(project_name, project_version, project_path):
         with open(file_name, 'w') as md:
             md.write("Do not forget to update your [Spack recipe](" + spack_recipe_url + ") with the following line:\n")
             md.write("```python\n")
-            md.write("    version('" + project_version + "', sha256='" + readable_hash + "')\n")
+            md.write("    version(\"" + project_version + "\", sha256=\"" + readable_hash + "\")\n")
             md.write("```\n")
         print("File created:", file_name)
 

@@ -26,7 +26,7 @@ class Lima(CMakePackage):
     variant(
         "xlmlima",
         default=True,
-        description="Build xlmlima tool (converts and prepares meshes, necessary for non-regression tests)"
+        description="Build xlmlima tool (converts and prepares meshes for non-regression tests)"
     )
     variant(
         "mli2",
@@ -45,18 +45,19 @@ class Lima(CMakePackage):
         default=True,
         description="Builds the mesh comparison tool (necessary for non-regression tests)"
     )
-    # disable_mli_warning=True for non regression testing, false otherwise (blue warning message when obsolete mli format is used)
+    # disable_mli_warning=True for non regression testing,
+    # false otherwise (blue warning message when obsolete mli format is used)
     variant(
         "disable_mli_warning",
         default=False,
-        description="Disables warning messages displayed when reading or writing a file in mli format (obsolete)",
+        description="Disables warning messages displayed when reading or writing an mli file"
     )
 
     patch("cmake.patch", when="@7.4.3")
     patch("cmake-7.6.0.patch", when="@7.6.0")
 
     version("main", branch="main")
-    version('7.12.2', sha256='8308c68d7c18b387b47bc969d472233eb2fdf00a5fc56bc081c9579374a78f04')
+    version("7.12.2", sha256="8308c68d7c18b387b47bc969d472233eb2fdf00a5fc56bc081c9579374a78f04")
     version("7.12.1", sha256="4c919e640b4f4fcef7d1c6c1e1e72a8d16762dd63cd691f9226a185cb6270c3f")
     version("7.12.0", sha256="437c5ddf8b8994a01977bf5656b8f9457b0548a4a2f96c335e046dd485381274")
     version("7.11.2", sha256="87105227d07484feb5a4cf8aef75734165abd478f205e3723a2573ef4ef904aa")
