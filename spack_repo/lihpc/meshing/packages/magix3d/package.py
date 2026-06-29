@@ -1,0 +1,160 @@
+# -*- coding: utf-8 -*-
+
+from spack import *
+import os
+from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+
+class Magix3d(CMakePackage):
+    """Mailleur 3D"""
+
+    homepage = "https://github.com/LIHPC-Computational-Geometry/magix3d"
+    url = "https://github.com/LIHPC-Computational-Geometry/magix3d/archive/refs/tags/0.0.0.tar.gz"
+    git = "https://github.com/LIHPC-Computational-Geometry/magix3d.git"
+    maintainers = ["meshing_team"]
+
+    variant("dkoc", default=False, description="Lecteur Catia pour OpenCascade")
+    variant("mdlparser", default=False, description="Lecteur du format mdl")
+    variant("sepa3d", default=False, description="Outil de separatrices 3D")
+    variant("smooth3d", default=False, description="Bibliotheque de lissage volumique Smooth3D")
+    variant("triton2", default=True, description="Mailleur tetraedrique Tetgen")
+    variant("pythonaddon",
+            default=False,
+            description="Additional python modules to enrich PYTHONPATH")
+    variant("doc", default=False, description="Installation de la documentation utilisateur")
+
+    version("2.7.0", sha256="362ac988f8d00e504d7a32f0dbc8e347a9625c344cc06aa24074ff4173442c8b")
+    version("2.6.3", sha256="b875c0e08b9f3779322338bb436b1865ee453d5c77a5ea27300a87cf03d1d757")
+    version("2.6.2", sha256="51f15612423f795b5983e893e0c527ae2a82254e0a7beef189959caca6931457")
+    version("2.6.1", sha256="3a679d56b332691f2cf0e0ff609e8f67596b4badf7db1f9e1a464bfc4a2c889d")
+    version("2.6.0", sha256="ea1aac98f9f32c83b04af027609f424dbc31a6a92e3c1b023478d3344c2b8dae")
+    version("2.5.2", sha256="1bfd56620ec2b91c4c677efbc1da8f56f6de1bb7a05a8383cd04b6cc04654a37")
+    version("2.5.1", sha256="274ebfd5f3d8f4bfa9cac1f36c297f60c88198dbd56cf724d6aa93429072b1cb")
+    version("2.5.0", sha256="b3dfed9dadef3f3ef80219d7d7f9a8c54f2d979efc1e83877c8c59df8e25a56b")
+    version("2.4.2", sha256="7a81bea88a85dea0e30c311053807449f354a5c7859af9c099b8da2c8af23113")
+    version("2.4.1", sha256="07934ea3d7a3ff99a8c6e8a7419e6b1f7311d430de4bcb8a7b089376b581adb1")
+    version("2.4.0", sha256="c2b0644355025f35f6dda29fe14ab72e0375f0aef67cd300d89b8050dd698232")
+    version("2.3.5", sha256="28808a4c5893f84e2de43c8913c6609f97b1a6b213b3bb2d7dd37a8a6c8f8d39")
+    version("2.3.4", sha256="934475f0738f7f6d48eb3e33336b4ce6625811722aebc5a566b7327d9dbdd255")
+    version("2.3.3", sha256="fd1fbbde688dcfd2ab5e7f102d3209c0e1da7c8bdc8cb0691a5701f9c382f4de")
+    version("2.3.2", sha256="5ae3afda57218c0dd6dea8373256f353112ae9156bbef2dd84666b6e32e65b74")
+    version("2.3.1", sha256="07f6cabd231777273468dc806f0c318b4520831dbcaf1fa2906c39051585410a")
+    version("2.3.0", sha256="9949dac2aa3df14f0e96e94105f47d0a612a83524c8138171fb1860a00feaf36")
+    version("2.2.7", sha256="4437209e1811b523c3945fda17ab6aaf2082da9c84f892955123e69465ebd250")
+    version("2.2.6", sha256="9d39dd74a1b9360a5ca2790f2d9e8b17429f82833df2d633b57c866383873d05")
+    version("2.2.5")
+
+    depends_on("guitoolkitsvariables", type=("build"))
+    depends_on("tkutil")
+    depends_on("vtkcontrib@4: +shared", type=("build", "link"))
+    depends_on("preferences@5: +shared", type=("build", "link"))
+    depends_on("pythonutil@5: +shared", type=("build", "link"))
+    depends_on("qqualif+gmds", type=("build", "link"))
+    depends_on("qtpython@4: +shared", type=("build", "link"))
+    depends_on("qtvtk@7: +shared", type=("build", "link"))
+    depends_on("cgns", type=("build", "link"))
+    depends_on("gmds+lima+cgns", type=("build", "link"))
+    depends_on("gts", type=("build", "link"))
+    depends_on("opencascade@7.8.1+data_exchange", type=("build", "link"))
+    depends_on("tetgen@1.6.0", when="+triton2")
+    depends_on("smooth3d +shared", type=("build", "link"), when="+smooth3d")
+    depends_on("swig", type="build")
+    depends_on("mesquite")
+    depends_on("python")
+    depends_on("qt")
+    depends_on("doxygen", type=("build"))
+    depends_on("lima@7.12.1: +scripting")
+    depends_on("pkgconfig", type=("build"))
+    depends_on("nlohmann-json")
+    depends_on("gmsh ~mmg~fltk+opencascade")
+
+    # depends_on("mdl-parser@1.5.2: +shared", type=("build", "link"), when="+mdlparser")
+    # depends_on("dkoc", type=("build", "link"), when="+dkoc")
+    # depends_on("separatrice3d +shared", type=("build", "link"), when="+sepa3d")
+    # depends_on("experimentalroom")
+
+    depends_on("py-numpy", when="+pythonaddon")
+    depends_on("py-matplotlib", when="+pythonaddon")
+    depends_on("py-scipy", when="+pythonaddon")
+    depends_on("py-cycler", when="+pythonaddon")
+    depends_on("py-kiwisolver", when="+pythonaddon")
+    depends_on("py-pillow", when="+pythonaddon")
+    depends_on("py-pyparsing", when="+pythonaddon")
+    depends_on("py-python-dateutil", when="+pythonaddon")
+    depends_on("py-pytz", when="+pythonaddon")
+    depends_on("py-setuptools", when="+pythonaddon")
+    depends_on("py-setuptools-scm", when="+pythonaddon")
+    depends_on("py-six", when="+pythonaddon")
+    depends_on("py-packaging", when="+pythonaddon")
+
+    # documentation
+    depends_on("py-breathe", when="+doc")
+    depends_on("py-rst2pdf", when="+doc")
+    # sphinx version fixed for rtd_theme
+    depends_on("py-sphinx@5.3.0", when="+doc")
+    # rtd_theme version fixed to fix no module found epub3
+    depends_on("py-sphinx-rtd-theme@0.5.1", when="+doc")
+    depends_on("py-sphinx-copybutton", when="+doc")
+
+    # setup PYTHON_PATH for documentation
+    def setup_build_environment(self, env):
+        if ("+doc" in self.spec.variants):
+            python_version = str(self.spec["python"].version).split(".")
+            python_dir = "python" + python_version[0] + "." + python_version[1]
+
+            sphinx_path = self.spec["py-sphinx"].prefix
+            sphinx_pythonpath = join_path(sphinx_path, "lib", python_dir, "site-packages")
+            env.prepend_path("PYTHONPATH", sphinx_pythonpath)
+
+    def cmake_args(self):
+        return self.fill_cmake_args(False, "undefined", "undefined",
+                                    "undefined", "unavailable", "undefined", "undefined")
+
+    def fill_cmake_args(self, batch, t_ext, erd_ext, team, dkoc_lic, url_wiki, url_doc_qualif):
+        args = []
+
+        # Toujours en mode shared, pour le scripting
+        args.append("-DBUILD_SHARED_LIBS:BOOL=ON")
+        # On installe => mode production pour les scripts fixant l"environnement python d"execution
+        args.append("-DPRODUCTION:BOOL=ON")
+        if self.spec.satisfies("%intel"):
+            args.append("-DCMAKE_CXX_FLAGS=\"-std=c++11\"")
+
+        args.append(self.define_from_variant("DKOC", "dkoc"))
+        args.append(self.define_from_variant("MDLPARSER", "mdlparser"))
+        args.append(self.define_from_variant("SEPA3D", "sepa3d"))
+        args.append(self.define_from_variant("SMOOTH3D", "smooth3d"))
+        args.append(self.define_from_variant("TRITON", "triton2"))
+        args.append(self.define_from_variant("PYTHONADDON", "pythonaddon"))
+        args.append(self.define_from_variant("WITH_DOC", "doc"))
+
+        args.append(self.define("T_INTERNAL_EXTENSION", t_ext))
+        args.append(self.define("ERD_INTERNAL_EXTENSION", erd_ext))
+        args.append(self.define("USER_TEAM", team))
+        args.append(self.define("DKOC_LICENCE", dkoc_lic))
+        args.append(self.define("URL_WIKI", url_wiki))
+        args.append(self.define("URL_QUALIF", url_doc_qualif))
+
+        args.append(self.define("BUILD_MAGIX3D", True))
+        args.append(self.define("BUILD_MAGIX3DBATCH", batch))
+
+        if ("+doc" in self.spec.variants):
+            args.append("-DSPHINX_WARNINGS_AS_ERRORS=OFF")
+
+        # only py-numpy py-matplotlib py-scipy are necessary
+        # the rest are here because we are not in an environment
+        if "+pythonaddon" in self.spec:
+            python_version = self.spec["python"].version.up_to(2)
+            py_depends = ["py-numpy", "py-matplotlib", "py-scipy",
+                          "py-cycler", "py-kiwisolver",
+                          "py-pillow", "py-pyparsing", "py-python-dateutil",
+                          "py-pytz", "py-setuptools", "py-setuptools-scm",
+                          "py-six", "py-packaging"]
+            python_path = []
+            for py_dep in py_depends:
+                python_path.append(os.path.join(self.spec[py_dep].prefix, "lib",
+                                                "python" + str(python_version),
+                                                "site-packages"))
+            args.append("-DADDPYTHONPACKAGES=" + ":".join(python_path) + ":")
+
+        return args
