@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from spack import *
+from spack.package import *
 import os
 from spack_repo.builtin.build_systems.cmake import CMakePackage
 

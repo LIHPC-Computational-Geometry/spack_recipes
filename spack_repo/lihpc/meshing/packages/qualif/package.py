@@ -5,7 +5,7 @@
 # REPLACE_NAME_SERVICE_LABO, 2020
 ##############################################################################
 
-from spack import *
+from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
 
 
