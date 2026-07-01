@@ -64,7 +64,8 @@ class Qtvtk(CMakePackage):
             sha256="75abca1906b3c6a535515a29be8fddbe1e1ff39c1bb609fe423d5bd309b8d61b",
             deprecated=True)
 
-    depends_on("cxx", type="build")  # generated
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
 
     def cmake_args(self):
         # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which

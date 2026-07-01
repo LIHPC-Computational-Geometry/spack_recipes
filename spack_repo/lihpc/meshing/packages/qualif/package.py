@@ -43,7 +43,8 @@ class Qualif(CMakePackage):
             sha256="470cb7d25d34f2b19458c6a43e9ca5e3e2def7f3f4f0efdf0dbef5bbfe8dc9cc",
             deprecated=True)
 
-    depends_on("cxx", type="build")  # generated
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
 
     variant("shared", default=True, description="Creation de bibliotheques dynamiques")
 

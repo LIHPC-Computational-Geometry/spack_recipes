@@ -44,6 +44,8 @@ class Magix3d(CMakePackage):
     version("2.2.6", sha256="9d39dd74a1b9360a5ca2790f2d9e8b17429f82833df2d633b57c866383873d05")
     version("2.2.5")
 
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
     depends_on("guitoolkitsvariables", type=("build"))
     depends_on("tkutil")
     depends_on("vtkcontrib@4: +shared", type=("build", "link"))

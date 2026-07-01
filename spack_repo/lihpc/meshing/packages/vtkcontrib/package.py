@@ -69,7 +69,8 @@ class Vtkcontrib(CMakePackage):
             sha256="3ddcb0b3f5c06c93a8fc3ea9b7cb03e93d3f5ed4ec0d2ea2a48eab7c68529305",
             deprecated=True)
 
-    depends_on("cxx", type="build")  # generated
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
 
     variant("shared", default=True, description="Creation de bibliotheques dynamiques")
 

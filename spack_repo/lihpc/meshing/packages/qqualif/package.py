@@ -71,7 +71,8 @@ class Qqualif(CMakePackage):
             sha256="9a942e63fbcce101e8231215bd52fff00bca8106b3c9d0ffd01dbacd606c988c",
             deprecated=True)
 
-    depends_on("cxx", type="build")  # generated
+    depends_on("c", type="build")
+    depends_on("cxx", type="build")
 
     def cmake_args(self):
         # Since version 5.4.0 VtkContrib uses common_vtk.cmake of GUIToolkitsVariables which

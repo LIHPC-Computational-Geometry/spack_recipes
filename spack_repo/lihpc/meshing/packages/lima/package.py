@@ -19,6 +19,7 @@ class Lima(CMakePackage):
     depends_on("swig", type=("build"), when="+scripting")
     depends_on("python +shared", type=("build", "link"), when="+scripting")
     depends_on("hdf5 +shared +cxx", type=("build", "link"), when="+mli2")
+    depends_on("c", type=("build"))
     depends_on("cxx", type=("build"))
     depends_on("fortran", type=("build"))
 
