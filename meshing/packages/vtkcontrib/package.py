@@ -31,6 +31,7 @@ class Vtkcontrib(CMakePackage):
 
     patch("vtkcontrib-4.6.0_calc_mpi.patch", when="@4.6.0")
 
+    version("5.17.1", sha256="0caf88a21bd64a5b1900780199edc3d0c6069410bd2c82b6528a1a089cdf2bb9")
     version("5.17.0", sha256="0ada45a4019929244580091252ebb863d27220cdadfa5b65495f60e04fc8f1bf")
     # Versions 5.15.0 and 5.16.*: linking problem.
     # version("5.16.1", sha256="fb0abb649b6fdd3678f0560f1c4bbf3a5a6579e971d6a83db82abbed245b379a")
