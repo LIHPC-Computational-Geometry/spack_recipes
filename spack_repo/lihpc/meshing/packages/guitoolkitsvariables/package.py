@@ -8,6 +8,7 @@ from spack_repo.builtin.build_systems.cmake import CMakePackage
 
 
 class Guitoolkitsvariables(CMakePackage):
+    """Common cmake files used by projects of the magix3d ecosystem."""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables"
     url = ("https://github.com/LIHPC-Computational-Geometry/"
