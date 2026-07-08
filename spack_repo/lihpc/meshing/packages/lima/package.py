@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 # From version 7.11.0 writing support for the mli format is no longer provided.
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Lima(CMakePackage):
@@ -28,31 +29,31 @@ class Lima(CMakePackage):
     variant(
         "xlmlima",
         default=True,
-        description="Build xlmlima tool (converts and prepares meshes for non-regression tests)"
+        description="Build xlmlima tool (converts and prepares meshes for non-regression tests)",
     )
     variant(
         "mli2",
         default=True,
-        description="Build Lima with mli2 format support (requires HDF5 >=1.10.0)"
+        description="Build Lima with mli2 format support (requires HDF5 >=1.10.0)",
     )
     variant(
         "machinetypes",
         default=True,
-        description="Build Lima MachineTypes API (shareable numeric types definitions)"
+        description="Build Lima MachineTypes API (shareable numeric types definitions)",
     )
     variant("i4", default=False, description="int_type=int32 instead of int64")
     variant("r4", default=False, description="real=float instead of double")
     variant(
         "tests",
         default=True,
-        description="Builds the mesh comparison tool (necessary for non-regression tests)"
+        description="Builds the mesh comparison tool (necessary for non-regression tests)",
     )
     # disable_mli_warning=True for non regression testing,
     # false otherwise (blue warning message when obsolete mli format is used)
     variant(
         "disable_mli_warning",
         default=False,
-        description="Disables warning messages displayed when reading or writing an mli file"
+        description="Disables warning messages displayed when reading or writing an mli file",
     )
 
     patch("cmake.patch", when="@7.4.3")
@@ -93,7 +94,7 @@ class Lima(CMakePackage):
             self.define_from_variant("BUILD_TESTS", "tests"),
             self.define_from_variant("DISABLE_MLI_WARNING", "disable_mli_warning"),
             self.define_from_variant("FORMAT_MLI2", "mli2"),
-            self.define_from_variant("MACHINE_TYPES", "machinetypes")
+            self.define_from_variant("MACHINE_TYPES", "machinetypes"),
         ]
 
         args.append(self.define("MACHINE_TYPES", False))
@@ -117,7 +118,7 @@ class Lima(CMakePackage):
                     # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
                     self.define("Python_EXECUTABLE", py.command.path),
                     # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
-                    self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path)
+                    self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path),
                 ]
             )
 

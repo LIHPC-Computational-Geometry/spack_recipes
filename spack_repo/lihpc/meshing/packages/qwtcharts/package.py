@@ -5,16 +5,19 @@
 # REPLACE_NAME_SERVICE_LABO, 2020
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Qwtcharts(CMakePackage):
     """Bibliotheque d'utilitaires Qwt"""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/qwtcharts"
-    url = ("https://github.com/LIHPC-Computational-Geometry/"
-           "qwtcharts/archive/refs/tags/0.0.0.tar.gz")
+    url = (
+        "https://github.com/LIHPC-Computational-Geometry/"
+        "qwtcharts/archive/refs/tags/0.0.0.tar.gz"
+    )
     git = "https://github.com/LIHPC-Computational-Geometry/qwtcharts.git"
     maintainers = ["meshing_team"]
 
@@ -30,24 +33,36 @@ class Qwtcharts(CMakePackage):
     version("5.2.0", sha256="5566d9bdd718f6c12b83f9bc03569ba61b3b67a54ef0ba39e72221ced985f706")
     version("4.4.13", sha256="e73544b6f94e2a3f989b74827bac5afbbf9c9a8899d991528d6f101f4fbc34d4")
     # versions below are deprecated as sources are in the infinite void of space
-    version("4.4.7",
-            sha256="e22528b70830e6ffa819ef032ab72307f218a65fa925a4c5f78a8510deedbae4",
-            deprecated=True)
-    version("4.4.6",
-            sha256="7e5e6d072e4ef01fc88d7cd7084a4eb8316ee03970536e0fc08598c07663d89e",
-            deprecated=True)
-    version("4.1.0",
-            sha256="47ecedb95db452edfde1efd8392e096ad5357517ddef17d09af6082df397ce12",
-            deprecated=True)
-    version("4.0.3",
-            sha256="03c2b1da97179c1702b75f48343eb4a36b5f8e516ed82cfeb32e4c29b7177e03",
-            deprecated=True)
-    version("4.0.2",
-            sha256="259164fbf009a275b90bf497362c5db42ad83f562a6747d22310c0eac4761f14",
-            deprecated=True)
-    version("4.0.0",
-            sha256="490c33b251b03ace8dd192cf775563fe9fd79ade51ebb8f30fcf023fd77ba000",
-            deprecated=True)
+    version(
+        "4.4.7",
+        sha256="e22528b70830e6ffa819ef032ab72307f218a65fa925a4c5f78a8510deedbae4",
+        deprecated=True,
+    )
+    version(
+        "4.4.6",
+        sha256="7e5e6d072e4ef01fc88d7cd7084a4eb8316ee03970536e0fc08598c07663d89e",
+        deprecated=True,
+    )
+    version(
+        "4.1.0",
+        sha256="47ecedb95db452edfde1efd8392e096ad5357517ddef17d09af6082df397ce12",
+        deprecated=True,
+    )
+    version(
+        "4.0.3",
+        sha256="03c2b1da97179c1702b75f48343eb4a36b5f8e516ed82cfeb32e4c29b7177e03",
+        deprecated=True,
+    )
+    version(
+        "4.0.2",
+        sha256="259164fbf009a275b90bf497362c5db42ad83f562a6747d22310c0eac4761f14",
+        deprecated=True,
+    )
+    version(
+        "4.0.0",
+        sha256="490c33b251b03ace8dd192cf775563fe9fd79ade51ebb8f30fcf023fd77ba000",
+        deprecated=True,
+    )
 
     depends_on("cxx", type="build")  # generated
 

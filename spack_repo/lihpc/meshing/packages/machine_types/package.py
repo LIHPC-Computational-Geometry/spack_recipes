@@ -4,16 +4,19 @@
 #
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class MachineTypes(CMakePackage):
     """Simple C numeric types definitions"""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/machine-types"
-    url = ("https://github.com/LIHPC-Computational-Geometry/"
-           "machine-types/archive/refs/tags/0.0.0.tar.gz")
+    url = (
+        "https://github.com/LIHPC-Computational-Geometry/"
+        "machine-types/archive/refs/tags/0.0.0.tar.gz"
+    )
     git = "https://github.com/LIHPC-Computational-Geometry/machine-types.git"
 
     version("2.0.1", sha256="c961e25f883cf1f48f3cbace1d4263292014f5fe863854f7094f745792e94a9c")

@@ -5,16 +5,19 @@
 # CEA/DAM/DSSI, 2020
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Vtkcontrib(CMakePackage):
     """Bibliotheque d'utilitaires VTK"""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/vtkcontrib"
-    url = ("https://github.com/LIHPC-Computational-Geometry/"
-           "vtkcontrib/archive/refs/tags/0.0.0.tar.gz")
+    url = (
+        "https://github.com/LIHPC-Computational-Geometry/"
+        "vtkcontrib/archive/refs/tags/0.0.0.tar.gz"
+    )
     git = "https://github.com/LIHPC-Computational-Geometry/vtkcontrib.git"
     maintainers = ["meshing_team"]
 
@@ -56,18 +59,26 @@ class Vtkcontrib(CMakePackage):
     version("5.4.0", sha256="c3c7d6b9491cbb273084ef1f5795e88599d23a041b568b61d1da426277cefcea")
     version("4.6.4", sha256="1fce68d5c9342f90ff54aae75248679d52e303cf1954cdcf2ed0bf9bc6157a4c")
     # versions below are deprecated as sources are in the infinite void of space
-    version("4.6.1",
-            sha256="8d32ff953f61addd0a40fa6a92c2ba8fe11f7431cc01608f45b8f7f681a7de76",
-            deprecated=True)
-    version("4.6.0",
-            sha256="269220824875c4945bdbdd78589d460b5a5ca806d78166c38079bb228e933e11",
-            deprecated=True)
-    version("4.0.1",
-            sha256="ea186d906ed63c9be0328067d08889dfe72b4fc1710831fc8234496f048003af",
-            deprecated=True)
-    version("4.0.0",
-            sha256="3ddcb0b3f5c06c93a8fc3ea9b7cb03e93d3f5ed4ec0d2ea2a48eab7c68529305",
-            deprecated=True)
+    version(
+        "4.6.1",
+        sha256="8d32ff953f61addd0a40fa6a92c2ba8fe11f7431cc01608f45b8f7f681a7de76",
+        deprecated=True,
+    )
+    version(
+        "4.6.0",
+        sha256="269220824875c4945bdbdd78589d460b5a5ca806d78166c38079bb228e933e11",
+        deprecated=True,
+    )
+    version(
+        "4.0.1",
+        sha256="ea186d906ed63c9be0328067d08889dfe72b4fc1710831fc8234496f048003af",
+        deprecated=True,
+    )
+    version(
+        "4.0.0",
+        sha256="3ddcb0b3f5c06c93a8fc3ea9b7cb03e93d3f5ed4ec0d2ea2a48eab7c68529305",
+        deprecated=True,
+    )
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")

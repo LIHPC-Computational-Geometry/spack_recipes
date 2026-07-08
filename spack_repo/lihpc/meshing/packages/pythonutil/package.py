@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Pythonutil(CMakePackage):
     """Utilitaires python-cpp."""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/pythonutil"
-    url = ("https://github.com/LIHPC-Computational-Geometry/"
-           "pythonutil/archive/refs/tags/0.0.0.tar.gz")
+    url = (
+        "https://github.com/LIHPC-Computational-Geometry/"
+        "pythonutil/archive/refs/tags/0.0.0.tar.gz"
+    )
     git = "https://github.com/LIHPC-Computational-Geometry/pythonutil.git"
     maintainers = ["meshing_team"]
 
@@ -37,13 +40,15 @@ class Pythonutil(CMakePackage):
 
         # Fix cmake taking python3 even if `which python` is python2
         py = self.spec["python"]
-        args.extend([
-            # find_package(PythonInterp) # Deprecated, but used by pybind11
-            self.define("PYTHON_EXECUTABLE", py.command.path),
-            # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
-            self.define("Python_EXECUTABLE", py.command.path),
-            # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
-            self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path),
-        ])
+        args.extend(
+            [
+                # find_package(PythonInterp) # Deprecated, but used by pybind11
+                self.define("PYTHON_EXECUTABLE", py.command.path),
+                # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
+                self.define("Python_EXECUTABLE", py.command.path),
+                # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
+                self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path),
+            ]
+        )
 
         return args

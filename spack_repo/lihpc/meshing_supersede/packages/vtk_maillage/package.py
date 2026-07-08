@@ -5,8 +5,10 @@
 
 
 import os
-from spack.package import *
+
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class VtkMaillage(CMakePackage):
@@ -16,7 +18,7 @@ class VtkMaillage(CMakePackage):
     v 1.5.0 du 07/06/24).
     The Visualization Toolkit (VTK) is an open-source, freely
     available software system for 3D computer graphics, image
-    processing and visualization. """
+    processing and visualization."""
 
     homepage = "http://www.vtk.org"
     url = "https://vtk.org/files/release/7.1/VTK-7.1.1.tar.gz"
@@ -91,35 +93,27 @@ class VtkMaillage(CMakePackage):
         cmake_args = [
             "-DBUILD_SHARED_LIBS=ON",
             "-DVTK_RENDERING_BACKEND:STRING={0}".format(opengl_ver),
-
             # In general, we disable use of VTK "ThirdParty" libs, preferring
             # spack-built versions whenever possible
             # "-DVTK_USE_SYSTEM_LIBRARIES:BOOL=ON",
             "-DVTK_USE_SYSTEM_LIBRARIES:BOOL=OFF",  # CP
-
             # However, in a few cases we can't do without them yet
             "-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF",
             "-DVTK_USE_SYSTEM_LIBHARU=OFF",
             "-DVTK_USE_SYSTEM_LIBPROJ4:BOOL=OFF",
             "-DVTK_USE_SYSTEM_OGGTHEORA:BOOL=OFF",
-
             # "-DNETCDF_DIR={0}".format(spec["netcdf"].prefix),
             # "-DNETCDF_C_ROOT={0}".format(spec["netcdf"].prefix),
             # "-DNETCDF_CXX_ROOT={0}".format(spec["netcdf-cxx"].prefix),
-
             # Allow downstream codes (e.g. VisIt) to override VTK's classes
             # "-DVTK_ALL_NEW_OBJECT_FACTORY:BOOL=ON",  # CP
-
             # Disable wrappers for other languages.
             "-DVTK_WRAP_JAVA=OFF",
             "-DVTK_WRAP_TCL=OFF",
         ]
 
         if "+mpi" in spec:
-            cmake_args.extend([
-                "-DVTK_Group_MPI:BOOL=ON",
-                "-DVTK_USE_SYSTEM_DIY2:BOOL=OFF",
-            ])
+            cmake_args.extend(["-DVTK_Group_MPI:BOOL=ON", "-DVTK_USE_SYSTEM_DIY2:BOOL=OFF"])
         else:
             cmake_args.append("-DVTK_Group_MPI:BOOL=OFF")
             cmake_args.append("-DVTK_USE_MPI=OFF")
@@ -134,12 +128,14 @@ class VtkMaillage(CMakePackage):
             qt_bin = spec["qt"].prefix.bin
             qmake_exe = os.path.join(qt_bin, "qmake")
 
-            cmake_args.extend([
-                # Enable Qt support here.
-                "-DVTK_QT_VERSION:STRING={0}".format(qt_ver),
-                "-DQT_QMAKE_EXECUTABLE:PATH={0}".format(qmake_exe),
-                "-DVTK_Group_Qt:BOOL=ON",
-            ])
+            cmake_args.extend(
+                [
+                    # Enable Qt support here.
+                    "-DVTK_QT_VERSION:STRING={0}".format(qt_ver),
+                    "-DQT_QMAKE_EXECUTABLE:PATH={0}".format(qmake_exe),
+                    "-DVTK_Group_Qt:BOOL=ON",
+                ]
+            )
 
             # NOTE: The following definitions are required in order to allow
             # VTK to build with qt~webkit versions (see the documentation for
@@ -153,35 +149,41 @@ class VtkMaillage(CMakePackage):
             #                ])
 
             # CP ADDON FLAGS :
-            cmake_args.extend([
-                "-DBUILD_SHARED_LIBS:BOOL=ON",
-                "-DCMAKE_SKIP_INSTALL_RPATH:BOOL=ON",
-                "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON",
-                "-DModule_vtkIOExportOpenGL:BOOL=ON",
-                "-DModule_vtkImagingOpenGL:BOOL=ON",
-                "-DModule_vtkIOExportOpenGL2:BOOL=OFF",
-                "-DModule_vtkImagingOpenGL2:BOOL=OFF",
-                "-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF",
-                "-DVTK_RENDERING_BACKEND=OpenGL",
-                "-DVTK_Group_Imaging:BOOL=ON",
-                "-DVTK_Group_Rendering:BOOL=ON",
-                "-DVTK_ALL_NEW_OBJECT_FACTORY=OFF",
-                # "-DVTK_QT_VERSION=5",
-                "-DVTK_USE_SYSTEM_NETCDF=OFF",
-                # "-DNETCDF_ENABLE_CXX=OFF",
-            ])
+            cmake_args.extend(
+                [
+                    "-DBUILD_SHARED_LIBS:BOOL=ON",
+                    "-DCMAKE_SKIP_INSTALL_RPATH:BOOL=ON",
+                    "-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON",
+                    "-DModule_vtkIOExportOpenGL:BOOL=ON",
+                    "-DModule_vtkImagingOpenGL:BOOL=ON",
+                    "-DModule_vtkIOExportOpenGL2:BOOL=OFF",
+                    "-DModule_vtkImagingOpenGL2:BOOL=OFF",
+                    "-DVTK_USE_SYSTEM_GL2PS:BOOL=OFF",
+                    "-DVTK_RENDERING_BACKEND=OpenGL",
+                    "-DVTK_Group_Imaging:BOOL=ON",
+                    "-DVTK_Group_Rendering:BOOL=ON",
+                    "-DVTK_ALL_NEW_OBJECT_FACTORY=OFF",
+                    # "-DVTK_QT_VERSION=5",
+                    "-DVTK_USE_SYSTEM_NETCDF=OFF",
+                    # "-DNETCDF_ENABLE_CXX=OFF",
+                ]
+            )
             if "+mpi" in spec:
-                cmake_args.extend([
-                    "-DModule_vtkParallelMPI:BOOL=ON",
-                    "-DModule_vtkFiltersParallelMPI:BOOL=ON",
-                    "-DModule_vtkRenderingParallel:BOOL=ON"
-                ])
+                cmake_args.extend(
+                    [
+                        "-DModule_vtkParallelMPI:BOOL=ON",
+                        "-DModule_vtkFiltersParallelMPI:BOOL=ON",
+                        "-DModule_vtkRenderingParallel:BOOL=ON",
+                    ]
+                )
             else:
-                cmake_args.extend([
-                    "-DModule_vtkParallelMPI:BOOL=OFF",
-                    "-DModule_vtkFiltersParallelMPI:BOOL=OFF",
-                    "-DModule_vtkRenderingParallel:BOOL=OFF"
-                ])
+                cmake_args.extend(
+                    [
+                        "-DModule_vtkParallelMPI:BOOL=OFF",
+                        "-DModule_vtkFiltersParallelMPI:BOOL=OFF",
+                        "-DModule_vtkRenderingParallel:BOOL=OFF",
+                    ]
+                )
             # !CP ADDON FLAGS
 
         if "+xdmf" in spec:
@@ -189,23 +191,25 @@ class VtkMaillage(CMakePackage):
                 # This policy exists only for CMake >= 3.12
                 cmake_args.extend(["-DCMAKE_POLICY_DEFAULT_CMP0074=NEW"])
 
-            cmake_args.extend([
-                # Enable XDMF Support here
-                "-DModule_vtkIOXdmf2:BOOL=ON",
-                "-DModule_vtkIOXdmf3:BOOL=ON",
-                "-DBOOST_ROOT={0}".format(spec["boost"].prefix),
-                "-DBOOST_LIBRARY_DIR={0}".format(spec["boost"].prefix.lib),
-                "-DBOOST_INCLUDE_DIR={0}".format(spec["boost"].prefix.include),
-                "-DBOOST_NO_SYSTEM_PATHS:BOOL=ON",
-                # This is needed because VTK has multiple FindBoost
-                # and they stick to system boost if there's a system boost
-                # installed with CMake
-                "-DBoost_NO_BOOST_CMAKE:BOOL=ON",
-                "-DHDF5_ROOT={0}".format(spec["hdf5"].prefix),
-                # The xdmf project does not export any CMake file...
-                "-DVTK_USE_SYSTEM_XDMF3:BOOL=OFF",
-                "-DVTK_USE_SYSTEM_XDMF2:BOOL=OFF"
-            ])
+            cmake_args.extend(
+                [
+                    # Enable XDMF Support here
+                    "-DModule_vtkIOXdmf2:BOOL=ON",
+                    "-DModule_vtkIOXdmf3:BOOL=ON",
+                    "-DBOOST_ROOT={0}".format(spec["boost"].prefix),
+                    "-DBOOST_LIBRARY_DIR={0}".format(spec["boost"].prefix.lib),
+                    "-DBOOST_INCLUDE_DIR={0}".format(spec["boost"].prefix.include),
+                    "-DBOOST_NO_SYSTEM_PATHS:BOOL=ON",
+                    # This is needed because VTK has multiple FindBoost
+                    # and they stick to system boost if there's a system boost
+                    # installed with CMake
+                    "-DBoost_NO_BOOST_CMAKE:BOOL=ON",
+                    "-DHDF5_ROOT={0}".format(spec["hdf5"].prefix),
+                    # The xdmf project does not export any CMake file...
+                    "-DVTK_USE_SYSTEM_XDMF3:BOOL=OFF",
+                    "-DVTK_USE_SYSTEM_XDMF2:BOOL=OFF",
+                ]
+            )
 
             if "+mpi" in spec:
                 cmake_args.extend(["-DModule_vtkIOParallelXdmf3:BOOL=ON"])
@@ -216,10 +220,13 @@ class VtkMaillage(CMakePackage):
             cmake_args.append("-DVTK_USE_SYSTEM_GLEW:BOOL=ON")
 
         if "+osmesa" in spec:
-            cmake_args.extend([
-                "-DVTK_USE_X:BOOL=OFF",
-                "-DVTK_USE_COCOA:BOOL=OFF",
-                "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON"])
+            cmake_args.extend(
+                [
+                    "-DVTK_USE_X:BOOL=OFF",
+                    "-DVTK_USE_COCOA:BOOL=OFF",
+                    "-DVTK_OPENGL_HAS_OSMESA:BOOL=ON",
+                ]
+            )
 
         else:
             cmake_args.append("-DVTK_OPENGL_HAS_OSMESA:BOOL=OFF")
@@ -228,20 +235,15 @@ class VtkMaillage(CMakePackage):
                 cmake_args.append("-DOpenGL_GL_PREFERENCE:STRING=LEGACY")
 
             if "darwin" in spec.architecture:
-                cmake_args.extend([
-                    "-DVTK_USE_X:BOOL=OFF",
-                    "-DVTK_USE_COCOA:BOOL=ON"])
+                cmake_args.extend(["-DVTK_USE_X:BOOL=OFF", "-DVTK_USE_COCOA:BOOL=ON"])
 
             elif "linux" in spec.architecture:
-                cmake_args.extend([
-                    "-DVTK_USE_X:BOOL=ON",
-                    "-DVTK_USE_COCOA:BOOL=OFF"])
+                cmake_args.extend(["-DVTK_USE_X:BOOL=ON", "-DVTK_USE_COCOA:BOOL=OFF"])
 
         if spec.satisfies("@:6.1.0"):
-            cmake_args.extend([
-                "-DCMAKE_C_FLAGS=-DGLX_GLXEXT_LEGACY",
-                "-DCMAKE_CXX_FLAGS=-DGLX_GLXEXT_LEGACY"
-            ])
+            cmake_args.extend(
+                ["-DCMAKE_C_FLAGS=-DGLX_GLXEXT_LEGACY", "-DCMAKE_CXX_FLAGS=-DGLX_GLXEXT_LEGACY"]
+            )
 
             # VTK 6.1.0 (and possibly earlier) does not use
             # NETCDF_CXX_ROOT to detect NetCDF C++ bindings, so
@@ -262,12 +264,15 @@ class VtkMaillage(CMakePackage):
             # string. This fix was recommended on the VTK mailing list
             # in March 2014 (see
             # https://public.kitware.com/pipermail/vtkusers/2014-March/083368.html)
-            if (self.spec.satisfies("%clang") and self.compiler.is_apple and self.compiler.version >= Version("5.1.0")):
+            if (
+                self.spec.satisfies("%clang")
+                and self.compiler.is_apple
+                and self.compiler.version >= Version("5.1.0")
+            ):
                 cmake_args.extend(["-DVTK_REQUIRED_OBJCXX_FLAGS="])
 
             # A bug in tao pegtl causes build failures with intel compilers
             if "%intel" in spec and spec.version >= Version("8.2"):
-                cmake_args.append(
-                    "-DVTK_MODULE_ENABLE_VTK_IOMotionFX:BOOL=OFF")
+                cmake_args.append("-DVTK_MODULE_ENABLE_VTK_IOMotionFX:BOOL=OFF")
 
         return cmake_args

@@ -5,8 +5,9 @@
 # CEA/DAM/DSSI, 2020
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Gmds(CMakePackage):

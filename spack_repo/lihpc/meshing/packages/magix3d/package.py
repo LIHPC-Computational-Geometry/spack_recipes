@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from spack.package import *
 import os
+
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Magix3d(CMakePackage):
@@ -18,9 +20,9 @@ class Magix3d(CMakePackage):
     variant("sepa3d", default=False, description="Outil de separatrices 3D")
     variant("smooth3d", default=False, description="Bibliotheque de lissage volumique Smooth3D")
     variant("triton2", default=True, description="Mailleur tetraedrique Tetgen")
-    variant("pythonaddon",
-            default=False,
-            description="Additional python modules to enrich PYTHONPATH")
+    variant(
+        "pythonaddon", default=False, description="Additional python modules to enrich PYTHONPATH"
+    )
     variant("doc", default=False, description="Installation de la documentation utilisateur")
 
     version("2.7.0", sha256="362ac988f8d00e504d7a32f0dbc8e347a9625c344cc06aa24074ff4173442c8b")
@@ -100,7 +102,7 @@ class Magix3d(CMakePackage):
 
     # setup PYTHON_PATH for documentation
     def setup_build_environment(self, env):
-        if ("+doc" in self.spec.variants):
+        if "+doc" in self.spec.variants:
             python_version = str(self.spec["python"].version).split(".")
             python_dir = "python" + python_version[0] + "." + python_version[1]
 
@@ -109,8 +111,9 @@ class Magix3d(CMakePackage):
             env.prepend_path("PYTHONPATH", sphinx_pythonpath)
 
     def cmake_args(self):
-        return self.fill_cmake_args(False, "undefined", "undefined",
-                                    "undefined", "unavailable", "undefined", "undefined")
+        return self.fill_cmake_args(
+            False, "undefined", "undefined", "undefined", "unavailable", "undefined", "undefined"
+        )
 
     def fill_cmake_args(self, batch, t_ext, erd_ext, team, dkoc_lic, url_wiki, url_doc_qualif):
         args = []
@@ -120,7 +123,7 @@ class Magix3d(CMakePackage):
         # On installe => mode production pour les scripts fixant l"environnement python d"execution
         args.append("-DPRODUCTION:BOOL=ON")
         if self.spec.satisfies("%intel"):
-            args.append("-DCMAKE_CXX_FLAGS=\"-std=c++11\"")
+            args.append('-DCMAKE_CXX_FLAGS="-std=c++11"')
 
         args.append(self.define_from_variant("DKOC", "dkoc"))
         args.append(self.define_from_variant("MDLPARSER", "mdlparser"))
@@ -140,23 +143,38 @@ class Magix3d(CMakePackage):
         args.append(self.define("BUILD_MAGIX3D", True))
         args.append(self.define("BUILD_MAGIX3DBATCH", batch))
 
-        if ("+doc" in self.spec.variants):
+        if "+doc" in self.spec.variants:
             args.append("-DSPHINX_WARNINGS_AS_ERRORS=OFF")
 
         # only py-numpy py-matplotlib py-scipy are necessary
         # the rest are here because we are not in an environment
         if "+pythonaddon" in self.spec:
             python_version = self.spec["python"].version.up_to(2)
-            py_depends = ["py-numpy", "py-matplotlib", "py-scipy",
-                          "py-cycler", "py-kiwisolver",
-                          "py-pillow", "py-pyparsing", "py-python-dateutil",
-                          "py-pytz", "py-setuptools", "py-setuptools-scm",
-                          "py-six", "py-packaging"]
+            py_depends = [
+                "py-numpy",
+                "py-matplotlib",
+                "py-scipy",
+                "py-cycler",
+                "py-kiwisolver",
+                "py-pillow",
+                "py-pyparsing",
+                "py-python-dateutil",
+                "py-pytz",
+                "py-setuptools",
+                "py-setuptools-scm",
+                "py-six",
+                "py-packaging",
+            ]
             python_path = []
             for py_dep in py_depends:
-                python_path.append(os.path.join(self.spec[py_dep].prefix, "lib",
-                                                "python" + str(python_version),
-                                                "site-packages"))
+                python_path.append(
+                    os.path.join(
+                        self.spec[py_dep].prefix,
+                        "lib",
+                        "python" + str(python_version),
+                        "site-packages",
+                    )
+                )
             args.append("-DADDPYTHONPACKAGES=" + ":".join(python_path) + ":")
 
         return args

@@ -5,8 +5,9 @@
 # CEA/DAM/DSSI, 2020
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Qtvtk(CMakePackage):
@@ -45,24 +46,36 @@ class Qtvtk(CMakePackage):
     version("8.4.0", sha256="851bcf977d03f514dec6e1c220f3585e80ad043c4b11ef45805a5916b1c16d64")
     version("7.14.8", sha256="2d9cb54c14afc38e849a25fe8fe534481402f64352c690454671e0e61a9fe0c4")
     # versions below are deprecated as sources are in the infinite void of space
-    version("7.14.0",
-            sha256="ff72228ae9762551e8c7be0def0a5e3289cb8c29427870beb34a375e02fec396",
-            deprecated=True)
-    version("7.13.1",
-            sha256="09c7d5b25ea6254650e994a0bfe97f96a3cd0c7e90df74f536d8b2e5b2f9e5d8",
-            deprecated=True)
-    version("7.13.0",
-            sha256="413b9776a81c51a9b3912d9de95ab04b4e3324a3e371f4759e690948bc9b8227",
-            deprecated=True)
-    version("7.1.0",
-            sha256="d70a3511cac971c0f18cbb322d32e1ef7dfae41816d1c189a7167289e89091d3",
-            deprecated=True)
-    version("7.0.1",
-            sha256="c5342f195c9f79fed62c572f405fdf67d009b89ce12e80e6fad80674dab92c06",
-            deprecated=True)
-    version("7.0.0",
-            sha256="75abca1906b3c6a535515a29be8fddbe1e1ff39c1bb609fe423d5bd309b8d61b",
-            deprecated=True)
+    version(
+        "7.14.0",
+        sha256="ff72228ae9762551e8c7be0def0a5e3289cb8c29427870beb34a375e02fec396",
+        deprecated=True,
+    )
+    version(
+        "7.13.1",
+        sha256="09c7d5b25ea6254650e994a0bfe97f96a3cd0c7e90df74f536d8b2e5b2f9e5d8",
+        deprecated=True,
+    )
+    version(
+        "7.13.0",
+        sha256="413b9776a81c51a9b3912d9de95ab04b4e3324a3e371f4759e690948bc9b8227",
+        deprecated=True,
+    )
+    version(
+        "7.1.0",
+        sha256="d70a3511cac971c0f18cbb322d32e1ef7dfae41816d1c189a7167289e89091d3",
+        deprecated=True,
+    )
+    version(
+        "7.0.1",
+        sha256="c5342f195c9f79fed62c572f405fdf67d009b89ce12e80e6fad80674dab92c06",
+        deprecated=True,
+    )
+    version(
+        "7.0.0",
+        sha256="75abca1906b3c6a535515a29be8fddbe1e1ff39c1bb609fe423d5bd309b8d61b",
+        deprecated=True,
+    )
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")

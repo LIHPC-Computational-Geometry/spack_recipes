@@ -5,8 +5,9 @@
 # CEA/DAM/DSSI, 2020
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Tkutil(CMakePackage):
@@ -17,7 +18,7 @@ class Tkutil(CMakePackage):
     git = "https://github.com/LIHPC-Computational-Geometry/tkutil.git"
     maintainers = ["meshing_team"]
 
-    extends("python")		# For the PYTHONPATH in the generated modules
+    extends("python")  # For the PYTHONPATH in the generated modules
 
     depends_on("guitoolkitsvariables", type=("build", "link"))
     depends_on("python", type=("build", "link"))
@@ -54,17 +55,19 @@ class Tkutil(CMakePackage):
     def cmake_args(self):
         args = []
         args = [self.define_from_variant("BUILD_SHARED_LIBS", "shared")]
-        args.append("-DCMAKE_CXX_FLAGS=\"-std=c++17\"")
+        args.append('-DCMAKE_CXX_FLAGS="-std=c++17"')
 
         # Fix cmake taking python3 even if `which python` is python2
         py = self.spec["python"]
-        args.extend([
-            # find_package(PythonInterp) # Deprecated, but used by pybind11
-            self.define("PYTHON_EXECUTABLE", py.command.path),
-            # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
-            self.define("Python_EXECUTABLE", py.command.path),
-            # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
-            self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path),
-        ])
+        args.extend(
+            [
+                # find_package(PythonInterp) # Deprecated, but used by pybind11
+                self.define("PYTHON_EXECUTABLE", py.command.path),
+                # find_package(Python) under cmake_minimum_required < 3.15 (CMP0094)
+                self.define("Python_EXECUTABLE", py.command.path),
+                # find_package(Python2/3) under cmake_minimum_required < 3.15 (CMP0094)
+                self.define("Python{}_EXECUTABLE".format(py.version[0]), py.command.path),
+            ]
+        )
 
         return args

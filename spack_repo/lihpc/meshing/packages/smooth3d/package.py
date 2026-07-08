@@ -7,12 +7,12 @@
 #
 ##############################################################################
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Smooth3d(CMakePackage):
-
     """Smooth3D is a mesh smoothing library"""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/smooth3d"

@@ -3,16 +3,19 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
-from spack.package import *
 from spack_repo.builtin.build_systems.cmake import CMakePackage
+
+from spack.package import *
 
 
 class Guitoolkitsvariables(CMakePackage):
     """Common cmake files used by projects of the magix3d ecosystem."""
 
     homepage = "https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables"
-    url = ("https://github.com/LIHPC-Computational-Geometry/"
-           "guitoolkitsvariables/archive/refs/tags/0.0.0.tar.gz")
+    url = (
+        "https://github.com/LIHPC-Computational-Geometry/"
+        "guitoolkitsvariables/archive/refs/tags/0.0.0.tar.gz"
+    )
     git = "https://github.com/LIHPC-Computational-Geometry/guitoolkitsvariables.git"
     maintainers = ["meshing_team"]
 
