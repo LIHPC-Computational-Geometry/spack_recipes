@@ -18,13 +18,13 @@ jobs:
       - name: Flake8 on meshing
         uses: py-actions/flake8@v2
         with:
-          ignore: "E501,F405,F403"
+          flake8-version: "7.3.0"
           path: "spack_repo/lihpc/meshing"
 
       - name: Flake8 on meshing_supersede
         uses: py-actions/flake8@v2
         with:
-          ignore: "E501,F405,F403,W504"
+          flake8-version: "7.3.0"
           path: "spack_repo/lihpc/meshing_supersede"
 
   spack-spec-mgx3d:
