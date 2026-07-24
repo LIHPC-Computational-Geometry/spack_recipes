@@ -15,7 +15,7 @@ class Magix3d(CMakePackage):
     variant("dkoc", default=False, description="Lecteur Catia pour OpenCascade")
     variant("mdlparser", default=False, description="Lecteur du format mdl")
     variant("sepa3d", default=False, description="Outil de separatrices 3D")
-    variant("smooth3d", default=False, description="Bibliotheque de lissage volumique Smooth3D")
+    variant("smooth3d", default=True, description="Bibliotheque de lissage volumique Smooth3D")
     variant("triton2", default=True, description="Mailleur tetraedrique Tetgen")
     variant("pythonaddon",
             default=False,
