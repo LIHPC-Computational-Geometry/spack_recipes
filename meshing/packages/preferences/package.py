@@ -26,6 +26,7 @@ class Preferences(CMakePackage):
     depends_on("qt")
     depends_on("pkgconfig", type=("build"))
 
+    version("6.4.0", sha256="f0088a6ead65ab7e34ceefd2b76bc6a8111bc4265903b715cd422b5bbd8f0b92")
     version("6.3.1", sha256="ecc5fa932d1e7b33d97d9e032a32c17b28e287893361228afc84235a55e1f2f9")
     version("6.3.0", sha256="300742a5dce7055f340b461d6740e89599b5c64e74bc37aa2f8953cc28ea7f90")
     version("6.2.2", sha256="5797fee3678c4b6d340a0cc4dd49fd2f050ed4574b9bba178d5c23aecadccc32")
