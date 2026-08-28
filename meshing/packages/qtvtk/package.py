@@ -27,6 +27,7 @@ class Qtvtk(CMakePackage):
 
     variant("shared", default=True, description="Creation de bibliotheques dynamiques")
 
+    version("8.12.0", sha256="7cc2389f2de34bc1557448b5f2e9cdf08991dd794f131c567ad3153e90afb81b")
     version("8.11.1", sha256="48a090298dc1e8e9cfe2492b2b2f080f588d29b4c6334ecee6a4e854152f19da")
     version("8.11.0", sha256="05ae61e6c36faba0060e381cae19ad575ebabe48d309b0f417f659bf26419681")
     version("8.10.0", sha256="6c9094d7a903b5a859f1ed197976512153ec983ecc338f7f04890c44546100b5")
