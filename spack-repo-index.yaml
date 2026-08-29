@@ -1,0 +1,5 @@
+repo_index:
+  paths:
+  - spack_repo/lihpc/meshing
+  - spack_repo/lihpc/meshing_supersede
+
