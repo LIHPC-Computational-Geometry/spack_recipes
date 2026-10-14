@@ -18,14 +18,14 @@ jobs:
       - name: Flake8 on meshing
         uses: py-actions/flake8@v2
         with:
-          ignore: "E501,F405,F403"
-          path: "meshing"
+          flake8-version: "7.3.0"
+          path: "spack_repo/lihpc/meshing"
 
       - name: Flake8 on meshing_supersede
         uses: py-actions/flake8@v2
         with:
-          ignore: "E501,F405,F403,W504"
-          path: "meshing_supersede"
+          flake8-version: "7.3.0"
+          path: "spack_repo/lihpc/meshing_supersede"
 
   spack-spec-mgx3d:
     # The CMake configure and build commands are platform agnostic and should work equally
@@ -47,10 +47,10 @@ jobs:
       - name: Initialize Spack environment
         shell: bash
         run: |
-          git clone --depth=1 -b v0.23.1 https://github.com/spack/spack.git ${{github.workspace}}/spack
+          git clone --depth=1 -b v1.1.1 https://github.com/spack/spack.git ${{github.workspace}}/spack
           source ${{github.workspace}}/spack/share/spack/setup-env.sh
-          spack repo add ${{github.workspace}}/meshing
-          spack repo add ${{github.workspace}}/meshing_supersede
+          spack repo add ${{github.workspace}}/spack_repo/lihpc/meshing
+          spack repo add ${{github.workspace}}/spack_repo/lihpc/meshing_supersede
 
       - name: Check Spack spec
         # We create a subdirectory that will stand as our working directory for all
@@ -81,8 +81,8 @@ jobs:
         shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
-          spack repo add $GITHUB_WORKSPACE/meshing
-          spack repo add $GITHUB_WORKSPACE/meshing_supersede
+          spack repo add $GITHUB_WORKSPACE/spack_repo/lihpc/meshing
+          spack repo add $GITHUB_WORKSPACE/spack_repo/lihpc/meshing_supersede
 
       - name: Build and Install Magix3D
         shell: bash
