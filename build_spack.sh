@@ -33,7 +33,11 @@ cp spack_recipes/config/repos.yaml spack/etc/spack/defaults/repos.yaml
 # this entry can be modified
 
 #==========================================
-# configure spack using spack commands; it modifies the .spack directory in the user home
+# configure spack using spack commands; by default it modifies the .spack directory in the user home
+# To avoid that and in particular allow 0.23.1 and 1.X.X versions of spack set the env variable
+# It might be a good idea to set it in the users .bashrc
+export SPACK_DISABLE_LOCAL_CONFIG=true
+
 source spack/share/spack/setup-env.sh
 spack clean -a
 
@@ -62,7 +66,10 @@ git clone git@github.com:LIHPC-Computational-Geometry/magix3d.git
 # you will probably want build_type=Debug or RelWithDebInfo.
 # Choose the variants you need, you can check them using `spack info gmds`.
 # The dev_path option does not seem to handle relative paths.
-spack install magix3d+smooth3d+triton2+doc dev_path=$PWD/magix3d build_type=Debug ^vtk-maillage~opengl2+qt~mpi ^hdf5~mpi ^cgns~mpi ^mesquite~mpi
+#
+# Note : hdf5-1.14.4 is selected in lieu of the default 1.14.5 in spack-0.23.1 because of
+# a libz.a detection issue https://github.com/spack/spack/pull/46612
+spack install magix3d+smooth3d+triton2+doc dev_path=$PWD/magix3d build_type=Debug ^vtk-maillage~opengl2+qt~mpi ^hdf5@1.14.4 ~mpi ^cgns~mpi ^mesquite~mpi
 
 # to configure an IDE
 # spack created files and directories named gmds/spack-* in the gmds source tree, where the necessary
