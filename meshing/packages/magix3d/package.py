@@ -107,9 +107,9 @@ class Magix3d(CMakePackage):
 
     def cmake_args(self):
         return self.fill_cmake_args(False, "undefined", "undefined",
-                                    "undefined", "unavailable", "undefined", "undefined")
+                                    "undefined", "undefined", "undefined")
 
-    def fill_cmake_args(self, batch, t_ext, erd_ext, team, dkoc_lic, url_wiki, url_doc_qualif):
+    def fill_cmake_args(self, batch, t_ext, erd_ext, team, url_wiki, url_doc_qualif):
         args = []
 
         # Toujours en mode shared, pour le scripting
@@ -130,7 +130,6 @@ class Magix3d(CMakePackage):
         args.append(self.define("T_INTERNAL_EXTENSION", t_ext))
         args.append(self.define("ERD_INTERNAL_EXTENSION", erd_ext))
         args.append(self.define("USER_TEAM", team))
-        args.append(self.define("DKOC_LICENCE", dkoc_lic))
         args.append(self.define("URL_WIKI", url_wiki))
         args.append(self.define("URL_QUALIF", url_doc_qualif))
 
