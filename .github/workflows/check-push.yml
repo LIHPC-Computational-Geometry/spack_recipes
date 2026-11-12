@@ -47,8 +47,7 @@ jobs:
           submodules: recursive
 
       - name: Check Spack spec
-        # We create a subdirectory that will stand as our working directory for all
-        # subsequent commands
+        shell: bash
         run: |
           source /spack/share/spack/setup-env.sh
           echo "=== Python ==="
