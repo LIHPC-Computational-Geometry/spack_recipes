@@ -56,6 +56,9 @@ jobs:
           
           echo "=== Spack ==="
           spack --version
+          spack repo list
+
+          echo "=== Magix3d spec ==="
           spack spec magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
 
   spack-install-mgx3d:
