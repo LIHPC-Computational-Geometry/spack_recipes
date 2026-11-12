@@ -46,6 +46,13 @@ jobs:
           fetch-depth: 2 # seems to be needed by codecov
           submodules: recursive
 
+      - name: Initialize Spack Environment
+        shell: bash
+        run: |
+          source /spack/share/spack/setup-env.sh
+          spack repo add $GITHUB_WORKSPACE/meshing
+          spack repo add $GITHUB_WORKSPACE/meshing_supersede
+          
       - name: Check Spack spec
         shell: bash
         run: |
@@ -58,7 +65,7 @@ jobs:
           spack --version
           spack repo list
 
-          echo "=== Magix3d spec ==="
+          echo "=== Spack spec of magix3d ==="
           spack spec magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
 
   spack-install-mgx3d:
@@ -79,6 +86,13 @@ jobs:
           fetch-depth: 2 # seems to be needed by codecov
           submodules: recursive
 
+      - name: Initialize Spack Environment
+        shell: bash
+        run: |
+          source /spack/share/spack/setup-env.sh
+          spack repo add $GITHUB_WORKSPACE/meshing
+          spack repo add $GITHUB_WORKSPACE/meshing_supersede
+          
       - name: Build and Install Magix3D
         shell: bash
         run: |
