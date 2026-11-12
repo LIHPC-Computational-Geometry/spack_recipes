@@ -57,6 +57,12 @@ jobs:
         # subsequent commands
         run: |
           source ${{github.workspace}}/spack/share/spack/setup-env.sh
+          echo "=== Python ==="
+          python3 --version
+          which python3
+          
+          echo "=== Spack ==="
+          spack --version
           spack spec magix3d~smooth3d~pythonaddon+doc ^vtk-maillage~opengl2+qt ^qt+opengl
 
   spack-install-mgx3d:
