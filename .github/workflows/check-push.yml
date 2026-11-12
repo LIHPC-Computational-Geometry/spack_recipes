@@ -34,6 +34,8 @@ jobs:
     name: Spack Spec Magix3D
     runs-on:  ubuntu-latest
     needs: [lint-recipes]
+    container:
+      image: ghcr.io/lihpc-computational-geometry/spack-cgcore:latest
     strategy:
       fail-fast: false
 
