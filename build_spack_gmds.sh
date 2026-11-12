@@ -1,15 +1,10 @@
 #==========================================
 # First get a spack release
-# On macos v0.22.5 or v0.23.1 should be chosen (because of the system's python-3.12 version ?)
-#git clone --depth=1 -b v0.22.5  https://github.com/spack/spack.git
- git clone --depth=1 -b v0.23.1  https://github.com/spack/spack.git
+git clone --depth=1 -b v1.1.1  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user  in order to 
 # have a fresh start 
-#==========================================
-# get our recipes
-git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
 #==========================================
 # modifying spack configuration
 #==========================================
@@ -21,12 +16,6 @@ git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
 # - in spack version 0.20.3
 #sed -i 's#"{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}"#"{name}"#g' spack/etc/spack/defaults/config.yaml
 
-# to register our recipes; it assumes that spack_recipes and spack are located at
-# the same level. You can use the "spack repo add" commands instead of copying the repos.yaml file
-#spack repo add ./spack_recipes/meshing
-#spack repo add ./spack_recipes/meshing_supersede
-cp spack_recipes/config/repos.yaml spack/etc/spack/defaults/repos.yaml
-
 # Optionnal: the default tmpdir used to build is defined in spack/etc/spack/defaults/config.yaml
 # under the entry build_stage: $tempdir/$user/spack-stage
 # Should one prefer to use a tmpfs or has limited disk space in the temporary dir (Qt's build directory can require up to 6Go on my setup)
@@ -36,6 +25,9 @@ cp spack_recipes/config/repos.yaml spack/etc/spack/defaults/repos.yaml
 # configure spack using spack commands; it modifies the .spack directory in the user home
 source spack/share/spack/setup-env.sh
 spack clean -a
+#==========================================
+# get our recipes
+spack repo add https://github.com/LIHPC-Computational-Geometry/spack_recipes.git ./spack_recipes
 
 # registering cmake
 spack external find cmake

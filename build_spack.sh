@@ -1,12 +1,12 @@
 #==========================================
 # First get a spack release
-git clone --depth=1 -b v0.23.1  https://github.com/spack/spack.git
+git clone --depth=1 -b v1.1.1  https://github.com/spack/spack.git
 #==========================================
 # can be mandatory if you have already used spack on your computer
 # delete the .spack directory in the home of the user 
 #==========================================
 # get our recipes
-git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
+spack repo add https://github.com/LIHPC-Computational-Geometry/spack_recipes.git ./spack_recipes
 #==========================================
 # modifying spack configuration
 #==========================================
@@ -20,12 +20,6 @@ git clone https://github.com/LIHPC-Computational-Geometry/spack_recipes.git
 
 # this is used to declare opengl as non buildable and use the system library 
 cp ./spack_recipes/config/packages.yaml ./spack/etc/spack/
-
-# to register our recipes; it assumes that spack_recipes and spack are located at
-# the same level. You can use the "spack repo add" commands instead of copying the repos.yaml file
-#spack repo add ./spack_recipes/meshing
-#spack repo add ./spack_recipes/meshing_supersede
-cp spack_recipes/config/repos.yaml spack/etc/spack/defaults/repos.yaml
 
 # Optionnal: the default tmpdir used to build is defined in spack/etc/spack/defaults/config.yaml
 # under the entry build_stage: $tempdir/$user/spack-stage
