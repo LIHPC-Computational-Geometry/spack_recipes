@@ -46,15 +46,11 @@ jobs:
           fetch-depth: 2 # seems to be needed by codecov
           submodules: recursive
 
-      - name: Initialize Spack environment
-        shell: bash
-        run: |
-          source /spack/share/spack/setup-env.sh
-
       - name: Check Spack spec
         # We create a subdirectory that will stand as our working directory for all
         # subsequent commands
         run: |
+          source /spack/share/spack/setup-env.sh
           echo "=== Python ==="
           python3 --version
           which python3
@@ -80,13 +76,6 @@ jobs:
         with:
           fetch-depth: 2 # seems to be needed by codecov
           submodules: recursive
-
-      - name: Initialize Spack Environment
-        shell: bash
-        run: |
-          source /spack/share/spack/setup-env.sh
-          spack repo add $GITHUB_WORKSPACE/meshing
-          spack repo add $GITHUB_WORKSPACE/meshing_supersede
 
       - name: Build and Install Magix3D
         shell: bash
