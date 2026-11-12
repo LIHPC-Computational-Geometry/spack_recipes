@@ -16,8 +16,8 @@ class Pythonutil(CMakePackage):
     depends_on("guitoolkitsvariables", type=("build"))
     depends_on("tkutil")
     depends_on("python", type=("build", "link"))
-    # On a besoin de swig >= 4.0.0 :
-    depends_on("swig@4:", type="build")
+    # On a besoin de swig >= 3.0.0 :
+    depends_on("swig@3:", type="build")
 
     variant("shared", default=True, description="Creation de bibliotheques dynamiques")
 
