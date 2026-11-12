@@ -52,7 +52,22 @@ jobs:
         run: |
           apt-get update
           apt-get install -y lcov
+
+      - name: Debug SWIG
+        run: |
+          echo "=== Environment ==="
+          echo "PATH=$PATH"
       
+          echo "=== SWIG ==="
+          which swig || true
+          swig -version || true
+      
+          echo "=== SWIG support files ==="
+          find "$(spack location -i swig)" -name swig.swg
+      
+          echo "=== CMake ==="
+          cmake --version
+    
       # Build the current sources, run unit tests and install
       - name: Build and install
         shell: bash
