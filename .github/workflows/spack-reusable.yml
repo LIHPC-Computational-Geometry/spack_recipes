@@ -80,6 +80,7 @@ jobs:
           spack env activate ci-env
           spack load python
           spack load py-pytest
+          spack load swig
           export version_number=`spack info ${{ github.event.repository.name }} | grep -A 1 "Preferred version:" | tail -n 1 | awk {'print $1'}`
           spack load ${{ github.event.repository.name }}@$version_number
 
@@ -88,6 +89,8 @@ jobs:
           command -v python
           pytest --version
           command -v pytest
+          swig --version
+          command -v swig
           echo $PYTHONPATH
 
           # set PYTHONPATH variable
