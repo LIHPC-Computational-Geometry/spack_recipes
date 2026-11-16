@@ -89,7 +89,7 @@ jobs:
           command -v python
           pytest --version
           command -v pytest
-          swig --version
+          swig -version
           command -v swig
           echo $PYTHONPATH
 
