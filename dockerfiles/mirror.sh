@@ -33,7 +33,7 @@ download_release_and_untar() {
 
 	url=$GH_BASE/$prj/archive/refs/tags/$version.tar.gz
 	echo -e "\e[1;32mDownloading $url and untar in $outputdir directory\e[0m"
-	curl -L $url | tar xz --directory $outputdir || exit 1
+	curl --proxy-negotiate --proxy-user : -L $url | tar xz --directory $outputdir || exit 1
 }
 
 clone() {
@@ -50,7 +50,7 @@ download_recipes_sh() {
 
 	url=$GH_BASE/spack_recipes/releases/download/$recipes_release/recipes.sh
 	echo -e "\e[1;32mDownloading $url in /tmp to get versions of products\e[0m"
-	curl -L $url > /tmp/recipes.sh || exit 1
+	curl --proxy-negotiate --proxy-user : -L $url > /tmp/recipes.sh || exit 1
 }
 
 
